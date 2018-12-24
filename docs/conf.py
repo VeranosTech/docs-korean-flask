@@ -70,6 +70,10 @@ latex_elements = {
 latex_use_parts = True
 latex_additional_files = ["flaskstyle.sty", "logo.pdf"]
 
+
+locale_dirs = ['locale/']
+gettext_compact = False
+
 # Local Extensions -----------------------------------------------------
 
 

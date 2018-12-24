@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2010 Pallets Team
+# This file is distributed under the same license as the Flask package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Flask 1.0.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../server.rst:4
+msgid "Development Server"
+msgstr ""
+
+#: ../../server.rst:8
+msgid ""
+"Starting with Flask 0.11 there are multiple built-in ways to run a "
+"development server.  The best one is the :command:`flask` command line "
+"utility but you can also continue using the :meth:`Flask.run` method."
+msgstr ""
+
+#: ../../server.rst:13
+msgid "Command Line"
+msgstr ""
+
+#: ../../server.rst:15
+msgid ""
+"The :command:`flask` command line script (:ref:`cli`) is strongly "
+"recommended for development because it provides a superior reload "
+"experience due to how it loads the application.  The basic usage is like "
+"this::"
+msgstr ""
+
+#: ../../server.rst:24
+msgid ""
+"This enables the development environment, including the interactive "
+"debugger and reloader, and then starts the server on "
+"*http://localhost:5000/*."
+msgstr ""
+
+#: ../../server.rst:28
+msgid ""
+"The individual features of the server can be controlled by passing more "
+"arguments to the ``run`` option. For instance the reloader can be "
+"disabled::"
+msgstr ""
+
+#: ../../server.rst:36
+msgid ""
+"Prior to Flask 1.0 the :envvar:`FLASK_ENV` environment variable was not "
+"supported and you needed to enable debug mode by exporting "
+"``FLASK_DEBUG=1``. This can still be used to control debug mode, but you "
+"should prefer setting the development environment as shown above."
+msgstr ""
+
+#: ../../server.rst:43
+msgid "In Code"
+msgstr ""
+
+#: ../../server.rst:45
+msgid ""
+"The alternative way to start the application is through the "
+":meth:`Flask.run` method.  This will immediately launch a local server "
+"exactly the same way the :command:`flask` script does."
+msgstr ""
+
+#: ../../server.rst:49
+msgid "Example::"
+msgstr ""
+
+#: ../../server.rst:54
+msgid ""
+"This works well for the common case but it does not work well for "
+"development which is why from Flask 0.11 onwards the :command:`flask` "
+"method is recommended.  The reason for this is that due to how the reload"
+" mechanism works there are some bizarre side-effects (like executing "
+"certain code twice, sometimes crashing without message or dying when a "
+"syntax or import error happens)."
+msgstr ""
+
+#: ../../server.rst:61
+msgid ""
+"It is however still a perfectly valid method for invoking a non automatic"
+" reloading application."
+msgstr ""
+

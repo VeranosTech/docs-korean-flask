@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2010 Pallets Team
+# This file is distributed under the same license as the Flask package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Flask 1.0.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../patterns/mongokit.rst:4
+msgid "MongoKit in Flask"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:6
+msgid ""
+"Using a document database rather than a full DBMS gets more common these "
+"days. This pattern shows how to use MongoKit, a document mapper library, "
+"to integrate with MongoDB."
+msgstr ""
+
+#: ../../patterns/mongokit.rst:10
+msgid ""
+"This pattern requires a running MongoDB server and the MongoKit library "
+"installed."
+msgstr ""
+
+#: ../../patterns/mongokit.rst:13
+msgid ""
+"There are two very common ways to use MongoKit.  I will outline each of "
+"them here:"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:18
+msgid "Declarative"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:20
+msgid ""
+"The default behavior of MongoKit is the declarative one that is based on "
+"common ideas from Django or the SQLAlchemy declarative extension."
+msgstr ""
+
+#: ../../patterns/mongokit.rst:23
+msgid "Here an example :file:`app.py` module for your application::"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:41
+msgid ""
+"To define your models, just subclass the `Document` class that is "
+"imported from MongoKit.  If you've seen the SQLAlchemy pattern you may "
+"wonder why we do not have a session and even do not define a `init_db` "
+"function here.  On the one hand, MongoKit does not have something like a "
+"session.  This sometimes makes it more to type but also makes it "
+"blazingly fast.  On the other hand, MongoDB is schemaless.  This means "
+"you can modify the data structure from one insert query to the next "
+"without any problem.  MongoKit is just schemaless too, but implements "
+"some validation to ensure data integrity."
+msgstr ""
+
+#: ../../patterns/mongokit.rst:50
+msgid "Here is an example document (put this also into :file:`app.py`, e.g.)::"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:79
+msgid ""
+"This example shows you how to define your schema (named structure), a "
+"validator for the maximum character length and uses a special MongoKit "
+"feature called `use_dot_notation`.  Per default MongoKit behaves like a "
+"python dictionary but with `use_dot_notation` set to ``True`` you can use"
+" your documents like you use models in nearly any other ORM by using dots"
+" to separate between attributes."
+msgstr ""
+
+#: ../../patterns/mongokit.rst:86
+msgid "You can insert entries into the database like this:"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:96
+msgid ""
+"Note that MongoKit is kinda strict with used column types, you must not "
+"use a common `str` type for either `name` or `email` but unicode."
+msgstr ""
+
+#: ../../patterns/mongokit.rst:99
+msgid "Querying is simple as well:"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:110
+msgid "PyMongo Compatibility Layer"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:112
+msgid ""
+"If you just want to use PyMongo, you can do that with MongoKit as well.  "
+"You may use this process if you need the best performance to get.  Note "
+"that this example does not show how to couple it with Flask, see the "
+"above MongoKit code for examples::"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:121
+msgid ""
+"To insert data you can use the `insert` method.  We have to get a "
+"collection first, this is somewhat the same as a table in the SQL world."
+msgstr ""
+
+#: ../../patterns/mongokit.rst:128
+msgid "MongoKit will automatically commit for us."
+msgstr ""
+
+#: ../../patterns/mongokit.rst:130
+msgid "To query your database, you use the collection directly:"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:137
+msgid "These results are also dict-like objects:"
+msgstr ""
+
+#: ../../patterns/mongokit.rst:143
+msgid ""
+"For more information about MongoKit, head over to the `website "
+"<https://github.com/namlook/mongokit>`_."
+msgstr ""
+

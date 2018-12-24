@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2010 Pallets Team
+# This file is distributed under the same license as the Flask package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Flask 1.0.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../patterns/caching.rst:4
+msgid "Caching"
+msgstr ""
+
+#: ../../patterns/caching.rst:6
+msgid ""
+"When your application runs slow, throw some caches in.  Well, at least "
+"it's the easiest way to speed up things.  What does a cache do?  Say you "
+"have a function that takes some time to complete but the results would "
+"still be good enough if they were 5 minutes old.  So then the idea is "
+"that you actually put the result of that calculation into a cache for "
+"some time."
+msgstr ""
+
+#: ../../patterns/caching.rst:13
+msgid ""
+"Flask itself does not provide caching for you, but Werkzeug, one of the "
+"libraries it is based on, has some very basic cache support.  It supports"
+" multiple cache backends, normally you want to use a memcached server."
+msgstr ""
+
+#: ../../patterns/caching.rst:18
+msgid "Setting up a Cache"
+msgstr ""
+
+#: ../../patterns/caching.rst:20
+msgid ""
+"You create a cache object once and keep it around, similar to how "
+":class:`~flask.Flask` objects are created.  If you are using the "
+"development server you can create a "
+":class:`~werkzeug.contrib.cache.SimpleCache` object, that one is a simple"
+" cache that keeps the item stored in the memory of the Python "
+"interpreter::"
+msgstr ""
+
+#: ../../patterns/caching.rst:29
+msgid ""
+"If you want to use memcached, make sure to have one of the memcache "
+"modules supported (you get them from `PyPI <https://pypi.org/>`_) and a "
+"memcached server running somewhere.  This is how you connect to such an "
+"memcached server then::"
+msgstr ""
+
+#: ../../patterns/caching.rst:37
+msgid ""
+"If you are using App Engine, you can connect to the App Engine memcache "
+"server easily::"
+msgstr ""
+
+#: ../../patterns/caching.rst:44
+msgid "Using a Cache"
+msgstr ""
+
+#: ../../patterns/caching.rst:46
+msgid ""
+"Now how can one use such a cache?  There are two very important "
+"operations: :meth:`~werkzeug.contrib.cache.BaseCache.get` and "
+":meth:`~werkzeug.contrib.cache.BaseCache.set`.  This is how to use them:"
+msgstr ""
+
+#: ../../patterns/caching.rst:50
+msgid ""
+"To get an item from the cache call "
+":meth:`~werkzeug.contrib.cache.BaseCache.get` with a string as key name. "
+"If something is in the cache, it is returned.  Otherwise that function "
+"will return ``None``::"
+msgstr ""
+
+#: ../../patterns/caching.rst:57
+msgid ""
+"To add items to the cache, use the "
+":meth:`~werkzeug.contrib.cache.BaseCache.set` method instead.  The first "
+"argument is the key and the second the value that should be set.  Also a "
+"timeout can be provided after which the cache will automatically remove "
+"item."
+msgstr ""
+
+#: ../../patterns/caching.rst:62
+msgid "Here a full example how this looks like normally::"
+msgstr ""
+

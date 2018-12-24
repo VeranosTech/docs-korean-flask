@@ -1,0 +1,322 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2010 Pallets Team
+# This file is distributed under the same license as the Flask package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Flask 1.0.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../errorhandling.rst:4
+msgid "Application Errors"
+msgstr ""
+
+#: ../../errorhandling.rst:8
+#, python-format
+msgid ""
+"Applications fail, servers fail.  Sooner or later you will see an "
+"exception in production.  Even if your code is 100% correct, you will "
+"still see exceptions from time to time.  Why?  Because everything else "
+"involved will fail.  Here are some situations where perfectly fine code "
+"can lead to server errors:"
+msgstr ""
+
+#: ../../errorhandling.rst:14
+msgid ""
+"the client terminated the request early and the application was still "
+"reading from the incoming data"
+msgstr ""
+
+#: ../../errorhandling.rst:16
+msgid "the database server was overloaded and could not handle the query"
+msgstr ""
+
+#: ../../errorhandling.rst:17
+msgid "a filesystem is full"
+msgstr ""
+
+#: ../../errorhandling.rst:18
+msgid "a harddrive crashed"
+msgstr ""
+
+#: ../../errorhandling.rst:19
+msgid "a backend server overloaded"
+msgstr ""
+
+#: ../../errorhandling.rst:20
+msgid "a programming error in a library you are using"
+msgstr ""
+
+#: ../../errorhandling.rst:21
+msgid "network connection of the server to another system failed"
+msgstr ""
+
+#: ../../errorhandling.rst:23
+msgid ""
+"And that's just a small sample of issues you could be facing.  So how do "
+"we deal with that sort of problem?  By default if your application runs "
+"in production mode, Flask will display a very simple page for you and log"
+" the exception to the :attr:`~flask.Flask.logger`."
+msgstr ""
+
+#: ../../errorhandling.rst:28
+msgid ""
+"But there is more you can do, and we will cover some better setups to "
+"deal with errors."
+msgstr ""
+
+#: ../../errorhandling.rst:32
+msgid "Error Logging Tools"
+msgstr ""
+
+#: ../../errorhandling.rst:34
+msgid ""
+"Sending error mails, even if just for critical ones, can become "
+"overwhelming if enough users are hitting the error and log files are "
+"typically never looked at. This is why we recommend using `Sentry "
+"<https://sentry.io/>`_ for dealing with application errors.  It's "
+"available as an Open Source project `on GitHub "
+"<https://github.com/getsentry/sentry>`_ and is also available as a "
+"`hosted version <https://sentry.io/signup/>`_ which you can try for free."
+" Sentry aggregates duplicate errors, captures the full stack trace and "
+"local variables for debugging, and sends you mails based on new errors or"
+" frequency thresholds."
+msgstr ""
+
+#: ../../errorhandling.rst:45
+msgid ""
+"To use Sentry you need to install the `sentry-sdk` client with extra "
+"`flask` dependencies::"
+msgstr ""
+
+#: ../../errorhandling.rst:49
+msgid "And then add this to your Flask app::"
+msgstr ""
+
+#: ../../errorhandling.rst:56
+msgid ""
+"The `YOUR_DSN_HERE` value needs to be replaced with the DSN value you get"
+" from your Sentry installation."
+msgstr ""
+
+#: ../../errorhandling.rst:59
+msgid ""
+"After installation, failures leading to an Internal Server Error are "
+"automatically reported to Sentry and from there you can receive error "
+"notifications."
+msgstr ""
+
+#: ../../errorhandling.rst:62
+msgid "Follow-up reads:"
+msgstr ""
+
+#: ../../errorhandling.rst:64
+msgid ""
+"Sentry also supports catching errors from your worker queue (RQ, Celery) "
+"in a similar fashion.  See the `Python SDK docs "
+"<https://docs.sentry.io/platforms/python/>`_ for more information."
+msgstr ""
+
+#: ../../errorhandling.rst:67
+msgid ""
+"`Getting started with Sentry "
+"<https://docs.sentry.io/quickstart/?platform=python>`_"
+msgstr ""
+
+#: ../../errorhandling.rst:68
+msgid ""
+"`Flask-specific documentation "
+"<https://docs.sentry.io/platforms/python/flask/>`_."
+msgstr ""
+
+#: ../../errorhandling.rst:73
+msgid "Error handlers"
+msgstr ""
+
+#: ../../errorhandling.rst:75
+msgid ""
+"You might want to show custom error pages to the user when an error "
+"occurs. This can be done by registering error handlers."
+msgstr ""
+
+#: ../../errorhandling.rst:78
+msgid ""
+"An error handler is a normal view function that returns a response, but "
+"instead of being registered for a route, it is registered for an "
+"exception or HTTP status code that would be raised while trying to handle"
+" a request."
+msgstr ""
+
+#: ../../errorhandling.rst:83
+msgid "Registering"
+msgstr ""
+
+#: ../../errorhandling.rst:85
+msgid ""
+"Register handlers by decorating a function with "
+":meth:`~flask.Flask.errorhandler`. Or use "
+":meth:`~flask.Flask.register_error_handler` to register the function "
+"later. Remember to set the error code when returning the response. ::"
+msgstr ""
+
+#: ../../errorhandling.rst:97
+msgid ""
+":exc:`werkzeug.exceptions.HTTPException` subclasses like "
+":exc:`~werkzeug.exceptions.BadRequest` and their HTTP codes are "
+"interchangeable when registering handlers. (``BadRequest.code == 400``)"
+msgstr ""
+
+#: ../../errorhandling.rst:101
+msgid ""
+"Non-standard HTTP codes cannot be registered by code because they are not"
+" known by Werkzeug. Instead, define a subclass of "
+":class:`~werkzeug.exceptions.HTTPException` with the appropriate code and"
+" register and raise that exception class. ::"
+msgstr ""
+
+#: ../../errorhandling.rst:114
+msgid ""
+"Handlers can be registered for any exception class, not just "
+":exc:`~werkzeug.exceptions.HTTPException` subclasses or HTTP status "
+"codes. Handlers can be registered for a specific class, or for all "
+"subclasses of a parent class."
+msgstr ""
+
+#: ../../errorhandling.rst:120
+msgid "Handling"
+msgstr ""
+
+#: ../../errorhandling.rst:122
+msgid ""
+"When an exception is caught by Flask while handling a request, it is "
+"first looked up by code. If no handler is registered for the code, it is "
+"looked up by its class hierarchy; the most specific handler is chosen. If"
+" no handler is registered, :class:`~werkzeug.exceptions.HTTPException` "
+"subclasses show a generic message about their code, while other "
+"exceptions are converted to a generic 500 Internal Server Error."
+msgstr ""
+
+#: ../../errorhandling.rst:129
+msgid ""
+"For example, if an instance of :exc:`ConnectionRefusedError` is raised, "
+"and a handler is registered for :exc:`ConnectionError` and "
+":exc:`ConnectionRefusedError`, the more specific "
+":exc:`ConnectionRefusedError` handler is called with the exception "
+"instance to generate the response."
+msgstr ""
+
+#: ../../errorhandling.rst:134
+msgid ""
+"Handlers registered on the blueprint take precedence over those "
+"registered globally on the application, assuming a blueprint is handling "
+"the request that raises the exception. However, the blueprint cannot "
+"handle 404 routing errors because the 404 occurs at the routing level "
+"before the blueprint can be determined."
+msgstr ""
+
+#: ../../errorhandling.rst:142
+msgid ""
+"Handlers are prioritized by specificity of the exception classes they are"
+" registered for instead of the order they are registered in."
+msgstr ""
+
+#: ../../errorhandling.rst:146
+msgid "Logging"
+msgstr ""
+
+#: ../../errorhandling.rst:148
+msgid ""
+"See :ref:`logging` for information on how to log exceptions, such as by "
+"emailing them to admins."
+msgstr ""
+
+#: ../../errorhandling.rst:153
+msgid "Debugging Application Errors"
+msgstr ""
+
+#: ../../errorhandling.rst:155
+msgid ""
+"For production applications, configure your application with logging and "
+"notifications as described in :ref:`application-errors`.  This section "
+"provides pointers when debugging deployment configuration and digging "
+"deeper with a full-featured Python debugger."
+msgstr ""
+
+#: ../../errorhandling.rst:162
+msgid "When in Doubt, Run Manually"
+msgstr ""
+
+#: ../../errorhandling.rst:164
+msgid ""
+"Having problems getting your application configured for production?  If "
+"you have shell access to your host, verify that you can run your "
+"application manually from the shell in the deployment environment.  Be "
+"sure to run under the same user account as the configured deployment to "
+"troubleshoot permission issues.  You can use Flask's builtin development "
+"server with `debug=True` on your production host, which is helpful in "
+"catching configuration issues, but **be sure to do this temporarily in a "
+"controlled environment.** Do not run in production with `debug=True`."
+msgstr ""
+
+#: ../../errorhandling.rst:177
+msgid "Working with Debuggers"
+msgstr ""
+
+#: ../../errorhandling.rst:179
+msgid ""
+"To dig deeper, possibly to trace code execution, Flask provides a "
+"debugger out of the box (see :ref:`debug-mode`).  If you would like to "
+"use another Python debugger, note that debuggers interfere with each "
+"other.  You have to set some options in order to use your favorite "
+"debugger:"
+msgstr ""
+
+#: ../../errorhandling.rst:184
+msgid "``debug``        - whether to enable debug mode and catch exceptions"
+msgstr ""
+
+#: ../../errorhandling.rst:185
+msgid "``use_debugger`` - whether to use the internal Flask debugger"
+msgstr ""
+
+#: ../../errorhandling.rst:186
+msgid ""
+"``use_reloader`` - whether to reload and fork the process if modules were"
+" changed"
+msgstr ""
+
+#: ../../errorhandling.rst:188
+msgid ""
+"``debug`` must be True (i.e., exceptions must be caught) in order for the"
+" other two options to have any value."
+msgstr ""
+
+#: ../../errorhandling.rst:191
+msgid ""
+"If you're using Aptana/Eclipse for debugging you'll need to set both "
+"``use_debugger`` and ``use_reloader`` to False."
+msgstr ""
+
+#: ../../errorhandling.rst:194
+msgid ""
+"A possible useful pattern for configuration is to set the following in "
+"your config.yaml (change the block as appropriate for your application, "
+"of course)::"
+msgstr ""
+
+#: ../../errorhandling.rst:201
+msgid ""
+"Then in your application's entry-point (main.py), you could have "
+"something like::"
+msgstr ""
+
