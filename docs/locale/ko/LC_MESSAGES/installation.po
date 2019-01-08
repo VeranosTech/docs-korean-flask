@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../installation.rst:4
 msgid "Installation"
-msgstr ""
+msgstr "설치"
 
 #: ../../installation.rst:7
 msgid "Python Version"
-msgstr ""
+msgstr "파이썬 버전"
 
 #: ../../installation.rst:9
 msgid ""
