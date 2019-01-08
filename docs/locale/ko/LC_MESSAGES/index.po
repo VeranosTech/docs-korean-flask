@@ -3,74 +3,83 @@
 # This file is distributed under the same license as the Flask package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Flask 1.0.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-24 16:20+0900\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2019-01-08 10:51+0900\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.6.0\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko\n"
+"X-Generator: Poedit 2.2\n"
 
 #: ../../index.rst:6
 msgid "Welcome to Flask"
-msgstr ""
+msgstr "Flask 문서"
 
 #: ../../index.rst:13
 msgid ""
-"Welcome to Flask's documentation. Get started with :ref:`installation` "
-"and then get an overview with the :ref:`quickstart`. There is also a more"
-" detailed :ref:`tutorial` that shows how to create a small but complete "
-"application with Flask. Common patterns are described in the "
-":ref:`patterns` section. The rest of the docs describe each component of "
-"Flask in detail, with a full reference in the :ref:`api` section."
+"Welcome to Flask's documentation. Get started with :ref:`installation` and then "
+"get an overview with the :ref:`quickstart`. There is also a more detailed :ref:"
+"`tutorial` that shows how to create a small but complete application with "
+"Flask. Common patterns are described in the :ref:`patterns` section. The rest "
+"of the docs describe each component of Flask in detail, with a full reference "
+"in the :ref:`api` section."
 msgstr ""
+"Flask 문서에 온 것을 환영한다. :ref:`installation`\\ 을 읽고 설치를 끝낸 후에 :"
+"ref:`quickstart`\\ 를 읽으면 개략적인 내용을 알 수 있다. :ref:`tutorial`\\ 에는 "
+"어떻게 Flask로 작지만 완벽한 애플리케이션을 만들 수 있는지 보여주는 자세한 내용"
+"이 있다. 많이 사용되는 패컨은 :ref:`patterns` 절에 설명했다. 나머지 문서는 Flask"
+"의 각 구성에 대해 자세히 설명하며 :ref:`api` 절에 전체 참조문서가 있다."
 
 #: ../../index.rst:20
 msgid ""
-"Flask depends on the `Jinja`_ template engine and the `Werkzeug`_ WSGI "
-"toolkit. The documentation for these libraries can be found at:"
+"Flask depends on the `Jinja`_ template engine and the `Werkzeug`_ WSGI toolkit. "
+"The documentation for these libraries can be found at:"
 msgstr ""
+"Flask는 `Jinja`_  템플릿 엔진과  `Werkzeug`_ WSGI 툴킷에 의존한다. 이 라이브러리"
+"에 대한 문서는 다음과 같다.:"
 
 #: ../../index.rst:23
 msgid "`Jinja documentation <http://jinja.pocoo.org/docs>`_"
-msgstr ""
+msgstr "`Jinja 문서 <http://jinja.pocoo.org/docs>`_"
 
 #: ../../index.rst:24
 msgid "`Werkzeug documentation <http://werkzeug.pocoo.org/docs>`_"
-msgstr ""
+msgstr "`Werkzeug 문서 <http://werkzeug.pocoo.org/docs>`_"
 
 #: ../../contents.rst.inc:2
 msgid "User's Guide"
-msgstr ""
+msgstr "사용자 안내서"
 
 #: ../../contents.rst.inc:4
 msgid ""
 "This part of the documentation, which is mostly prose, begins with some "
-"background information about Flask, then focuses on step-by-step "
-"instructions for web development with Flask."
+"background information about Flask, then focuses on step-by-step instructions "
+"for web development with Flask."
 msgstr ""
+"이 부분은 Flask에 대한 배경지식부터 시작해서 단계적으로 Flask를 사용한 웹 개발"
+"에 대해 집중한다."
 
 #: ../../contents.rst.inc:35
 msgid "API Reference"
-msgstr ""
+msgstr "API 참조문서"
 
 #: ../../contents.rst.inc:37
 msgid ""
-"If you are looking for information on a specific function, class or "
-"method, this part of the documentation is for you."
-msgstr ""
+"If you are looking for information on a specific function, class or method, "
+"this part of the documentation is for you."
+msgstr "특정 함수, 클래스, 메서드에 대한 정보를 원하면 다음을 참조한다."
 
 #: ../../contents.rst.inc:46
 msgid "Additional Notes"
-msgstr ""
+msgstr "추가 정보"
 
 #: ../../contents.rst.inc:48
 msgid "Design notes, legal information and changelog are here for the interested."
-msgstr ""
-
+msgstr "설계 노트, 법률적 정보와 체인지로그(changelog)는 여기에 있다."
