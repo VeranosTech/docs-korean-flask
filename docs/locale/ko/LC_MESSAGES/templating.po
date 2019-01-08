@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../templating.rst:4
 msgid "Templates"
-msgstr ""
+msgstr "템플릿"
 
 #: ../../templating.rst:6
 msgid ""
