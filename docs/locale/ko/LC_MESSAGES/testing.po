@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../testing.rst:4
 msgid "Testing Flask Applications"
-msgstr ""
+msgstr "Flask 애플리케이션 테스트"
 
 #: ../../testing.rst:6
 msgid "**Something that is untested is broken.**"
