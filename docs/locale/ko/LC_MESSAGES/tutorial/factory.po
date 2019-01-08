@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flask 1.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"POT-Creation-Date: 2019-01-08 10:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,10 +151,11 @@ msgstr ""
 msgid ""
 "Now you can run your application using the ``flask`` command. From the "
 "terminal, tell Flask where to find your application, then run it in "
-"development mode."
+"development mode. Remember, you should still be in the top-level ``flask-"
+"tutorial`` directory, not the ``flaskr`` package."
 msgstr ""
 
-#: ../../tutorial/factory.rst:132
+#: ../../tutorial/factory.rst:133
 msgid ""
 "Development mode shows an interactive debugger whenever a page raises an "
 "exception, and restarts the server whenever you make changes to the code."
@@ -162,30 +163,38 @@ msgid ""
 "the tutorial."
 msgstr ""
 
-#: ../../tutorial/factory.rst:137
+#: ../../tutorial/factory.rst:138
 msgid "For Linux and Mac:"
 msgstr ""
 
-#: ../../tutorial/factory.rst:145
+#: ../../tutorial/factory.rst:146
 msgid "For Windows cmd, use ``set`` instead of ``export``:"
 msgstr ""
 
-#: ../../tutorial/factory.rst:153
+#: ../../tutorial/factory.rst:154
 msgid "For Windows PowerShell, use ``$env:`` instead of ``export``:"
 msgstr ""
 
-#: ../../tutorial/factory.rst:161
+#: ../../tutorial/factory.rst:162
 msgid "You'll see output similar to this:"
 msgstr ""
 
-#: ../../tutorial/factory.rst:173
+#: ../../tutorial/factory.rst:174
 msgid ""
 "Visit http://127.0.0.1:5000/hello in a browser and you should see the "
 "\"Hello, World!\" message. Congratulations, you're now running your Flask"
 " web application!"
 msgstr ""
 
-#: ../../tutorial/factory.rst:177
+#: ../../tutorial/factory.rst:178
 msgid "Continue to :doc:`database`."
 msgstr ""
+
+#~ msgid ""
+#~ "Now you can run your application "
+#~ "using the ``flask`` command. From the"
+#~ " terminal, tell Flask where to find"
+#~ " your application, then run it in "
+#~ "development mode."
+#~ msgstr ""
 

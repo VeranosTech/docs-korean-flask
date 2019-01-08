@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flask 1.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"POT-Creation-Date: 2019-01-08 10:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -384,8 +384,8 @@ msgstr ""
 msgid ""
 "Serialize objects to ASCII-encoded JSON. If this is disabled, the JSON "
 "will be returned as a Unicode string, or encoded as ``UTF-8`` by "
-"``jsonify``. This has security implications when rendering the JSON in to"
-" JavaScript in templates, and should typically remain enabled."
+"``jsonify``. This has security implications when rendering the JSON into "
+"JavaScript in templates, and should typically remain enabled."
 msgstr ""
 
 #: ../../config.rst:311
@@ -658,18 +658,32 @@ msgstr ""
 
 #: ../../config.rst:556
 msgid ""
+"Note that :meth:`~flask.Config.from_object` does not instantiate the "
+"class object. If you need to instantiate the class, such as to access a "
+"property, then you must do so before calling "
+":meth:`~flask.Config.from_object`::"
+msgstr ""
+
+#: ../../config.rst:568
+msgid ""
+"Instantiating the configutation object allows you to use ``@property`` in"
+" your configuration classes::"
+msgstr ""
+
+#: ../../config.rst:594
+msgid ""
 "There are many different ways and it's up to you how you want to manage "
 "your configuration files.  However here a list of good recommendations:"
 msgstr ""
 
-#: ../../config.rst:559
+#: ../../config.rst:597
 msgid ""
 "Keep a default configuration in version control.  Either populate the "
 "config with this default configuration or import it in your own "
 "configuration files before overriding values."
 msgstr ""
 
-#: ../../config.rst:562
+#: ../../config.rst:600
 msgid ""
 "Use an environment variable to switch between the configurations. This "
 "can be done from outside the Python interpreter and makes development and"
@@ -680,18 +694,18 @@ msgid ""
 "configuration for you."
 msgstr ""
 
-#: ../../config.rst:569
+#: ../../config.rst:607
 msgid ""
 "Use a tool like `fabric`_ in production to push code and configurations "
 "separately to the production server(s).  For some details about how to do"
 " that, head over to the :ref:`fabric-deployment` pattern."
 msgstr ""
 
-#: ../../config.rst:580
+#: ../../config.rst:618
 msgid "Instance Folders"
 msgstr ""
 
-#: ../../config.rst:584
+#: ../../config.rst:622
 msgid ""
 "Flask 0.8 introduces instance folders.  Flask for a long time made it "
 "possible to refer to paths relative to the application's folder directly "
@@ -701,7 +715,7 @@ msgid ""
 "root path refers to the contents of the package."
 msgstr ""
 
-#: ../../config.rst:591
+#: ../../config.rst:629
 msgid ""
 "With Flask 0.8 a new attribute was introduced: "
 ":attr:`Flask.instance_path`.  It refers to a new concept called the "
@@ -710,7 +724,7 @@ msgid ""
 "drop things that either change at runtime or configuration files."
 msgstr ""
 
-#: ../../config.rst:597
+#: ../../config.rst:635
 msgid ""
 "You can either explicitly provide the path of the instance folder when "
 "creating the Flask application or you can let Flask autodetect the "
@@ -718,36 +732,36 @@ msgid ""
 "parameter::"
 msgstr ""
 
-#: ../../config.rst:604
+#: ../../config.rst:642
 msgid "Please keep in mind that this path *must* be absolute when provided."
 msgstr ""
 
-#: ../../config.rst:606
+#: ../../config.rst:644
 msgid ""
 "If the `instance_path` parameter is not provided the following default "
 "locations are used:"
 msgstr ""
 
-#: ../../config.rst:609
+#: ../../config.rst:647
 msgid "Uninstalled module::"
 msgstr ""
 
-#: ../../config.rst:614
+#: ../../config.rst:652
 msgid "Uninstalled package::"
 msgstr ""
 
-#: ../../config.rst:620
+#: ../../config.rst:658
 msgid "Installed module or package::"
 msgstr ""
 
-#: ../../config.rst:625
+#: ../../config.rst:663
 msgid ""
 "``$PREFIX`` is the prefix of your Python installation.  This can be "
 "``/usr`` or the path to your virtualenv.  You can print the value of "
 "``sys.prefix`` to see what the prefix is set to."
 msgstr ""
 
-#: ../../config.rst:629
+#: ../../config.rst:667
 msgid ""
 "Since the config object provided loading of configuration files from "
 "relative filenames we made it possible to change the loading via "
@@ -757,21 +771,40 @@ msgid ""
 "`instance_relative_config` switch to the application constructor::"
 msgstr ""
 
-#: ../../config.rst:638
+#: ../../config.rst:676
 msgid ""
 "Here is a full example of how to configure Flask to preload the config "
-"from a module and then override the config from a file in the config "
+"from a module and then override the config from a file in the instance "
 "folder if it exists::"
 msgstr ""
 
-#: ../../config.rst:646
+#: ../../config.rst:684
 msgid ""
 "The path to the instance folder can be found via the "
 ":attr:`Flask.instance_path`.  Flask also provides a shortcut to open a "
 "file from the instance folder with :meth:`Flask.open_instance_resource`."
 msgstr ""
 
-#: ../../config.rst:650
+#: ../../config.rst:688
 msgid "Example usage for both::"
 msgstr ""
+
+#~ msgid ""
+#~ "Serialize objects to ASCII-encoded JSON."
+#~ " If this is disabled, the JSON "
+#~ "will be returned as a Unicode "
+#~ "string, or encoded as ``UTF-8`` by "
+#~ "``jsonify``. This has security implications"
+#~ " when rendering the JSON in to "
+#~ "JavaScript in templates, and should "
+#~ "typically remain enabled."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Here is a full example of how "
+#~ "to configure Flask to preload the "
+#~ "config from a module and then "
+#~ "override the config from a file in"
+#~ " the config folder if it exists::"
+#~ msgstr ""
 

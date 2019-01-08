@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flask 1.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"POT-Creation-Date: 2019-01-08 10:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,28 +118,29 @@ msgstr ""
 #: ../../blueprints.rst:77
 msgid ""
 "When you bind a function with the help of the ``@simple_page.route`` "
-"decorator the blueprint will record the intention of registering the "
-"function `show` on the application when it's later registered. "
+"decorator, the blueprint will record the intention of registering the "
+"function ``show`` on the application when it's later registered. "
 "Additionally it will prefix the endpoint of the function with the name of"
 " the blueprint which was given to the :class:`Blueprint` constructor (in "
-"this case also ``simple_page``)."
+"this case also ``simple_page``). The blueprint's name does not modify the"
+" URL, only the endpoint."
 msgstr ""
 
-#: ../../blueprints.rst:85
+#: ../../blueprints.rst:86
 msgid "Registering Blueprints"
 msgstr ""
 
-#: ../../blueprints.rst:87
+#: ../../blueprints.rst:88
 msgid "So how do you register that blueprint?  Like this::"
 msgstr ""
 
-#: ../../blueprints.rst:95
+#: ../../blueprints.rst:96
 msgid ""
 "If you check the rules registered on the application, you will find "
 "these::"
 msgstr ""
 
-#: ../../blueprints.rst:103
+#: ../../blueprints.rst:104
 msgid ""
 "The first one is obviously from the application itself for the static "
 "files.  The other two are for the `show` function of the ``simple_page`` "
@@ -147,43 +148,43 @@ msgid ""
 "blueprint and separated by a dot (``.``)."
 msgstr ""
 
-#: ../../blueprints.rst:108
+#: ../../blueprints.rst:109
 msgid "Blueprints however can also be mounted at different locations::"
 msgstr ""
 
-#: ../../blueprints.rst:112
+#: ../../blueprints.rst:113
 msgid "And sure enough, these are the generated rules::"
 msgstr ""
 
-#: ../../blueprints.rst:119
+#: ../../blueprints.rst:120
 msgid ""
 "On top of that you can register blueprints multiple times though not "
 "every blueprint might respond properly to that.  In fact it depends on "
 "how the blueprint is implemented if it can be mounted more than once."
 msgstr ""
 
-#: ../../blueprints.rst:124
+#: ../../blueprints.rst:125
 msgid "Blueprint Resources"
 msgstr ""
 
-#: ../../blueprints.rst:126
+#: ../../blueprints.rst:127
 msgid ""
 "Blueprints can provide resources as well.  Sometimes you might want to "
 "introduce a blueprint only for the resources it provides."
 msgstr ""
 
-#: ../../blueprints.rst:130
+#: ../../blueprints.rst:131
 msgid "Blueprint Resource Folder"
 msgstr ""
 
-#: ../../blueprints.rst:132
+#: ../../blueprints.rst:133
 msgid ""
 "Like for regular applications, blueprints are considered to be contained "
 "in a folder.  While multiple blueprints can originate from the same "
 "folder, it does not have to be the case and it's usually not recommended."
 msgstr ""
 
-#: ../../blueprints.rst:136
+#: ../../blueprints.rst:137
 msgid ""
 "The folder is inferred from the second argument to :class:`Blueprint` "
 "which is usually `__name__`.  This argument specifies what logical Python"
@@ -194,24 +195,24 @@ msgid ""
 ":attr:`Blueprint.root_path` property to see what the resource folder is::"
 msgstr ""
 
-#: ../../blueprints.rst:147
+#: ../../blueprints.rst:148
 msgid ""
 "To quickly open sources from this folder you can use the "
 ":meth:`~Blueprint.open_resource` function::"
 msgstr ""
 
-#: ../../blueprints.rst:154
+#: ../../blueprints.rst:155
 msgid "Static Files"
 msgstr ""
 
-#: ../../blueprints.rst:156
+#: ../../blueprints.rst:157
 msgid ""
 "A blueprint can expose a folder with static files by providing the path "
 "to the folder on the filesystem with the ``static_folder`` argument. It "
 "is either an absolute path or relative to the blueprint's location::"
 msgstr ""
 
-#: ../../blueprints.rst:162
+#: ../../blueprints.rst:163
 msgid ""
 "By default the rightmost part of the path is where it is exposed on the "
 "web. This can be changed with the ``static_url_path`` argument. Because "
@@ -220,14 +221,14 @@ msgid ""
 "prefix ``/admin``, the static URL will be ``/admin/static``."
 msgstr ""
 
-#: ../../blueprints.rst:168
+#: ../../blueprints.rst:169
 msgid ""
 "The endpoint is named ``blueprint_name.static``. You can generate URLs to"
 " it with :func:`url_for` like you would with the static folder of the "
 "application::"
 msgstr ""
 
-#: ../../blueprints.rst:174
+#: ../../blueprints.rst:175
 msgid ""
 "However, if the blueprint does not have a ``url_prefix``, it is not "
 "possible to access the blueprint's static folder. This is because the URL"
@@ -237,24 +238,24 @@ msgid ""
 "folder."
 msgstr ""
 
-#: ../../blueprints.rst:182
+#: ../../blueprints.rst:183
 msgid "Templates"
 msgstr ""
 
-#: ../../blueprints.rst:184
+#: ../../blueprints.rst:185
 msgid ""
 "If you want the blueprint to expose templates you can do that by "
 "providing the `template_folder` parameter to the :class:`Blueprint` "
 "constructor::"
 msgstr ""
 
-#: ../../blueprints.rst:189
+#: ../../blueprints.rst:190
 msgid ""
 "For static files, the path can be absolute or relative to the blueprint "
 "resource folder."
 msgstr ""
 
-#: ../../blueprints.rst:192
+#: ../../blueprints.rst:193
 msgid ""
 "The template folder is added to the search path of templates but with a "
 "lower priority than the actual application's template folder. That way "
@@ -266,7 +267,7 @@ msgid ""
 "registered takes precedence over the others."
 msgstr ""
 
-#: ../../blueprints.rst:201
+#: ../../blueprints.rst:202
 msgid ""
 "So if you have a blueprint in the folder ``yourapplication/admin`` and "
 "you want to render the template ``'admin/index.html'`` and you have "
@@ -277,7 +278,7 @@ msgid ""
 "application template folder."
 msgstr ""
 
-#: ../../blueprints.rst:209
+#: ../../blueprints.rst:210
 msgid ""
 "To further reiterate this: if you have a blueprint named ``admin`` and "
 "you want to render a template called :file:`index.html` which is specific"
@@ -285,7 +286,7 @@ msgid ""
 "this::"
 msgstr ""
 
-#: ../../blueprints.rst:221
+#: ../../blueprints.rst:222
 msgid ""
 "And then when you want to render the template, use "
 ":file:`admin/index.html` as the name to look up the template by.  If you "
@@ -295,11 +296,11 @@ msgid ""
 "``render_template`` call."
 msgstr ""
 
-#: ../../blueprints.rst:228
+#: ../../blueprints.rst:229
 msgid "Building URLs"
 msgstr ""
 
-#: ../../blueprints.rst:230
+#: ../../blueprints.rst:231
 msgid ""
 "If you want to link from one page to another you can use the "
 ":func:`url_for` function just like you normally would do just that you "
@@ -307,7 +308,7 @@ msgid ""
 "(``.``)::"
 msgstr ""
 
-#: ../../blueprints.rst:236
+#: ../../blueprints.rst:237
 msgid ""
 "Additionally if you are in a view function of a blueprint or a rendered "
 "template and you want to link to another endpoint of the same blueprint, "
@@ -315,28 +316,28 @@ msgid ""
 "only::"
 msgstr ""
 
-#: ../../blueprints.rst:242
+#: ../../blueprints.rst:243
 msgid ""
 "This will link to ``admin.index`` for instance in case the current "
 "request was dispatched to any other admin blueprint endpoint."
 msgstr ""
 
-#: ../../blueprints.rst:246
+#: ../../blueprints.rst:247
 msgid "Error Handlers"
 msgstr ""
 
-#: ../../blueprints.rst:248
+#: ../../blueprints.rst:249
 msgid ""
 "Blueprints support the errorhandler decorator just like the "
 ":class:`Flask` application object, so it is easy to make Blueprint-"
 "specific custom error pages."
 msgstr ""
 
-#: ../../blueprints.rst:252
+#: ../../blueprints.rst:253
 msgid "Here is an example for a \"404 Page Not Found\" exception::"
 msgstr ""
 
-#: ../../blueprints.rst:258
+#: ../../blueprints.rst:259
 msgid ""
 "Most errorhandlers will simply work as expected; however, there is a "
 "caveat concerning handlers for 404 and 405 exceptions.  These "
@@ -350,7 +351,21 @@ msgid ""
 "defined at the application level using the ``request`` proxy object::"
 msgstr ""
 
-#: ../../blueprints.rst:276
+#: ../../blueprints.rst:277
 msgid "More information on error handling see :ref:`errorpages`."
 msgstr ""
+
+#~ msgid ""
+#~ "When you bind a function with the"
+#~ " help of the ``@simple_page.route`` "
+#~ "decorator the blueprint will record the"
+#~ " intention of registering the function "
+#~ "`show` on the application when it's "
+#~ "later registered. Additionally it will "
+#~ "prefix the endpoint of the function "
+#~ "with the name of the blueprint "
+#~ "which was given to the "
+#~ ":class:`Blueprint` constructor (in this case"
+#~ " also ``simple_page``)."
+#~ msgstr ""
 

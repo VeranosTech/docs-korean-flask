@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flask 1.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"POT-Creation-Date: 2019-01-08 10:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,8 +154,8 @@ msgstr ""
 
 #: ../../installation.rst:94
 msgid ""
-"If you needed to install virtualenv because you are on an older version "
-"of Python, use the following command instead:"
+"If you needed to install virtualenv because you are using Python 2, use "
+"the following command instead:"
 msgstr ""
 
 #: ../../installation.rst:110
@@ -223,4 +223,11 @@ msgstr ""
 #: ../../installation.rst:183
 msgid "Now you can return above and :ref:`install-create-env`."
 msgstr ""
+
+#~ msgid ""
+#~ "If you needed to install virtualenv "
+#~ "because you are on an older "
+#~ "version of Python, use the following "
+#~ "command instead:"
+#~ msgstr ""
 

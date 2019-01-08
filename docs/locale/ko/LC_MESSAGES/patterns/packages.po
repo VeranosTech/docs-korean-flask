@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flask 1.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"POT-Creation-Date: 2019-01-08 10:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,15 +22,14 @@ msgid "Larger Applications"
 msgstr ""
 
 #: ../../patterns/packages.rst:6
-msgid ""
-"For larger applications it's a good idea to use a package instead of a "
-"module.  That is quite simple.  Imagine a small application looks like "
-"this::"
+msgid "Imagine a simple flask application structure that looks like this::"
 msgstr ""
 
-#: ../../patterns/packages.rst:20
+#: ../../patterns/packages.rst:18
 msgid ""
-"The :ref:`tutorial <tutorial>` is structured this way, see the "
+"While this is fine for small applications, for larger applications it's a"
+" good idea to use a package instead of a module. The :ref:`tutorial "
+"<tutorial>` is structured to use the package pattern, see the "
 ":gh:`example code <examples/tutorial>`."
 msgstr ""
 
@@ -142,4 +141,18 @@ msgid ""
 "blueprint.  For a gentle introduction into this topic refer to the "
 ":ref:`blueprints` chapter of the documentation."
 msgstr ""
+
+#~ msgid ""
+#~ "For larger applications it's a good "
+#~ "idea to use a package instead of"
+#~ " a module.  That is quite simple."
+#~ "  Imagine a small application looks "
+#~ "like this::"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The :ref:`tutorial <tutorial>` is structured"
+#~ " this way, see the :gh:`example code"
+#~ " <examples/tutorial>`."
+#~ msgstr ""
 

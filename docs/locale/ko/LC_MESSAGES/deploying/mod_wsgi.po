@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flask 1.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"POT-Creation-Date: 2019-01-08 10:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,11 +97,17 @@ msgstr ""
 
 #: ../../deploying/mod_wsgi.rst:64
 msgid ""
+"If a factory function is used in a :file:`__init__.py` file, then the "
+"function should be imported::"
+msgstr ""
+
+#: ../../deploying/mod_wsgi.rst:69
+msgid ""
 "If you don't have a factory function for application creation but a "
 "singleton instance you can directly import that one as `application`."
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:67
+#: ../../deploying/mod_wsgi.rst:72
 msgid ""
 "Store that file somewhere that you will find it again (e.g.: "
 ":file:`/var/www/yourapplication`) and make sure that `yourapplication` "
@@ -112,57 +118,57 @@ msgid ""
 " option to just patch the path in the ``.wsgi`` file before the import::"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:79
+#: ../../deploying/mod_wsgi.rst:84
 msgid "Configuring Apache"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:81
+#: ../../deploying/mod_wsgi.rst:86
 msgid ""
 "The last thing you have to do is to create an Apache configuration file "
 "for your application.  In this example we are telling `mod_wsgi` to "
 "execute the application under a different user for security reasons:"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:101
+#: ../../deploying/mod_wsgi.rst:106
 msgid ""
 "Note: WSGIDaemonProcess isn't implemented in Windows and Apache will "
 "refuse to run with the above configuration. On a Windows system, "
 "eliminate those lines:"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:115
+#: ../../deploying/mod_wsgi.rst:120
 msgid ""
 "Note: There have been some changes in access control configuration for "
 "`Apache 2.4`_."
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:119
+#: ../../deploying/mod_wsgi.rst:124
 msgid ""
 "Most notably, the syntax for directory permissions has changed from httpd"
 " 2.2"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:126
+#: ../../deploying/mod_wsgi.rst:131
 msgid "to httpd 2.4 syntax"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:133
+#: ../../deploying/mod_wsgi.rst:138
 msgid "For more information consult the `mod_wsgi documentation`_."
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:141
+#: ../../deploying/mod_wsgi.rst:146
 msgid "Troubleshooting"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:143
+#: ../../deploying/mod_wsgi.rst:148
 msgid "If your application does not run, follow this guide to troubleshoot:"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:149
+#: ../../deploying/mod_wsgi.rst:154
 msgid "**Problem:** application does not run, errorlog shows SystemExit ignored"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:146
+#: ../../deploying/mod_wsgi.rst:151
 msgid ""
 "You have an ``app.run()`` call in your application file that is not "
 "guarded by an ``if __name__ == '__main__':`` condition.  Either remove "
@@ -170,11 +176,11 @@ msgid ""
 "separate :file:`run.py` file or put it into such an if block."
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:156
+#: ../../deploying/mod_wsgi.rst:161
 msgid "**Problem:** application gives permission errors"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:152
+#: ../../deploying/mod_wsgi.rst:157
 msgid ""
 "Probably caused by your application running as the wrong user.  Make sure"
 " the folders the application needs access to have the proper privileges "
@@ -182,11 +188,11 @@ msgid ""
 "parameter to the `WSGIDaemonProcess` directive)"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:172
+#: ../../deploying/mod_wsgi.rst:177
 msgid "**Problem:** application dies with an error on print"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:159
+#: ../../deploying/mod_wsgi.rst:164
 msgid ""
 "Keep in mind that mod_wsgi disallows doing anything with "
 ":data:`sys.stdout` and :data:`sys.stderr`.  You can disable this "
@@ -194,17 +200,17 @@ msgid ""
 "``off``:"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:168
+#: ../../deploying/mod_wsgi.rst:173
 msgid ""
 "Alternatively you can also replace the standard out in the .wsgi file "
 "with a different stream::"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:182
+#: ../../deploying/mod_wsgi.rst:187
 msgid "**Problem:** accessing resources gives IO errors"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:175
+#: ../../deploying/mod_wsgi.rst:180
 msgid ""
 "Your application probably is a single .py file you symlinked into the "
 "site-packages folder.  Please be aware that this does not work, instead "
@@ -212,33 +218,33 @@ msgid ""
 "in, or convert your application into a package."
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:180
+#: ../../deploying/mod_wsgi.rst:185
 msgid ""
 "The reason for this is that for non-installed packages, the module "
 "filename is used to locate the resources and for symlinks the wrong "
 "filename is picked up."
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:185
+#: ../../deploying/mod_wsgi.rst:190
 msgid "Support for Automatic Reloading"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:187
+#: ../../deploying/mod_wsgi.rst:192
 msgid ""
 "To help deployment tools you can activate support for automatic "
 "reloading.  Whenever something changes the ``.wsgi`` file, `mod_wsgi` "
 "will reload all the daemon processes for us."
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:191
+#: ../../deploying/mod_wsgi.rst:196
 msgid "For that, just add the following directive to your `Directory` section:"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:198
+#: ../../deploying/mod_wsgi.rst:203
 msgid "Working with Virtual Environments"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:200
+#: ../../deploying/mod_wsgi.rst:205
 msgid ""
 "Virtual environments have the advantage that they never install the "
 "required dependencies system wide so you have a better control over what "
@@ -246,15 +252,15 @@ msgid ""
 "you have to modify your ``.wsgi`` file slightly."
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:205
+#: ../../deploying/mod_wsgi.rst:210
 msgid "Add the following lines to the top of your ``.wsgi`` file::"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:210
+#: ../../deploying/mod_wsgi.rst:215
 msgid "For Python 3 add the following lines to the top of your ``.wsgi`` file::"
 msgstr ""
 
-#: ../../deploying/mod_wsgi.rst:216
+#: ../../deploying/mod_wsgi.rst:221
 msgid ""
 "This sets up the load paths according to the settings of the virtual "
 "environment.  Keep in mind that the path has to be absolute."

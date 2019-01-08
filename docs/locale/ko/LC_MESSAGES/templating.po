@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flask 1.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-24 16:20+0900\n"
+"POT-Creation-Date: 2019-01-08 10:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -165,18 +165,24 @@ msgid ""
 "is for example very helpful if you try to generate JavaScript on the fly."
 msgstr ""
 
-#: ../../templating.rst:113
+#: ../../templating.rst:119
 msgid ""
-"Note that inside ``script`` tags no escaping must take place, so make "
-"sure to disable escaping with ``|safe`` before Flask 0.10 if you intend "
-"to use it inside ``script`` tags:"
+"It is also safe to use the output of `|tojson` in a *single-quoted* HTML "
+"attribute:"
 msgstr ""
 
-#: ../../templating.rst:124
+#: ../../templating.rst:128
+msgid ""
+"Note that in versions of Flask prior to 0.10, if using the output of "
+"``|tojson`` inside ``script``, make sure to disable escaping with "
+"``|safe``. In Flask 0.10 and above, this happens automatically."
+msgstr ""
+
+#: ../../templating.rst:133
 msgid "Controlling Autoescaping"
 msgstr ""
 
-#: ../../templating.rst:126
+#: ../../templating.rst:135
 msgid ""
 "Autoescaping is the concept of automatically escaping special characters "
 "for you.  Special characters in the sense of HTML (or XML, and thus "
@@ -188,7 +194,7 @@ msgid ""
 "(see :ref:`xss`)"
 msgstr ""
 
-#: ../../templating.rst:135
+#: ../../templating.rst:144
 msgid ""
 "Sometimes however you will need to disable autoescaping in templates. "
 "This can be the case if you want to explicitly inject HTML into pages, "
@@ -196,44 +202,44 @@ msgid ""
 "markdown to HTML converter."
 msgstr ""
 
-#: ../../templating.rst:140
+#: ../../templating.rst:149
 msgid "There are three ways to accomplish that:"
 msgstr ""
 
-#: ../../templating.rst:142
+#: ../../templating.rst:151
 msgid ""
 "In the Python code, wrap the HTML string in a :class:`~flask.Markup` "
 "object before passing it to the template.  This is in general the "
 "recommended way."
 msgstr ""
 
-#: ../../templating.rst:145
+#: ../../templating.rst:154
 msgid ""
 "Inside the template, use the ``|safe`` filter to explicitly mark a string"
 " as safe HTML (``{{ myvariable|safe }}``)"
 msgstr ""
 
-#: ../../templating.rst:147
+#: ../../templating.rst:156
 msgid "Temporarily disable the autoescape system altogether."
 msgstr ""
 
-#: ../../templating.rst:149
+#: ../../templating.rst:158
 msgid ""
 "To disable the autoescape system in templates, you can use the ``{% "
 "autoescape %}`` block:"
 msgstr ""
 
-#: ../../templating.rst:159
+#: ../../templating.rst:168
 msgid ""
 "Whenever you do this, please be very cautious about the variables you are"
 " using in this block."
 msgstr ""
 
-#: ../../templating.rst:165
+#: ../../templating.rst:174
 msgid "Registering Filters"
 msgstr ""
 
-#: ../../templating.rst:167
+#: ../../templating.rst:176
 msgid ""
 "If you want to register your own filters in Jinja2 you have two ways to "
 "do that.  You can either put them by hand into the "
@@ -241,11 +247,11 @@ msgid ""
 ":meth:`~flask.Flask.template_filter` decorator."
 msgstr ""
 
-#: ../../templating.rst:172
+#: ../../templating.rst:181
 msgid "The two following examples work the same and both reverse an object::"
 msgstr ""
 
-#: ../../templating.rst:182
+#: ../../templating.rst:191
 msgid ""
 "In case of the decorator the argument is optional if you want to use the "
 "function name as name of the filter.  Once registered, you can use the "
@@ -253,11 +259,11 @@ msgid ""
 " example if you have a Python list in context called `mylist`::"
 msgstr ""
 
-#: ../../templating.rst:192
+#: ../../templating.rst:201
 msgid "Context Processors"
 msgstr ""
 
-#: ../../templating.rst:194
+#: ../../templating.rst:203
 msgid ""
 "To inject new variables automatically into the context of a template, "
 "context processors exist in Flask.  Context processors run before the "
@@ -267,7 +273,7 @@ msgid ""
 "the template context, for all templates in the app::"
 msgstr ""
 
-#: ../../templating.rst:205
+#: ../../templating.rst:214
 msgid ""
 "The context processor above makes a variable called `user` available in "
 "the template with the value of `g.user`.  This example is not very "
@@ -275,23 +281,31 @@ msgid ""
 "an idea how this works."
 msgstr ""
 
-#: ../../templating.rst:210
+#: ../../templating.rst:219
 msgid ""
 "Variables are not limited to values; a context processor can also make "
 "functions available to templates (since Python allows passing around "
 "functions)::"
 msgstr ""
 
-#: ../../templating.rst:220
+#: ../../templating.rst:229
 msgid ""
 "The context processor above makes the `format_price` function available "
 "to all templates::"
 msgstr ""
 
-#: ../../templating.rst:225
+#: ../../templating.rst:234
 msgid ""
 "You could also build `format_price` as a template filter (see :ref"
 ":`registering-filters`), but this demonstrates how to pass functions in a"
 " context processor."
 msgstr ""
+
+#~ msgid ""
+#~ "Note that inside ``script`` tags no "
+#~ "escaping must take place, so make "
+#~ "sure to disable escaping with ``|safe``"
+#~ " before Flask 0.10 if you intend "
+#~ "to use it inside ``script`` tags:"
+#~ msgstr ""
 
