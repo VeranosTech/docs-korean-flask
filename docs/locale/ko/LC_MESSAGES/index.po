@@ -34,7 +34,7 @@ msgstr ""
 "Flask 문서에 온 것을 환영한다. :ref:`installation`\\ 을 읽고 설치를 끝낸 후에 :"
 "ref:`quickstart`\\ 를 읽으면 개략적인 내용을 알 수 있다. :ref:`tutorial`\\ 에는 "
 "어떻게 Flask로 작지만 완벽한 애플리케이션을 만들 수 있는지 보여주는 자세한 내용"
-"이 있다. 많이 사용되는 패컨은 :ref:`patterns` 절에 설명했다. 나머지 문서는 Flask"
+"이 있다. 많이 사용되는 패턴은 :ref:`patterns` 절에 설명했다. 나머지 문서는 Flask"
 "의 각 구성에 대해 자세히 설명하며 :ref:`api` 절에 전체 참조문서가 있다."
 
 #: ../../index.rst:20
