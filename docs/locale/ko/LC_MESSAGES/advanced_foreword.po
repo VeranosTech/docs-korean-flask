@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../advanced_foreword.rst:4
 msgid "Foreword for Experienced Programmers"
-msgstr ""
+msgstr "숙련된 프로그래머를 위한 서문"
 
 #: ../../advanced_foreword.rst:7
 msgid "Thread-Locals in Flask"
