@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../errorhandling.rst:4
 msgid "Application Errors"
-msgstr ""
+msgstr "애플리케이션 오류"
 
 #: ../../errorhandling.rst:8
 #, python-format
