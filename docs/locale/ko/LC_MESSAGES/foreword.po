@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../foreword.rst:2
 msgid "Foreword"
-msgstr ""
+msgstr "서문"
 
 #: ../../foreword.rst:4
 msgid ""
