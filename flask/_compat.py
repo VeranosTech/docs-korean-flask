@@ -28,6 +28,7 @@ if not PY2:
 
     from inspect import getfullargspec as getargspec
     from io import StringIO
+    import collections.abc as collections_abc
 
     def reraise(tp, value, tb=None):
         if value.__traceback__ is not tb:
@@ -47,6 +48,7 @@ else:
 
     from inspect import getargspec
     from cStringIO import StringIO
+    import collections as collections_abc
 
     exec('def reraise(tp, value, tb=None):\n raise tp, value, tb')
 
@@ -97,3 +99,12 @@ if hasattr(sys, 'pypy_version_info'):
         BROKEN_PYPY_CTXMGR_EXIT = True
     except AssertionError:
         pass
+
+
+try:
+    from os import fspath
+except ImportError:
+    # Backwards compatibility as proposed in PEP 0519:
+    # https://www.python.org/dev/peps/pep-0519/#backwards-compatibility
+    def fspath(path):
+        return path.__fspath__() if hasattr(path, '__fspath__') else path
