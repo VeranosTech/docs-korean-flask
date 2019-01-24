@@ -41,13 +41,15 @@ msgstr "가장 작은 플라스크 앱은 다음처럼 생겼다::"
 
 #: ../../quickstart.rst:23
 msgid "So what did that code do?"
-msgstr ""
+msgstr "이 코드는 무슨 일을 하는가?"
 
 #: ../../quickstart.rst:25
 msgid ""
 "First we imported the :class:`~flask.Flask` class.  An instance of this "
 "class will be our WSGI application."
 msgstr ""
+"우선 :class:`~flask.Flask` 클래스를 임포트한다. 이 클래스의 인스턴스가 "
+"우리의 WSGI 애플리케이션이 된다."
 
 #: ../../quickstart.rst:27
 msgid ""
@@ -60,12 +62,20 @@ msgid ""
 " For more information have a look at the :class:`~flask.Flask` "
 "documentation."
 msgstr ""
+"다음으로는 이 클래스의 인스턴스를 만든다. 첫번째 인수는 애플리케이션의 "
+"모듈 혹은 패키지 이름이다. 만약 (이 예제처럼) 단일 모듈을 사용하면 "
+"이 모듈이 독립 애플리케이션으로 실행되는지 혹은 모듈로서 임포트되는지에 따라 "
+"이름이 달라지므로 ``__name__``\ 라고 넣어야 한다. "
+"이게 필요한 이유는 플라스크가 어디에서 템플릿, 스태틱 파일 등을 찾아야 할지 "
+"알아야 하기 때문이다. 더 자세한 내용은 :class:`~flask.Flask` 문서를 참조한다. "
 
 #: ../../quickstart.rst:34
 msgid ""
 "We then use the :meth:`~flask.Flask.route` decorator to tell Flask what "
 "URL should trigger our function."
 msgstr ""
+"다음으로 :meth:`~flask.Flask.route` 데코레이터로 플라스크가 어떤 URL을 받아서 "
+"우리가 만든 함수를 호출할지를 알려준다."
 
 #: ../../quickstart.rst:36
 msgid ""
