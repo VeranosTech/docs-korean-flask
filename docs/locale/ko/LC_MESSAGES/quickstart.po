@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../quickstart.rst:4
 msgid "Quickstart"
-msgstr "빠르게 시작하기"
+msgstr "바로 시작하기"
 
 #: ../../quickstart.rst:6
 msgid ""
@@ -27,14 +27,17 @@ msgid ""
 "assumes you already have Flask installed.  If you do not, head over to "
 "the :ref:`installation` section."
 msgstr ""
+"당장 시작해보고 싶은가? 이 페이지는 플라스크에 대한 좋은 소개서가 될 것이다. "
+"일단 플라스크가 설치되어 있다고 가정한다. 만약 설치하지 않았다면 "
+":ref:`installation` 섹션으로 돌아가서 설치하라."
 
 #: ../../quickstart.rst:12
 msgid "A Minimal Application"
-msgstr ""
+msgstr "가장 작은 애플리케이션"
 
 #: ../../quickstart.rst:14
 msgid "A minimal Flask application looks something like this::"
-msgstr ""
+msgstr "가장 작은 플라스크 앱은 다음처럼 생겼다::"
 
 #: ../../quickstart.rst:23
 msgid "So what did that code do?"
@@ -857,7 +860,7 @@ msgstr ""
 
 #: ../../quickstart.rst:721
 msgid "Sessions"
-msgstr ""
+msgstr "세션"
 
 #: ../../quickstart.rst:723
 msgid ""
@@ -868,6 +871,8 @@ msgid ""
 " is that the user could look at the contents of your cookie but not "
 "modify it, unless they know the secret key used for signing."
 msgstr ""
+"request 객체 이외에도 :class:`~flask.session` 객체가 있어서 사용자별 정보를 "
+"리쿼스트마다 저장할 수 있다. "
 
 #: ../../quickstart.rst:730
 msgid ""
