@@ -112,7 +112,7 @@ msgid ""
 " line interpreter. On Command Prompt::"
 msgstr ""
 "만약 윈도우를 사용하면 어떤 명령줄 인터프리터를 사용하는가에 따라 문법이 다르다. "
-"코맨드 프롬프트를 사용한다면::"
+"만약 코맨드 프롬프트(command prompt)를 사용한다면::"
 
 #: ../../quickstart.rst:58
 msgid "And on PowerShell::"
@@ -128,8 +128,8 @@ msgid ""
 "testing but probably not what you want to use in production. For "
 "deployment options see :ref:`deployment`."
 msgstr ""
-"이렇게 하면 아주 프로덕션에서는 쓰기 힘들지만 테스트에 쓰기에는 충분한 "
-"소형 빌트인 서버를 가동한다. "
+"이렇게 하면 운용(production)에서는 쓰기 힘들지만 테스트에 쓰기에는 충분한 "
+"소형 빌트인 서버(built-in server)를 가동한다. "
 
 #: ../../quickstart.rst:72
 msgid ""
@@ -141,7 +141,7 @@ msgstr ""
 
 #: ../../quickstart.rst:77
 msgid "Externally Visible Server"
-msgstr ""
+msgstr "외부에 보이는 서버"
 
 #: ../../quickstart.rst:79
 msgid ""
@@ -150,6 +150,9 @@ msgid ""
 "default because in debugging mode a user of the application can execute "
 "arbitrary Python code on your computer."
 msgstr ""
+"서버를 가동하면 사용자의 컴퓨터에서만 보이고 외부 네트워크에서는 보이지 않는 "
+"것을 알 수 있다. 디버깅 모드에서는 이게 디폴트 설정이다. 앱 사용자가 컴퓨터에서 "
+"아무런 파이썬 코드나 실행시키는 것을 막기 위해서이다."
 
 #: ../../quickstart.rst:84
 msgid ""
@@ -157,14 +160,18 @@ msgid ""
 " can make the server publicly available simply by adding "
 "``--host=0.0.0.0`` to the command line::"
 msgstr ""
+"만약 디버거를 비활성화하거나 네트워크 상의 사용자를 신뢰한다면 "
+"명령줄에 ``--host=0.0.0.0``  옵션을 추가하여 모두에게 공개할 수도 있다."
 
 #: ../../quickstart.rst:90
 msgid "This tells your operating system to listen on all public IPs."
 msgstr ""
+"이렇게 하면 모든 퍼블릭 IP에서 오는 요청을 받도록 한다."
 
 #: ../../quickstart.rst:94
 msgid "What to do if the Server does not Start"
 msgstr ""
+"만약 서버가 동작하지 않으"
 
 #: ../../quickstart.rst:96
 msgid ""
@@ -172,10 +179,13 @@ msgid ""
 " exist, there are multiple reasons this might be the case.  First of all "
 "you need to look at the error message."
 msgstr ""
+":command:`python -m flask` 명령이 실패하거나 :command:`flask` 명령이 "
+"없다고 나오면 여러가지 원인이 있을 수 있다. 우선 에러 메시지를 확인할 필요가 있다."
+
 
 #: ../../quickstart.rst:101
 msgid "Old Version of Flask"
-msgstr ""
+msgstr "Flask 버전이 오래된 경우"
 
 #: ../../quickstart.rst:103
 msgid ""
@@ -185,10 +195,14 @@ msgid ""
 "options: either upgrade to newer Flask versions or have a look at the "
 ":ref:`server` docs to see the alternative method for running a server."
 msgstr ""
+"버전 0.11보다 예전의 버전은 애플리케이션 가동시에 다른 방법을 사용한다. "
+":command:`flask` 명령도 존재하지 않고 :command:`python -m flask` 명령도 불가능하다. "
+"이 때는 두가지 옵션이 있다. Flask 버전을 업그레이드 하거나 :ref:`server` 문서를 참조하여 "
+"서버를 가동하는 다른 방법을 찾아야 한다."
 
 #: ../../quickstart.rst:110
 msgid "Invalid Import Name"
-msgstr ""
+msgstr "임포트 네임이 잘못된 경우"
 
 #: ../../quickstart.rst:112
 msgid ""
@@ -198,12 +212,17 @@ msgid ""
 "navigate to the application). It will tell you what it tried to import "
 "and why it failed."
 msgstr ""
+"``FLASK_APP``\ 이라는 환경변수는 :command:`flask run` 명령으로 임포트할 "
+"모듈 이름이다. 만약 모듈 이름이 잘못되어 있으면 서버가 시작하면서 "
+"(디버그 모드에서는 애플리케이션에 진입했을 때) 에러가 발생한다. "
+"에러 메세지에는 어떤 이름을 임포트하려다가 실패했는지 나올 것이다."
 
 #: ../../quickstart.rst:117
 msgid ""
 "The most common reason is a typo or because you did not actually create "
 "an ``app`` object."
 msgstr ""
+"가장 흔한 원인은 오타이거나 ``app`` 객체를 생성하지 않는 경우이다."
 
 #: ../../quickstart.rst:123
 msgid "Debug Mode"
