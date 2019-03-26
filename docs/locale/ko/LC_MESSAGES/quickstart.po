@@ -226,11 +226,11 @@ msgstr ""
 
 #: ../../quickstart.rst:123
 msgid "Debug Mode"
-msgstr ""
+msgstr "디버그 모드"
 
 #: ../../quickstart.rst:125
 msgid "(Want to just log errors and stack traces? See :ref:`application-errors`)"
-msgstr ""
+msgstr "(에러나 스택 트레이스를 기록하고 있는 경우에는 :ref:`application-errors` 참조)"
 
 #: ../../quickstart.rst:127
 msgid ""
@@ -240,6 +240,10 @@ msgid ""
 "support the server will reload itself on code changes, and it will also "
 "provide you with a helpful debugger if things go wrong."
 msgstr ""
+":command:`flask` 스크립트는 로컬 개발 서버를 시작하기에 적당하지만 "
+"코드를 바꿀 때마다 수동으로 재시작해야 한다. "
+"디버그 지원을 활성화하면 코드가 바뀔 때마다 서버가 스스로 코드를 리로드하고 "
+"재시작한다. 그리고 일이 잘못되면 유용한 디버거도 제공한다. " 
 
 #: ../../quickstart.rst:133
 msgid ""
@@ -247,10 +251,12 @@ msgid ""
 "the ``FLASK_ENV`` environment variable and set it to ``development`` "
 "before running the server::"
 msgstr ""
+"(디버그 모드를 포함하여 모든 개발 기능을 활성화하려면 서버를 시작하기 전에 "
+"``FLASK_ENV`` 환경변수를 ``development``\ 로 설정하고 익스포트한다.::"
 
 #: ../../quickstart.rst:140
 msgid "(On Windows you need to use ``set`` instead of ``export``.)"
-msgstr ""
+msgstr "(윈도우즈에서는 ``export`` 대신에 ``set``\ 을 사용한다.)"
 
 #: ../../quickstart.rst:142
 msgid "This does the following things:"
