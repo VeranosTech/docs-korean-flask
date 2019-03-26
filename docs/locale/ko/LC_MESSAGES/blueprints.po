@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../blueprints.rst:4
 msgid "Modular Applications with Blueprints"
-msgstr ""
+msgstr "블루프린트를 사용한 모듈형 애플리케이션"
 
 #: ../../blueprints.rst:10
 msgid ""
@@ -32,14 +32,20 @@ msgid ""
 "  Rather it is a *blueprint* of how to construct or extend an "
 "application."
 msgstr ""
+"플라스크는 애플리케이션 컴포넌트를 만들고 애플리케이션내 혹은 여러 애플리케이션에 걸친 "
+"공통 패턴을 지원하기 위해 *블루프린트*\ 라는 개념을 사용한다. "
+"블루프린트는 대규모 애플리케이션의 동작을 단순하게 만들면서 애플리케이션에 다양한 기능을 "
+"등록할 수 있는 확장 프로그램을 만드는 수단을 제공한다. "
+":class:`Blueprint` 클래스 객체는 :class:`Flask` 애플리케이션 객체와 비슷하게 동작한다. "
+"하지만 실제로는 애플리케이션이 아니라 애플리케이션을 생성하거나 확장하기 위한 청사진에 지나지 않는다. "
 
 #: ../../blueprints.rst:19
 msgid "Why Blueprints?"
-msgstr ""
+msgstr "왜 블루프린트를 사용하는가?"
 
 #: ../../blueprints.rst:21
 msgid "Blueprints in Flask are intended for these cases:"
-msgstr ""
+msgstr "플라스크에서는 다음과 같은 경우에 블루프린트를 사용한다:"
 
 #: ../../blueprints.rst:23
 msgid ""
@@ -47,6 +53,9 @@ msgid ""
 " applications; a project could instantiate an application object, "
 "initialize several extensions, and register a collection of blueprints."
 msgstr ""
+"애플리케이션을 여러개의 블루프린트로 나눈다. 이 방식은 대규모 애플리케이션에 적당하다. "
+"하나의 프로젝트에서 하나의 애플리케이션 객체를 초기화한 다음에 "
+"여러개의 확장프로그램을 초기화하고 블루프린트를 등록한다."
 
 #: ../../blueprints.rst:26
 msgid ""
@@ -54,12 +63,15 @@ msgid ""
 "Parameters in the URL prefix/subdomain become common view arguments (with"
 " defaults) across all view functions in the blueprint."
 msgstr ""
+"블루프린트를 애플리케이션의 특정 URL 접미사로 혹은 서브도메인으로 등록한다. "
+"URL 접미사/서브도메인 파라미터는 블루프린트 내의 모든 뷰 함수에 대해 공통 디폴트 뷰 인수가 된다. "
 
 #: ../../blueprints.rst:29
 msgid ""
 "Register a blueprint multiple times on an application with different URL "
 "rules."
 msgstr ""
+"하나의 블루프린트를 하나의 애플리케이션에 다른 URL로 여러번 등록할 수도 있다. " 
 
 #: ../../blueprints.rst:31
 msgid ""
@@ -67,12 +79,15 @@ msgid ""
 "through blueprints.  A blueprint does not have to implement applications "
 "or view functions."
 msgstr ""
+"템플릿 필터, 스태틱 파일, 템플릿, 그외 다른 유틸리티들을 블루프린트로 제공할 수도 있다. "
+"블루프린트는 반드시 애플리케이션이나 뷰 함수를 구현할 필요는 없다. "
 
 #: ../../blueprints.rst:34
 msgid ""
 "Register a blueprint on an application for any of these cases when "
 "initializing a Flask extension."
 msgstr ""
+"플라스크 확장 프로그램을 초기화 할 때 블루프린트를 등록할 수 있다. "
 
 #: ../../blueprints.rst:37
 msgid ""
@@ -83,6 +98,10 @@ msgid ""
 "applications will have separate configs and will be managed at the WSGI "
 "layer."
 msgstr ""
+"블루프린트는 애플리케이션이 아니기 때문에 플러그 앱이라고 할 수 없다. "
+"블루프린트는 앱에 한 번 이상 등록할 수 있는 오퍼레이션 집합일 뿐이다. "
+"복수의 애플리케이션 객체도 가능하다. (:ref:`app-dispatch` 참조) 하지만 "
+"애플리케이션이 별도의 설정을 가지고 WSGI 레이어에서 관리할 수 있어야 한다. "
 
 #: ../../blueprints.rst:43
 msgid ""
@@ -92,10 +111,13 @@ msgid ""
 "blueprint once an application was created without having to destroy the "
 "whole application object."
 msgstr ""
+"대신에 블루프린트는 애플리케이션 설정을 공유하고 필요에 따라 애플리케이션 객체를 "
+"변경할 수 있다. 단점은 일단 애플리케이션이 생성되고 블루프린트를 등록하면 "
+"전체 애플리케이션 객체를 없애지 않고서는 블루프린트를 등록해제할 수 없다는 점이다. "
 
 #: ../../blueprints.rst:50
 msgid "The Concept of Blueprints"
-msgstr ""
+msgstr "블루프린트의 개념"
 
 #: ../../blueprints.rst:52
 msgid ""
@@ -104,16 +126,20 @@ msgid ""
 " blueprints when dispatching requests and generating URLs from one "
 "endpoint to another."
 msgstr ""
+"블루프린트의 기본 개념은 애플리케이션에 등록될 때 실행할 동작을 기록한다는 것이다. "
+"플라스크는 리쿼스트를 받거나 엔드포인트 URL을 생성할 때 블루프린트와 뷰 함수를 연결한다. 
 
 #: ../../blueprints.rst:58
 msgid "My First Blueprint"
-msgstr ""
+msgstr "첫번째 블루프린트"
 
 #: ../../blueprints.rst:60
 msgid ""
 "This is what a very basic blueprint looks like.  In this case we want to "
 "implement a blueprint that does simple rendering of static templates::"
 msgstr ""
+"이 블루프린트는 아주 기본적인 것이다. 여기에서는 스테틱 템플릿을 렌더링하는 "
+"단순한 블루프린트를 구현한다.
 
 #: ../../blueprints.rst:77
 msgid ""
@@ -125,20 +151,26 @@ msgid ""
 "this case also ``simple_page``). The blueprint's name does not modify the"
 " URL, only the endpoint."
 msgstr ""
+"``@simple_page.route``\ 의 도움으로 함수를 바인드시키면 블루프린트는 "
+"함수 ``show``\ 를 애플리케이션에 등록할 것이라는 정보를 기록한다. "
+"나중에 실제로 등록을 하면 함수의 엔트포인트 앞에 :class:`Blueprint` 클래스 "
+"생성자로 넘긴 블루프린트 이름을 접미사로 붙인다. 블루프린트 이름은 엔드포인트만 "
+"바꾸고 URL을 바꾸지는 않는다. " 
 
 #: ../../blueprints.rst:86
 msgid "Registering Blueprints"
-msgstr ""
+msgstr "블루프린트 등록"
 
 #: ../../blueprints.rst:88
 msgid "So how do you register that blueprint?  Like this::"
-msgstr ""
+msgstr "블루프린트를 등록하는 방법은 다음과 같다.::"
 
 #: ../../blueprints.rst:96
 msgid ""
 "If you check the rules registered on the application, you will find "
 "these::"
 msgstr ""
+"만약 애플리케이션에 등록된 규칙을 확인하고 싶다면::"
 
 #: ../../blueprints.rst:104
 msgid ""
@@ -147,14 +179,17 @@ msgid ""
 "blueprint.  As you can see, they are also prefixed with the name of the "
 "blueprint and separated by a dot (``.``)."
 msgstr ""
+"첫번째 항목은 스태틱항목에 대한 애플리케이션 자체이고 다른 두개는 "
+"``simple_page`` 블루프린트의 `show` 함수에 대한 것이다. "
+"블루프린트 이름 접미사가 점으로 구분되어 있는 것을 볼 수 있다. "
 
 #: ../../blueprints.rst:109
 msgid "Blueprints however can also be mounted at different locations::"
-msgstr ""
+msgstr "블루프린트는 다른 장수에 마운트할 수도 있다::"
 
 #: ../../blueprints.rst:113
 msgid "And sure enough, these are the generated rules::"
-msgstr ""
+msgstr "생성된 규칙::"
 
 #: ../../blueprints.rst:120
 msgid ""
@@ -162,10 +197,12 @@ msgid ""
 "every blueprint might respond properly to that.  In fact it depends on "
 "how the blueprint is implemented if it can be mounted more than once."
 msgstr ""
+"모든 블루프린트를 여러번 등록할 수 있는 것은 아니다. 블루프린트를 여러번 "
+"마운트하려면 그게 가능하도록 구현해야 한다. "
 
 #: ../../blueprints.rst:125
 msgid "Blueprint Resources"
-msgstr ""
+msgstr "블루프린트 리소스"
 
 #: ../../blueprints.rst:127
 msgid ""
