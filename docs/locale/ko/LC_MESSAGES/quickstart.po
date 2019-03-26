@@ -171,7 +171,7 @@ msgstr ""
 #: ../../quickstart.rst:94
 msgid "What to do if the Server does not Start"
 msgstr ""
-"만약 서버가 동작하지 않으"
+"만약 서버가 동작하지 않으면"
 
 #: ../../quickstart.rst:96
 msgid ""
