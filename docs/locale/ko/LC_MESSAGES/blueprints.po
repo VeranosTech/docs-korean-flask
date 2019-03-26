@@ -170,7 +170,7 @@ msgid ""
 "If you check the rules registered on the application, you will find "
 "these::"
 msgstr ""
-"만약 애플리케이션에 등록된 규칙을 확인하고 싶다면::"
+"만약 애플리케이션에 등록된 URL 규칙을 확인하고 싶다면::"
 
 #: ../../blueprints.rst:104
 msgid ""
@@ -179,17 +179,17 @@ msgid ""
 "blueprint.  As you can see, they are also prefixed with the name of the "
 "blueprint and separated by a dot (``.``)."
 msgstr ""
-"첫번째 항목은 스태틱항목에 대한 애플리케이션 자체이고 다른 두개는 "
+"첫번째 규칙은 스태틱 항목에 대한 애플리케이션 자체 규칙이고 다른 두개는 "
 "``simple_page`` 블루프린트의 `show` 함수에 대한 것이다. "
 "블루프린트 이름 접미사가 점으로 구분되어 있는 것을 볼 수 있다. "
 
 #: ../../blueprints.rst:109
 msgid "Blueprints however can also be mounted at different locations::"
-msgstr "블루프린트는 다른 장수에 마운트할 수도 있다::"
+msgstr "블루프린트는 다른 장소에 마운트할 수도 있다::"
 
 #: ../../blueprints.rst:113
 msgid "And sure enough, these are the generated rules::"
-msgstr "생성된 규칙::"
+msgstr "생성된 URL 규칙::"
 
 #: ../../blueprints.rst:120
 msgid ""
