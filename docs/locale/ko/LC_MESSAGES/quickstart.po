@@ -260,33 +260,34 @@ msgstr "(윈도우즈에서는 ``export`` 대신에 ``set``\ 을 사용한다.)"
 
 #: ../../quickstart.rst:142
 msgid "This does the following things:"
-msgstr ""
+msgstr "이렇게 하면 다음과 같이 동작한다:"
 
 #: ../../quickstart.rst:144
 msgid "it activates the debugger"
-msgstr ""
+msgstr "디버거를 활성화한다"
 
 #: ../../quickstart.rst:145
 msgid "it activates the automatic reloader"
-msgstr ""
+msgstr "자동 리로더를 활성화한다"
 
 #: ../../quickstart.rst:146
 msgid "it enables the debug mode on the Flask application."
-msgstr ""
+msgstr "플라스크 애플리케이션의 디버그 모드를 활성화한다."
 
 #: ../../quickstart.rst:148
 msgid ""
 "You can also control debug mode separately from the environment by "
 "exporting ``FLASK_DEBUG=1``."
 msgstr ""
+"만약 디버그 모드 활성화만 하고 싶다면 ``FLASK_DEBUG=1``\ 로 익스포트한다. "
 
 #: ../../quickstart.rst:151
 msgid "There are more parameters that are explained in the :ref:`server` docs."
-msgstr ""
+msgstr ":ref:`server` 문서에는 더 많은 파라미터가 설명되어 있다."
 
 #: ../../quickstart.rst:153
 msgid "Attention"
-msgstr ""
+msgstr "주의사항!"
 
 #: ../../quickstart.rst:155
 msgid ""
@@ -296,24 +297,28 @@ msgid ""
 "a major security risk and therefore it **must never be used on production"
 " machines**."
 msgstr ""
+"대화형 디버거는 프로세스가 포크된 환경에서는 동작하지 않는다. "
+"(따라서 운영 서버에서느는 사용할 수 없다.) 또한 모든 코드를 실행할 수 있다. "
+"보안 위험이 크기 때문에 운영 머신에서는 절대로 사용하면 안된다. "
 
 #: ../../quickstart.rst:160
 msgid "Screenshot of the debugger in action:"
-msgstr ""
+msgstr "디버거 동작 화면:"
 
 #: ../../quickstart.rst:167
 msgid ""
 "More information on using the debugger can be found in the `Werkzeug "
 "documentation`_."
 msgstr ""
+"디버거에 대한 더 많은 정보는 `Werkzeug documentation`_\ 에서 볼 수 있다. "
 
 #: ../../quickstart.rst:172
 msgid "Have another debugger in mind? See :ref:`working-with-debuggers`."
-msgstr ""
+msgstr "다른 디버거를 사용하고 싶으면  :ref:`working-with-debuggers`\ 를 참조한다."
 
 #: ../../quickstart.rst:176
 msgid "Routing"
-msgstr ""
+msgstr "라우팅"
 
 #: ../../quickstart.rst:178
 msgid ""
