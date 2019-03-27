@@ -438,7 +438,7 @@ msgstr ""
 
 #: ../../quickstart.rst:256
 msgid "URL Building"
-msgstr ""
+msgstr "URL 역검색"
 
 #: ../../quickstart.rst:258
 msgid ""
@@ -448,32 +448,37 @@ msgid ""
 " the URL rule. Unknown variable parts are appended to the URL as query "
 "parameters."
 msgstr ""
+"특정 함수에 대한 URL을 찾으려면 :func:`~flask.url_for` 명령을 사용한다. "
+"이 명령은 함수 이름을 첫번째 입력으로,  URL 규칙에 있는 키워드 인수를 나머지 입력으로 받는다. "
+"URL 규칙에 없는 인수는 URL 쿼리로 붙는다."
 
 #: ../../quickstart.rst:263
 msgid ""
 "Why would you want to build URLs using the URL reversing function "
 ":func:`~flask.url_for` instead of hard-coding them into your templates?"
 msgstr ""
+"템플릿에서 주소를 하드코딩하지 않고 URL 역검색 함수 :func:`~flask.url_for`\ 를 써야 "
+"하는 이유는 무엇일까?"
 
 #: ../../quickstart.rst:266
 msgid "Reversing is often more descriptive than hard-coding the URLs."
-msgstr ""
+msgstr "역검색이 하드코딩보다 설명하기 좋다."
 
 #: ../../quickstart.rst:267
 msgid "You can change your URLs in one go instead of needing to remember to"
-msgstr ""
+msgstr "URL을 바꿔도 하드코딩된 URL이 어디에 있는지 찾을 필요가 없다."
 
 #: ../../quickstart.rst:268
 msgid "manually change hard-coded URLs."
-msgstr ""
+msgstr " "
 
 #: ../../quickstart.rst:269
 msgid "URL building handles escaping of special characters and Unicode data"
-msgstr ""
+msgstr "유니코드 데이터나 특수문자를 자동으로 투명하게 이스케이프한다."
 
 #: ../../quickstart.rst:270
 msgid "transparently."
-msgstr ""
+msgstr " "
 
 #: ../../quickstart.rst:271
 msgid ""
@@ -483,13 +488,14 @@ msgstr ""
 
 #: ../../quickstart.rst:275
 msgid "If your application is placed outside the URL root, for example, in"
-msgstr ""
+msgstr "만약 ``/``\ 가 아니라 ``/myapplication``\ 처럼 URL 루트 밖에 애플리케이션이 있다면,"
 
 #: ../../quickstart.rst:274
 msgid ""
 "``/myapplication`` instead of ``/``, :func:`~flask.url_for` properly "
 "handles that for you."
 msgstr ""
+":func:`~flask.url_for`  명령을 쓰는게 더 적절하다."
 
 #: ../../quickstart.rst:277
 msgid ""
