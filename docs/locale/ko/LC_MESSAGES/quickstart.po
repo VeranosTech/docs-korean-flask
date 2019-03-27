@@ -1111,7 +1111,7 @@ msgid ""
 msgstr ""
 "secret key는 가능한한 무작위 값이어야 한다. 운영체제는 암호화 난수 생성기에 "
 "기반하여 무작위 데이터를 생성하는 방법을 제공한다. "
-"다음 명령으로 :attr:`Flask.secret_key`(또는 :data:`SECRET_KEY`)에 들어갈 "
+"다음 명령으로 :attr:`Flask.secret_key` (또는 :data:`SECRET_KEY`)\ 에 들어갈 "
 "값을 생성할 수 있다."
 
 #: ../../quickstart.rst:777
@@ -1215,11 +1215,11 @@ msgstr ""
 
 #: ../../quickstart.rst:831
 msgid "Read more on :ref:`application-errors`."
-msgstr ""
+msgstr ":ref:`application-errors`\ 에 대해서는 여기를 참조한다. "
 
 #: ../../quickstart.rst:834
 msgid "Hooking in WSGI Middlewares"
-msgstr ""
+msgstr "WSGI 미들웨어 후킹"
 
 #: ../../quickstart.rst:836
 msgid ""
@@ -1228,10 +1228,13 @@ msgid ""
 "middlewares from the Werkzeug package to work around bugs in lighttpd, "
 "you can do it like this::"
 msgstr ""
+"WSGI 미들웨어를 애플리케이션에 추가하고 싶으면 내부 WSGI 애플리케이션을 래핑하면 된다. "
+"예를 들어 lighttpd의 버그에 대응하기 위해 Werkzeug 패키지에서 미들웨어 하나를 골라서 쓸 수 있다. "
+"이 때는 다음처럼 한다.::"
 
 #: ../../quickstart.rst:845
 msgid "Using Flask Extensions"
-msgstr ""
+msgstr "플라스크 확장기능 사용하기"
 
 #: ../../quickstart.rst:847
 msgid ""
@@ -1239,16 +1242,18 @@ msgid ""
 "example, Flask-SQLAlchemy provides SQLAlchemy support that makes it "
 "simple and easy to use with Flask."
 msgstr ""
+"확장기능은 여러가지 일을 수행하는 것을 돕는 패키지이다. 예를 들어 Flask-SQLAlchemy는 "
+"플라스크에서 SQLAlchemy를 쓸 수 있도록 지원한다. "
 
 #: ../../quickstart.rst:851
 msgid "For more on Flask extensions, have a look at :ref:`extensions`."
-msgstr ""
+msgstr "플라스크 확장기능에 대해서는 :ref:`extensions`\ 를 참조한다."
 
 #: ../../quickstart.rst:854
 msgid "Deploying to a Web Server"
-msgstr ""
+msgstr "웹서버 배포"
 
 #: ../../quickstart.rst:856
 msgid "Ready to deploy your new Flask app? Go to :ref:`deployment`."
-msgstr ""
+msgstr "플라스크 앱을 배포할 준비가 되었으면 :ref:`deployment`\ 를 참조한다."
 
