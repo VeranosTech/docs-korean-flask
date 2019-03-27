@@ -506,9 +506,10 @@ msgid ""
 " it's handling a request even while we use a Python shell. See :ref"
 ":`context-locals`."
 msgstr ""
-"예를 들어 다음 코드에서는 파이썬 셸에서 마치 요청을 받을 것처럼 동작하기 위해 "
-":func:`~flask.url_for`.:meth:`~flask.Flask.test_request_context` 함수를 사용하고 있다. "
-"자세한 내용은 :ref:`context-locals`\ 를 참조한다."
+"예를 들어 다음 코드에서는 :meth:`~flask.Flask.test_request_context` 메서드를 써서 "
+":func:`~flask.url_for` 함수를 테스트하고 있다. "
+":meth:`~flask.Flask.test_request_context` 메서드는 파이썬 쉘에서 요청을 받을 것처럼 "
+"동작시킬 때 사용한다. 자세한 내용은 :ref:`context-locals`\ 를 참조한다."
 
 #: ../../quickstart.rst:315
 msgid "HTTP Methods"
