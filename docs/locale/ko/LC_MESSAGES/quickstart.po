@@ -129,7 +129,7 @@ msgid ""
 ":ref:`deployment`."
 msgstr ""
 "이렇게 하면 운용(production)에서는 쓰기 힘들지만 테스트에 쓰기에는 충분한 "
-"소형 빌트인 서버(built-in server)를 가동한다. "
+"소형 빌트인 서버(built-in server)를 가동한다. 배포 옵션에 대해서는 :ref:`deployment`\ 를 참조한다. "
 
 #: ../../quickstart.rst:72
 msgid ""
