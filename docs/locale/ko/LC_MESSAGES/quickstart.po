@@ -1152,6 +1152,11 @@ msgid ""
 " next (and only the next) request.  This is usually combined with a "
 "layout template to expose the message."
 msgstr ""
+"좋은 어플리케이션과 사용자 인터페이스에서 중요한 것은 피드백이다. "
+"만약 사용자가 충분한 피드백을 받지 못하면 아마도 그 애플리케이션을 싫어하게 될 것이다. "
+"플라스크는 사용자에게 플래시로 피드백을 주는 시스템을 지원한다. 플래시 시스템은 "
+"기본적으로 request에 메세지를 기록하고 그것을 다음번 request에서 처리하는 시스템이다. "
+"일반적으로 레이아웃 템플릿과 협조하여 메세지를 노출시키는데 사용된다. "
 
 #: ../../quickstart.rst:798
 msgid ""
@@ -1160,6 +1165,9 @@ msgid ""
 "also available in the templates.  Check out the :ref:`message-flashing-"
 "pattern` for a full example."
 msgstr ""
+"메세지를 플래시하려면 템플릿 안에 :func:`~flask.flash` 함수를 쓰고 메세지를 가져오려면 "
+":func:`~flask.get_flashed_messages` 함수를 쓴다. 더 자세한 예제는 "
+":ref:`message-flashing-pattern`\ 을 참조한다."
 
 #: ../../quickstart.rst:804
 msgid "Logging"
