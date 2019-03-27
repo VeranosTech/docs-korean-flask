@@ -693,7 +693,7 @@ msgstr ""
 
 #: ../../quickstart.rst:446
 msgid "Accessing Request Data"
-msgstr ""
+msgstr "리퀘스트 데이터 접근"
 
 #: ../../quickstart.rst:448
 msgid ""
@@ -703,20 +703,26 @@ msgid ""
 "you might be wondering how that object can be global and how Flask "
 "manages to still be threadsafe.  The answer is context locals:"
 msgstr ""
+"웹 애플리케이션에서는 클라이언트가 서버로 보낸 데이터에 반응하는 것이 가장 중요한 일이다. "
+"플라스크에서는 이 정보가 :class:`~flask.request` 글로벌 객체로 제공된다. "
+"파이썬에 익숙하다면 어떻게 이 객체가 글러벌이 되고 플라스크가 이를 쓰레드세이프하게 "
+"관리하는지 궁금할 것이다. 답은 컨텍스트 로컬즈(context locals)에 있다.:"
 
 #: ../../quickstart.rst:458
 msgid "Context Locals"
-msgstr ""
+msgstr "컨텍스트 로컬즈"
 
 #: ../../quickstart.rst:460
 msgid "Insider Information"
-msgstr ""
+msgstr "내부 정보"
 
 #: ../../quickstart.rst:462
 msgid ""
 "If you want to understand how that works and how you can implement tests "
 "with context locals, read this section, otherwise just skip it."
 msgstr ""
+"만약 컨텍스트 로컬즈가 어떻게 동작하고 어떻게 테스트를 구현하는지 궁금하면 이 절을 읽어야 한다. "
+"그렇지 않다면 그냥 넘어가도 된다."
 
 #: ../../quickstart.rst:465
 msgid ""
@@ -725,6 +731,9 @@ msgid ""
 "specific context.  What a mouthful.  But that is actually quite easy to "
 "understand."
 msgstr ""
+"플라스크에서 어떤 객체는 글로벌 객체이다. 하자미나 평범한 글로벌 객체는 아니다. "
+"이 객체들은 실제로는 특정 컨테스트에 대해 로컬인 객체에 대한 프록시 객체이다. "
+"어려워보이지만 실제로는 이해하기 쉽다. "
 
 #: ../../quickstart.rst:469
 msgid ""
@@ -737,6 +746,12 @@ msgid ""
 "It does that in an intelligent way so that one application can invoke "
 "another application without breaking."
 msgstr ""
+"스레드를 다루고 있는 컨텍스트를 상상해 보자. 리쿼스트가 들어오고 "
+"웹서버가 새 스레드(또는 스레드말고 동시성 시스템을 다룰 수 있는 다른 객체)를 "
+"생성하기로 결정했다. 플라스크가 내부 리퀘스트를 시작하면 현재 스레드가 액티브 "
+"컨텍스트라는 것을 찾아내고 현재 애플리케이션과 WSGI 환경을 그 컨텍스트에 연결한다. "
+"플라스크가 이 작업을 잘 해내기 때문에 하나의 애플리케이션이 다른 애플리케이션을 "
+"호출할 수 있다. "
 
 #: ../../quickstart.rst:478
 msgid ""
@@ -750,12 +765,19 @@ msgid ""
 "combination with the ``with`` statement it will bind a test request so "
 "that you can interact with it.  Here is an example::"
 msgstr ""
+"이게 무슨 뜻일까? 기본적으로 개발자는 유니트 테스팅 등을 하기 전에는 이런 경우를 "
+"겪지 않는다. 리퀘스트 객체에 의존하는 코드가 리퀘스트 객체가 없으면 갑자기 고장나는 "
+"경우를 보았을 것이다. 해결법은 리퀘스트 객체를 개발자 스스로가 생성해서 컨텍스트에 바인딩시키는 것이다. "
+"이렇게 하는 가장 쉬운 방법은 :meth:`~flask.Flask.test_request_context` 컨텍스트 매니저를 "
+"사용하는 것이다. "
 
 #: ../../quickstart.rst:495
 msgid ""
 "The other possibility is passing a whole WSGI environment to the "
 ":meth:`~flask.Flask.request_context` method::"
 msgstr ""
+"다른 방법으로는 :meth:`~flask.Flask.request_context` \ 에 넣는 것이다. "
+"전체 WSGI 환경을  "
 
 #: ../../quickstart.rst:504
 msgid "The Request Object"
