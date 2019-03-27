@@ -342,10 +342,12 @@ msgid ""
 "You can do more! You can make parts of the URL dynamic and attach "
 "multiple rules to a function."
 msgstr ""
+"이 이상의 기능도 가능하다. URL의 일부를 동적으로 만들 수도 있고 "
+"하나의 함수에 여러개의 URL 규칙을 붙일 수도 있다."
 
 #: ../../quickstart.rst:196
 msgid "Variable Rules"
-msgstr ""
+msgstr "변수 규칙"
 
 #: ../../quickstart.rst:198
 msgid ""
@@ -354,10 +356,13 @@ msgid ""
 "as a keyword argument. Optionally, you can use a converter to specify the"
 " type of the argument like ``<converter:variable_name>``. ::"
 msgstr ""
+"``<variable_name>``\ 과 같이 URL에 변수를 추가할 수 있다. "
+"그려면 함수는 ``<variable_name>`` 부분을 키워드 인수로 받는다. "
+"``<converter:variable_name>`` 형식으로 인수의 자료형을 지정하는 컨버터를 사용할 수도 있다."
 
 #: ../../quickstart.rst:218
 msgid "Converter types:"
-msgstr ""
+msgstr "컨버터 유형::"
 
 #: ../../quickstart.rst:221
 msgid "``string``"
@@ -365,7 +370,7 @@ msgstr ""
 
 #: ../../quickstart.rst:221
 msgid "(default) accepts any text without a slash"
-msgstr ""
+msgstr "(디폴트) 슬래시가 없는 문자를 받는다."
 
 #: ../../quickstart.rst:222
 msgid "``int``"
@@ -373,7 +378,7 @@ msgstr ""
 
 #: ../../quickstart.rst:222
 msgid "accepts positive integers"
-msgstr ""
+msgstr "양의 정수를 받는다."
 
 #: ../../quickstart.rst:223
 msgid "``float``"
@@ -381,7 +386,7 @@ msgstr ""
 
 #: ../../quickstart.rst:223
 msgid "accepts positive floating point values"
-msgstr ""
+msgstr "양의 부동소수점 값을 받는다."
 
 #: ../../quickstart.rst:224
 msgid "``path``"
@@ -389,7 +394,7 @@ msgstr ""
 
 #: ../../quickstart.rst:224
 msgid "like ``string`` but also accepts slashes"
-msgstr ""
+msgstr "``string`` \ 와 같지만 슬래시를 포함한다"
 
 #: ../../quickstart.rst:225
 msgid "``uuid``"
@@ -397,7 +402,7 @@ msgstr ""
 
 #: ../../quickstart.rst:225
 msgid "accepts UUID strings"
-msgstr ""
+msgstr "UUID 문자열을 받는다"
 
 #: ../../quickstart.rst:229
 msgid "Unique URLs / Redirection Behavior"
