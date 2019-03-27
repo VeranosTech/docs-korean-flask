@@ -1171,7 +1171,7 @@ msgstr ""
 
 #: ../../quickstart.rst:804
 msgid "Logging"
-msgstr ""
+msgstr "로그"
 
 #: ../../quickstart.rst:808
 msgid ""
@@ -1183,6 +1183,12 @@ msgid ""
 "with ``400 Bad Request`` in that situation, but sometimes that won't do "
 "and the code has to continue working."
 msgstr ""
+"때때로 올바른 데이터를 처리해야 하는데 그렇지 못한 경우도 있다. "
+"예를 들어 HTTP 요청을 보내는 클라이언트 사이드의 코드가 있는데 오동작하는 경우이다. "
+"사용자가 데이터를 조작했거나 클라이언트 코드가 실패한 경우에 이럴 수 있다. "
+"대부분의 경우에는 400 Bad Request로 응답하면 그만이지만 가끔 이럴 때도 "
+"코드가 동작해야 하는 경우도 있을 수 있다. "
+
 
 #: ../../quickstart.rst:816
 msgid ""
@@ -1190,10 +1196,12 @@ msgid ""
 "loggers come in handy.  As of Flask 0.3 a logger is preconfigured for you"
 " to use."
 msgstr ""
+"무슨 일이 발생하고 있는지 로그를 남기고 실을 때 로거가 유용하다. 플라스크 0.3부터는 "
+"플라스크에서 로그를 설정할 수 있다."
 
 #: ../../quickstart.rst:820
 msgid "Here are some example log calls::"
-msgstr ""
+msgstr "다음은 로그 호출의 예이다.::"
 
 #: ../../quickstart.rst:826
 msgid ""
@@ -1202,6 +1210,8 @@ msgid ""
 "documentation <https://docs.python.org/library/logging.html>`_ for more "
 "information."
 msgstr ""
+"플라스크에서 사용되는 :attr:`~flask.Flask.logger`\ 는 파이썬 표준 :class:`~logging.Logger`\ 이다. "
+"따라서 자세한 내용은 `공식 로그 문서 <https://docs.python.org/library/logging.html>`_\ 를 참조한다. "
 
 #: ../../quickstart.rst:831
 msgid "Read more on :ref:`application-errors`."
