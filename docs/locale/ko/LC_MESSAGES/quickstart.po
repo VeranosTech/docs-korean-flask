@@ -552,7 +552,8 @@ msgid ""
 msgstr ""
 "동적 웹 애플리케이션에는 스태틱 파일이 필요하다. 스태틱 파일은 보통 CSS와 자바스크립트 파일이다. "
 "개발시에는 플라스크가 스태틱 파일 서버 역할을 하지만 실제 운영시에는 웹서버를 이용한다. "
-"플라스크에서 스태틱 파일을 서빙할 때는 패키지 안이나 이웃 디렉토리에 :file:`static`  폴더를 만들면 "
+"플라스크에서 스태틱 파일을 서빙할 때는 애플리케이션이 패키지인 경우 패키지 내부, "
+"애플리케이션이 모듈인 경우 이웃 디렉토리에 :file:`static`  폴더를 만들면 "
 "애플리케이션에서 ``/static``\ 이라는 이름으로 쓸 수 있다. "
 
 #: ../../quickstart.rst:347
@@ -568,7 +569,7 @@ msgstr "이 경우 파일은 :file:`static/style.css`\ 로 파일시스템에 �
 
 #: ../../quickstart.rst:354
 msgid "Rendering Templates"
-msgstr ""
+msgstr "템플릿 렌더링"
 
 #: ../../quickstart.rst:356
 msgid ""
@@ -577,6 +578,10 @@ msgid ""
 "the application secure.  Because of that Flask configures the `Jinja2 "
 "<http://jinja.pocoo.org/>`_ template engine for you automatically."
 msgstr ""
+"파이썬에서 HTML을 생성하려면 애플리케이션 보안을 위해 HTML 이스케이핑을 "
+"직접 해야 하기 때문에 그닥 유쾌하지도 않고 아주 짜증나는 일이다. "
+"플라스크는 `Jinja2 <http://jinja.pocoo.org/>`_ 템플릿 엔진을 이용할 수 있도록 해 준다. "
+
 
 #: ../../quickstart.rst:361
 msgid ""
@@ -585,6 +590,9 @@ msgid ""
 "variables you want to pass to the template engine as keyword arguments. "
 "Here's a simple example of how to render a template::"
 msgstr ""
+"템플릿을 렌더링할 때는 :func:`~flask.render_template` 메서드를 사용한다. "
+"개발자가 해야 할 일은 템플릿 이름과 변수를 템플릿 엔진에 키워드 인수로 넣어주는 것이다. "
+"여기 템플릿을 렌더링하는 간단한 예가 있다.::"
 
 #: ../../quickstart.rst:373
 msgid ""
@@ -592,14 +600,17 @@ msgid ""
 "your application is a module, this folder is next to that module, if it's"
 " a package it's actually inside your package:"
 msgstr ""
+"플라스크는 :file:`templates` 폴더에서 템플릿을 찾는다. "
+"만약 애플리케이션이 모듈이면 폴더는 모듈 옆에 있어야 하고 "
+"애플리케이션이 패키지이면 패키지 안에 있어야 한다."
 
 #: ../../quickstart.rst:377
 msgid "**Case 1**: a module::"
-msgstr ""
+msgstr "**경우 1**: 모듈인 경우::"
 
 #: ../../quickstart.rst:383
 msgid "**Case 2**: a package::"
-msgstr ""
+msgstr "**경우 2**: 패키지인 경우::"
 
 #: ../../quickstart.rst:390
 msgid ""
@@ -607,10 +618,13 @@ msgid ""
 "to the official `Jinja2 Template Documentation "
 "<http://jinja.pocoo.org/docs/templates>`_ for more information."
 msgstr ""
+"템플릿에서는 Jinja2의 모든 기능을 사용할 수 있다. "
+"보다 자세한 정보는  `Jinja2 템플릿 문서 <http://jinja.pocoo.org/docs/templates>`_\ 를 "
+"참조한다. "
 
 #: ../../quickstart.rst:394
 msgid "Here is an example template:"
-msgstr ""
+msgstr "다음은 템플릿 예제이다.:"
 
 #: ../../quickstart.rst:406
 msgid ""
@@ -618,6 +632,8 @@ msgid ""
 ":class:`~flask.session` and :class:`~flask.g` [#]_ objects as well as the"
 " :func:`~flask.get_flashed_messages` function."
 msgstr ""
+"템플릿 내부에서도 :class:`~flask.request`, :class:`~flask.session`, :class:`~flask.g` [#]_  객체, "
+"그리고 :func:`~flask.get_flashed_messages` 함수에 접근할 수 있다. "
 
 #: ../../quickstart.rst:410
 msgid ""
@@ -626,6 +642,9 @@ msgid ""
 " documentation.  Basically template inheritance makes it possible to keep"
 " certain elements on each page (like header, navigation and footer)."
 msgstr ""
+"템플릿에서도 상속이 유용하게 사용된다. 만약 어떻게 템플릿을 상속하는지 궁금하면 "
+":ref:`template-inheritance` 문서를 참조한다. 기본적으로 템플릿 상속을 쓰면 "
+"모든 페이지에 (헤더, 네비게이션, 푸터와 같은) 특정한 엘리먼트를 공통적으로 넣을 수 있다. "
 
 #: ../../quickstart.rst:415
 msgid ""
@@ -636,12 +655,18 @@ msgid ""
 ":class:`~jinja2.Markup` class or by using the ``|safe`` filter in the "
 "template.  Head over to the Jinja 2 documentation for more examples."
 msgstr ""
+"자동 이스케이프를 활성활 하면 ``name``\ 이 HTML을 포함하고 있을 때 "
+"자동으로 이스케이프된다. 만약 변수값을 믿을 수 있고 "
+"(위키 마크업을 HTML로 바꾼 것 처럼) 안전한 HTML만 "
+"포함하고 있다고 확신하면 :class:`~jinja2.Markup`  클래스나 ``|safe`` 필터를 "
+"템플릿 내부에 쓸 수 있다. 다른 예제를 보려면 Jinja2 문서를 참조한다."
 
 #: ../../quickstart.rst:422
 msgid ""
 "Here is a basic introduction to how the :class:`~jinja2.Markup` class "
 "works::"
 msgstr ""
+"다음은 :class:`~jinja2.Markup` 클래스에 대한 기본적인 소개자료이다.::"
 
 #: ../../quickstart.rst:434
 msgid ""
@@ -650,6 +675,10 @@ msgid ""
 "``.xml``, ``.xhtml``.  Templates loaded from a string will have "
 "autoescaping disabled."
 msgstr ""
+"자동 이스케이프는 모든 템플릿에 대해 적용되지 않는다. "
+"템플릿 확장자가 ``.html``, ``.htm``, ``.xml``, ``.xhtml``\ 인 경우에만 "
+"자동 이스케이프가 활성화 된다. 문자열에서 로드된 템플릿에서는 자동 이스케이프가 "
+"비활성화된다."
 
 #: ../../quickstart.rst:439
 msgid ""
@@ -658,6 +687,9 @@ msgid ""
 "that object (:class:`~flask.g`) and the :ref:`sqlite3` for more "
 "information."
 msgstr ""
+":class:`~flask.g` 객체가 무엇인지 잘 모르겠는가? 이 객체는 개발자가 필요로 하는 "
+"정보를 담을 수 있는 객체이다. "
+"보다 자세한 정보는 :class:`~flask.g` 객체와 :ref:`sqlite3` 문서를 참조하라."
 
 #: ../../quickstart.rst:446
 msgid "Accessing Request Data"
