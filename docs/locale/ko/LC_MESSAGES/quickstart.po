@@ -470,7 +470,7 @@ msgstr "URL을 바꿔도 하드코딩된 URL이 어디에 있는지 찾을 필�
 
 #: ../../quickstart.rst:268
 msgid "manually change hard-coded URLs."
-msgstr " "
+msgstr "."
 
 #: ../../quickstart.rst:269
 msgid "URL building handles escaping of special characters and Unicode data"
@@ -478,13 +478,13 @@ msgstr "유니코드 데이터나 특수문자를 자동으로 투명하게 이�
 
 #: ../../quickstart.rst:270
 msgid "transparently."
-msgstr " "
+msgstr "."
 
 #: ../../quickstart.rst:271
 msgid ""
 "The generated paths are always absolute, avoiding unexpected behavior of "
 "relative paths in browsers."
-msgstr ""
+msgstr "."
 
 #: ../../quickstart.rst:275
 msgid "If your application is placed outside the URL root, for example, in"
@@ -505,10 +505,13 @@ msgid ""
 " it's handling a request even while we use a Python shell. See :ref"
 ":`context-locals`."
 msgstr ""
+"예를 들어 다음 코드에서는 파이썬 셸에서 마치 리퀘스트를 받을 것처럼 동작하기 위해 "
+":func:`~flask.url_for`.:meth:`~flask.Flask.test_request_context` 함수를 사용하고 있다. "
+"자세한 내용은 :ref:`context-locals`\ 를 참조한다."
 
 #: ../../quickstart.rst:315
 msgid "HTTP Methods"
-msgstr ""
+msgstr "HTTP 메서드"
 
 #: ../../quickstart.rst:317
 msgid ""
@@ -518,6 +521,7 @@ msgid ""
 "``methods`` argument of the :meth:`~flask.Flask.route` decorator to "
 "handle different HTTP methods. ::"
 msgstr ""
+""
 
 #: ../../quickstart.rst:332
 msgid ""
