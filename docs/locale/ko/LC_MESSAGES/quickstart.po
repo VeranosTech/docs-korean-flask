@@ -406,11 +406,11 @@ msgstr "UUID 문자열을 받는다"
 
 #: ../../quickstart.rst:229
 msgid "Unique URLs / Redirection Behavior"
-msgstr ""
+msgstr "URL 유일성과 리디렉트"
 
 #: ../../quickstart.rst:231
 msgid "The following two rules differ in their use of a trailing slash. ::"
-msgstr ""
+msgstr "다음 두 규칙은 끝부분에 슬래시가 있나 없나의 차이가 있다::"
 
 #: ../../quickstart.rst:241
 msgid ""
@@ -419,6 +419,9 @@ msgid ""
 "a trailing slash, Flask redirects you to the canonical URL with the "
 "trailing slash."
 msgstr ""
+"``projects`` 엔드포인트의 표준 URL은 끝에 슬래시가 있다."
+"이는 파일 시스템의 폴더와 비슷하다. 만약 끝부분 슬래시 없이 이 URL에 접근하면 "
+"플라스크는 자동으로 마지막 끝부분 슬래시를 붙인 주소로 리디렉트한다."
 
 #: ../../quickstart.rst:246
 msgid ""
@@ -428,6 +431,10 @@ msgid ""
 "unique for these resources, which helps search engines avoid indexing the"
 " same page twice."
 msgstr ""
+"``about`` 엔드포인트의 표준 URL은 끝에 슬래시가 없다. "
+"이는 파일 패스와 비슷하다 이 URL의 끝에 슬래시를 붙여서 접근하면 "
+"404 \"Not Found\" 에러가 발생한다. 이렇게 하면 URL이 이 리소스에 대해 유일성을 "
+"보장하므로 서치 엔진이 같은 페이지를 두번 인덱싱하지 않도록 한다."
 
 #: ../../quickstart.rst:256
 msgid "URL Building"
