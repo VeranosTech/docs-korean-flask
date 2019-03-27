@@ -124,9 +124,9 @@ msgstr "아니면 :command:`python -m flask` 명령을 쓸 수도 있다.::"
 
 #: ../../quickstart.rst:68
 msgid ""
-"This launches a very simple builtin server, which is good enough for "
-"testing but probably not what you want to use in production. For "
-"deployment options see :ref:`deployment`."
+"This launches a very simple builtin server, which is good enough for testing "
+"but probably not what you want to use in production. For deployment options see "
+":ref:`deployment`."
 msgstr ""
 "이렇게 하면 운용(production)에서는 쓰기 힘들지만 테스트에 쓰기에는 충분한 "
 "소형 빌트인 서버(built-in server)를 가동한다. "
