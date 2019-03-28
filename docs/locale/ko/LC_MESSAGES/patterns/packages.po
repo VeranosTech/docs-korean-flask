@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../patterns/packages.rst:4
 msgid "Larger Applications"
-msgstr ""
+msgstr "대규모 애플리케이션"
 
 #: ../../patterns/packages.rst:6
 msgid "Imagine a simple flask application structure that looks like this::"
-msgstr ""
+msgstr "다음과 같은 간단한 플라스크 애플리케이션 구조가 있다고 하자::"
 
 #: ../../patterns/packages.rst:18
 msgid ""
@@ -32,6 +32,9 @@ msgid ""
 "<tutorial>` is structured to use the package pattern, see the "
 ":gh:`example code <examples/tutorial>`."
 msgstr ""
+"이 구조는 소규모 애플리케이션에는 좋지만 대규모 애플리케이션에서는 모듈 대신 "
+"패키지를 쓰는 것이 좋은 생각이다. :ref:`tutorial <tutorial>`\ 은 패키지 방식을 사용하고 있다. "
+":gh:`example code <examples/tutorial>`\ 도 참조한다."
 
 #: ../../patterns/packages.rst:24
 msgid "Simple Packages"
