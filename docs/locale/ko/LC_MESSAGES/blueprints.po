@@ -257,7 +257,8 @@ msgid ""
 "to the folder on the filesystem with the ``static_folder`` argument. It "
 "is either an absolute path or relative to the blueprint's location::"
 msgstr ""
-""
+"블루프린트는 ``static_folder`` 인수로 받은 파일시스템 폴더 패스를 스태틱 파일 폴더로 정한다. "
+"절대경로일 수도 있고 블루프린트 위치에 대한 상대경로일 수도 있다.::"
 
 #: ../../blueprints.rst:163
 msgid ""
@@ -267,6 +268,10 @@ msgid ""
 "``url_prefix`` of the blueprint + ``/static``. If the blueprint has the "
 "prefix ``/admin``, the static URL will be ``/admin/static``."
 msgstr ""
+"디폴트로 패스의 가장 오른쪽 부분이 웹에 노출된다. "
+"이 값은 ``static_url_path`` 인수로 바꿀 수 있다. "
+"위 예에서는 폴더가 ``static`` \ 이므로 블루프린트의 ``url_prefix`` + ``/static``\ 이 된다. "
+"만약 블루프린트의 접두사가 ``/admin``\ 이면 스태틱 url은 ``/admin/static``\ 이 된다."
 
 #: ../../blueprints.rst:169
 msgid ""
@@ -274,6 +279,8 @@ msgid ""
 " it with :func:`url_for` like you would with the static folder of the "
 "application::"
 msgstr ""
+"엔트포인트 이름은 ``blueprint_name.static``\ 이 된다. "
+"애플리케이션에서 처럼 :func:`url_for`  함수로 URL을 얻을 수 있다."
 
 #: ../../blueprints.rst:175
 msgid ""
@@ -284,10 +291,13 @@ msgid ""
 " are not searched if the file does not exist in the application static "
 "folder."
 msgstr ""
+"하지만 블루프린트에 ``url_prefix``\ 이 없으면 블루프린트 전용 스태틱 폴더는 접근할 수 없다. "
+"이 때는 URL이 그냥 ``/static``\ 이고 애플리케이션의 ``/static`` 루트가 더 우선권을 가진다. "
+"템플릿 폴더와 달리 애플리케이션 스태틱 폴더에 파일이 없으면 블루프린트 스태틱 폴더까지 검색하지 않는다. "
 
 #: ../../blueprints.rst:183
 msgid "Templates"
-msgstr ""
+msgstr "템플릿"
 
 #: ../../blueprints.rst:185
 msgid ""
@@ -295,12 +305,15 @@ msgid ""
 "providing the `template_folder` parameter to the :class:`Blueprint` "
 "constructor::"
 msgstr ""
+"블루프린트 생성자 :class:`Blueprint`\ 에 `template_folder` 인수를 넣으면 "
+"전용 템플릿을 사용할 수 있다. "
 
 #: ../../blueprints.rst:190
 msgid ""
 "For static files, the path can be absolute or relative to the blueprint "
 "resource folder."
 msgstr ""
+"스태틱 파일에서는 경로가 절대 경로이든 블루프린트에 대한 상대경로이든 상관없었다."
 
 #: ../../blueprints.rst:193
 msgid ""
@@ -313,6 +326,10 @@ msgid ""
 "blueprints provide the same relative template path the first blueprint "
 "registered takes precedence over the others."
 msgstr ""
+"템플릿 폴더는 탬플릿 검색 경로에 추가되지만 애플리케이션의 템플릿 폴더보다 우선 순위가 낮다. "
+"따라서 블루프린트의 템플릿을 애플리케이션 템플릿으로 쉽게 오버라이드 할 수 있다. "
+"오버라이드 되길 원치 않는다면 애플리케이션이나 다른 블루프린트의 상대경로를 다르게 만들어야 한다. "
+"여러개의 블루프린트가 똑같은 상대경로를 가지면 가장 먼저 등록된 블루프린트가 우선권을 가진다. "
 
 #: ../../blueprints.rst:202
 msgid ""
@@ -324,6 +341,11 @@ msgid ""
 "template overridden by a template named ``index.html`` in the actual "
 "application template folder."
 msgstr ""
+"따라서 블루프린트 폴더가 ``yourapplication/admin``\ 이고 "
+"템플릿 ``'admin/index.html'``\ 을 만들고 싶으면 우선 ``templates``\ 을 "
+"`template_folder`\ 로 지정하고 :file:`yourapplication/admin/templates/admin/index.html`\ 처럼 "
+"파일을 만들어야 한다. ``admin`` 폴더가 추가로 들어가는 이유는 실제 애플리케이션 템플릿 폴더의 "
+"`index.html`` 템플릿에 오버라이드되지 않도록 하기 위함이다. "
 
 #: ../../blueprints.rst:210
 msgid ""
