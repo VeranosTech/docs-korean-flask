@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../patterns/packages.rst:24
 msgid "Simple Packages"
-msgstr ""
+msgstr "간단한 패키지"
 
 #: ../../patterns/packages.rst:26
 msgid ""
@@ -48,10 +48,13 @@ msgid ""
 "(Make sure to delete all ``.pyc`` files first, otherwise things would "
 "most likely break)"
 msgstr ""
+"이 구조를 대규모 애플리케이션용으로 바꾸려면 이 폴더에 :file:`yourapplication` 폴더를 만들고 "
+"그 안으로 파일을 옮긴다. 그리고 :file:`yourapplication.py` 파일을 :file:`__init__.py`\ 로 "
+"이름을 바꾼다. (그 전에 모든 ``.pyc`` 파일을 삭제해야 한다. 그렇지 않으면 오동작이 발생한다.)"
 
 #: ../../patterns/packages.rst:31 ../../patterns/packages.rst:105
 msgid "You should then end up with something like that::"
-msgstr ""
+msgstr "그러면 다음과 같은 구조가 된다.::"
 
 #: ../../patterns/packages.rst:44
 msgid ""
@@ -61,12 +64,19 @@ msgid ""
 "not a big problem, just add a new file called :file:`setup.py` next to "
 "the inner :file:`yourapplication` folder with the following contents::"
 msgstr ""
+"이제는 애플리케이션을 어떻게 시작할까? "
+"단순히 ``python yourapplication/__init__.py``\ 라고 하면 실행되지 않는다. "
+"파이썬에서는 패키지 안의 모듈은 시작파일이 될 수 없기 때문이다. "
+"이 문제는 쉽게 해결할 수 있다. :file:`yourapplication` 폴더안에 다음 내용으로 "
+":file:`setup.py` 파일을 만든다."
 
 #: ../../patterns/packages.rst:61
 msgid ""
 "In order to run the application you need to export an environment "
 "variable that tells Flask where to find the application instance::"
 msgstr ""
+"애플리케이션을 실행하러면 애플리케이션 인수턴스를 찾을 수 있는 위치를 "
+"플라스크에게 알려주는 환경변수를 지정해야 한다.::"
 
 #: ../../patterns/packages.rst:66
 msgid ""
@@ -74,12 +84,15 @@ msgid ""
 "exact path to your application directory. Similarly you can turn on the "
 "development features like this::"
 msgstr ""
+"만약 프로젝트 디렉터리 바깥에 있다면 애플리케이션 디렉터리에 대한 정확한 "
+"패스 정보를 제공해야 한다. 개발 서버 기능은 다음처럼 켤 수 있다.::"
 
 #: ../../patterns/packages.rst:72
 msgid ""
 "In order to install and run the application you need to issue the "
 "following commands::"
 msgstr ""
+"애플리케이션을 설치하고 실행하려면 다음 명령을 내린다.::"
 
 #: ../../patterns/packages.rst:78
 msgid ""
@@ -87,6 +100,8 @@ msgid ""
 " into multiple modules.  The only thing you have to remember is the "
 "following quick checklist:"
 msgstr ""
+"이렇게 하면 뭐가 좋은가? 이제 우리는 애플리케이션에 여러개의 모듈을 넣을 수 있다. "
+"다음과 같은 점만 기억하면 된다.::"
 
 #: ../../patterns/packages.rst:82
 msgid ""
@@ -94,6 +109,8 @@ msgid ""
 ":file:`__init__.py` file.  That way each module can import it safely and "
 "the `__name__` variable will resolve to the correct package."
 msgstr ""
+":file:`__init__.py` 파일 안에 `Flask` 애플리케이션 객체가 생성되어 있어야 한다. "
+"각 모듈은 이 객체를 임포트할 수 있다.  `__name__`  변수로 패키지를 파악할 수 있다."
 
 #: ../../patterns/packages.rst:85
 msgid ""
@@ -102,14 +119,18 @@ msgid ""
 "Not the object itself, but the module it is in. Import the view module "
 "**after the application object is created**."
 msgstr ""
+"모든 뷰 함수(:meth:`~flask.Flask.route` 데코레이터를 가진 함수)는 "
+":file:`__init__.py` 파일에 임포트되어 있어야 한다. "
+"객체 자체는 임포트할 필요가 없고 모듈만 임포트하면 된다. "
+"딘 **\ 애플리케이션 객체가 생성된 다음에\ ** 뷰 모듈을 임포트 해야 한다. "
 
 #: ../../patterns/packages.rst:90
 msgid "Here's an example :file:`__init__.py`::"
-msgstr ""
+msgstr "다음은 :file:`__init__.py` 파일의 예이다.::"
 
 #: ../../patterns/packages.rst:97
 msgid "And this is what :file:`views.py` would look like::"
-msgstr ""
+msgstr "그리고 :file:`views.py` 파일은 다음과 같아야 한다.::"
 
 #: ../../patterns/packages.rst:120
 msgid "Circular Imports"
