@@ -23,7 +23,7 @@ msgstr "튜토리얼"
 
 #: ../../tutorial/index.rst:6
 msgid "Contents:"
-msgstr ""
+msgstr "목차:"
 
 #: ../../tutorial/index.rst:22
 msgid ""
@@ -32,6 +32,7 @@ msgid ""
 "edit or delete their own posts. You will be able to package and install "
 "the application on other computers."
 msgstr ""
+"이 튜토리얼은 "
 
 #: ../../tutorial/index.rst:32
 msgid ""

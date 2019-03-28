@@ -127,7 +127,7 @@ msgid ""
 "endpoint to another."
 msgstr ""
 "블루프린트의 기본 개념은 애플리케이션에 등록될 때 실행할 동작을 기록한다는 것이다. "
-"플라스크는 리쿼스트를 받거나 엔드포인트 URL을 생성할 때 블루프린트와 뷰 함수를 연결한다. 
+"플라스크는 리쿼스트를 받거나 엔드포인트 URL을 생성할 때 블루프린트와 뷰 함수를 연결한다. "
 
 #: ../../blueprints.rst:58
 msgid "My First Blueprint"
@@ -139,7 +139,7 @@ msgid ""
 "implement a blueprint that does simple rendering of static templates::"
 msgstr ""
 "이 블루프린트는 아주 기본적인 것이다. 여기에서는 스테틱 템플릿을 렌더링하는 "
-"단순한 블루프린트를 구현한다.
+"단순한 블루프린트를 구현한다."
 
 #: ../../blueprints.rst:77
 msgid ""
@@ -209,10 +209,11 @@ msgid ""
 "Blueprints can provide resources as well.  Sometimes you might want to "
 "introduce a blueprint only for the resources it provides."
 msgstr ""
+"블루프린트도 리소스를 제공할 수 있다. 블루프린트만 전용 리소스를 제공할 수도 있다."
 
 #: ../../blueprints.rst:131
 msgid "Blueprint Resource Folder"
-msgstr ""
+msgstr "블루프린트 리소스 폴더"
 
 #: ../../blueprints.rst:133
 msgid ""
@@ -220,6 +221,8 @@ msgid ""
 "in a folder.  While multiple blueprints can originate from the same "
 "folder, it does not have to be the case and it's usually not recommended."
 msgstr ""
+"일반 애플리케이션처럼 블루프린트도 하나의 폴더 안에 담겨져 있어야 한다. "
+"여러개의 블루프린트를 한 폴더에서 불러올 수도 있지만 권장하지는 않는다. "
 
 #: ../../blueprints.rst:137
 msgid ""
@@ -231,16 +234,22 @@ msgid ""
 "contained in will be the resource folder.  You can access the "
 ":attr:`Blueprint.root_path` property to see what the resource folder is::"
 msgstr ""
+"폴더 경로는 :class:`Blueprint` 클래스 생성자의 두번째 인수에서 유추한다. "
+"이 값은 보통 `__name__`\ 이다. 이 인수는 블루프린트에 해당하는 파이썬 모듈이나 "
+"패키지를 지정한다. 만약 이 값이 패키지이면 그 패키지 폴더 자체가 리소스 폴더가 되고 "
+"이 값이 모듈이면 그 모듈을 포함하는 폴더가 리소스 폴더가 된다. "
+"이 리소스 폴더의 경우는 :attr:`Blueprint.root_path` 속성에서 볼 수 있다.::"
 
 #: ../../blueprints.rst:148
 msgid ""
 "To quickly open sources from this folder you can use the "
 ":meth:`~Blueprint.open_resource` function::"
 msgstr ""
+"이 폴더의 소스에 접근하려면 :meth:`~Blueprint.open_resource` 함수를 사용한다.::"
 
 #: ../../blueprints.rst:155
 msgid "Static Files"
-msgstr ""
+msgstr "스태틱 파일"
 
 #: ../../blueprints.rst:157
 msgid ""
@@ -248,6 +257,7 @@ msgid ""
 "to the folder on the filesystem with the ``static_folder`` argument. It "
 "is either an absolute path or relative to the blueprint's location::"
 msgstr ""
+""
 
 #: ../../blueprints.rst:163
 msgid ""
