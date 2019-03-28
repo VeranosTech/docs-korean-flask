@@ -134,7 +134,7 @@ msgstr "그리고 :file:`views.py` 파일은 다음과 같아야 한다.::"
 
 #: ../../patterns/packages.rst:120
 msgid "Circular Imports"
-msgstr ""
+msgstr "순환 임포트"
 
 #: ../../patterns/packages.rst:122
 msgid ""
@@ -146,6 +146,12 @@ msgid ""
 "and just ensuring the module is imported and we are doing that at the "
 "bottom of the file."
 msgstr ""
+"대부분의 파이썬 프로그래머가 순환 임포트(2개의 모듈이 서로를 임포트하는 것, "
+"이 경우에는 :file:`views.py` 파일과 :file:`__init__.py` 파일)를 "
+"싫어하기 때문에 한마디 남긴다. 일반적으로 순환 임포트는 안좋은 생각이다. "
+"하지만 이 경우에는 괜찮다. 실제로 :file:`__init__.py` 파일 내에서 뷰를 "
+"사용하지는 않기 때문이다. 뷰 모듈이 임포되기만 하면 되므로 가장 아래에 "
+"코드를 넣었다."
 
 #: ../../patterns/packages.rst:130
 msgid ""
@@ -153,10 +159,12 @@ msgid ""
 "decorators there is no way around that.  Check out the :ref:`becomingbig`"
 " section for some inspiration how to deal with that."
 msgstr ""
+"물론 이 방식에는 여전히 몇가지 문제가 있다. 하지만 데코레이터를 쓰려면 "
+"이 방법밖에는 없다. 이 문제에 대해서는 :ref:`becomingbig` 절을 참조한다. "
 
 #: ../../patterns/packages.rst:138
 msgid "Working with Blueprints"
-msgstr ""
+msgstr "블루프린트 사용"
 
 #: ../../patterns/packages.rst:140
 msgid ""
