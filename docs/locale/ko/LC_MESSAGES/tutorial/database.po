@@ -161,6 +161,7 @@ msgid ""
 "Add the Python functions that will run these SQL commands to the "
 "``db.py`` file:"
 msgstr ""
+"이 SQL 명령을 실행하는 파이썬 함수를 ``db.py`` 파일에 추가한다.:"
 
 #: ../../tutorial/database.rst:137
 msgid ""
