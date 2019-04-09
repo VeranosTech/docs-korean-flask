@@ -134,11 +134,11 @@ msgid ""
 msgstr ""
 "``close_db``\ 는 ``g.db``\ 가 제대로 설정되었는지 점검하고 만약 컨넥선이 있으면 "
 "닫는다. 나중에 애플리케이션에 각 request가 종료되면 애플리케이션 팩토리에서 "
-``close_db`` 함수가 request 종료시마다 호출되도록 지시하게 된다."
+"``close_db`` 함수가 request 종료시마다 호출되도록 지시하게 된다."
 
 #: ../../tutorial/database.rst:89
 msgid "Create the Tables"
-msgstr ""
+msgstr "테이블 생성"
 
 #: ../../tutorial/database.rst:91
 msgid ""
@@ -147,6 +147,10 @@ msgid ""
 "in the ``user`` table, and posts in the ``post`` table. Create a file "
 "with the SQL commands needed to create empty tables:"
 msgstr ""
+"SQLite에서는 데이터는 테이블과 컬럼에 저장된다. 테이블과 컬럼은 데이터를 "
+"저장하거나 가져오기 전에 미리 만들어져 있어야 한다. "
+"Flaskr는 사용자 정보를 ``user`` 테이블에, 포스팅 정보를 ``post`` 테이블에 저장한다. "
+"SQL 명령으로 파일 내에 빈 테이블을 생성한다.:"
 
 #: ../../tutorial/database.rst:96
 msgid "``flaskr/schema.sql``"
