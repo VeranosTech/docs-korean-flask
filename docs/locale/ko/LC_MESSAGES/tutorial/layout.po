@@ -77,7 +77,7 @@ msgstr "``tests/``, 테스트 모듈을 포함하는 디렉터리"
 msgid ""
 "``venv/``, a Python virtual environment where Flask and other "
 "dependencies are installed."
-msgstr "``venf/``, 플라스크와 다른 의존성 패키지가 설치된 파이썬 가상환경"
+msgstr "``venv/``, 플라스크와 다른 의존성 패키지가 설치된 파이썬 가상환경"
 
 #: ../../tutorial/layout.rst:46
 msgid "Installation files telling Python how to install your project."
@@ -117,5 +117,5 @@ msgstr ""
 
 #: ../../tutorial/layout.rst:110
 msgid "Continue to :doc:`factory`."
-msgstr ":doc:`factory`\ 로 계속."
+msgstr ":doc:`factory`\ 으로 계속."
 

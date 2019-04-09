@@ -211,19 +211,19 @@ msgstr ""
 
 #: ../../tutorial/factory.rst:138
 msgid "For Linux and Mac:"
-msgstr ""
+msgstr "리눅스와 맥:"
 
 #: ../../tutorial/factory.rst:146
 msgid "For Windows cmd, use ``set`` instead of ``export``:"
-msgstr ""
+msgstr "윈도우에서는 ``export`` 대신 ``set`` 사용:"
 
 #: ../../tutorial/factory.rst:154
 msgid "For Windows PowerShell, use ``$env:`` instead of ``export``:"
-msgstr ""
+msgstr "윈도우 파워셸에서는 ``export`` 대신 ``$env:`` 사용:"
 
 #: ../../tutorial/factory.rst:162
 msgid "You'll see output similar to this:"
-msgstr ""
+msgstr "다음과 같은 화면을 볼 수 있다.:"
 
 #: ../../tutorial/factory.rst:174
 msgid ""
@@ -234,7 +234,7 @@ msgstr ""
 
 #: ../../tutorial/factory.rst:178
 msgid "Continue to :doc:`database`."
-msgstr ""
+msgstr ":doc:`database`\ 로 계속"
 
 #~ msgid ""
 #~ "Now you can run your application "
