@@ -63,6 +63,9 @@ msgid ""
 "and operations are performed using the connection, which is closed after "
 "the work is finished."
 msgstr ""
+"SQLite 데이터베이스를 사용할 때(다른 파이썬 데이터베이스를 라이브러리를 사용할 "
+"때도 대부분 마찬가지로) 가장 먼저 할 일은 데이터베이스에 연결하는 컨넥션을 만드는 것이다. "
+"모든 쿼리와 연산은 컨넥션을 써서 이루어지고 모든 작업이 끝나면 컨넥션이 닫힌다. "
 
 #: ../../tutorial/database.rst:32
 msgid ""
@@ -70,6 +73,9 @@ msgid ""
 "is created at some point when handling a request, and closed before the "
 "response is sent."
 msgstr ""
+"웹 애플리케이션에서 컨넥션은 보통 request와 연결되어 있다. "
+"request를 다룰 때 특정 시점에서 컨넥션이 만들어지고 reponse를 보내기 전에 "
+"닫는다."
 
 #: ../../tutorial/database.rst:36 ../../tutorial/database.rst:120
 #: ../../tutorial/database.rst:157
