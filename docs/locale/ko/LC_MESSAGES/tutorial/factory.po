@@ -232,7 +232,7 @@ msgid ""
 " web application!"
 msgstr ""
 "브라우저에서 http://127.0.0.1:5000/hello 를 방문하면 \"Hello, World!\" 메세지가 "
-"보여야 한다. 축하한다. 이제 최초로 플라스크 웹 애플리케이션을 실행하였다."
+"보여야 한다. 축하한다. 이제 최초로 플라스크 웹 애플리케이션을 실행하였다!"
 
 #: ../../tutorial/factory.rst:178
 msgid "Continue to :doc:`database`."
