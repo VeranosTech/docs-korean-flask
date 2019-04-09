@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../tutorial/database.rst:4
 msgid "Define and Access the Database"
-msgstr ""
+msgstr "데이터베이스 정의하고 접근하기"
 
 #: ../../tutorial/database.rst:6
 msgid ""
@@ -27,6 +27,8 @@ msgid ""
 "Python comes with built-in support for SQLite in the :mod:`sqlite3` "
 "module."
 msgstr ""
+"이 애플리케이션은 `SQLite`_ 데이터베이스로 사용자와 포스트를 저장할 것이다. "
+"파이썬은 :mod:`sqlite3` 모듈로 SQLite를 지원한다. "
 
 #: ../../tutorial/database.rst:10
 msgid ""
@@ -37,16 +39,22 @@ msgid ""
 "this. Once you become big, you may want to switch to a different "
 "database."
 msgstr ""
+"SQLite는 별도의 데이터베이스 서버를 만들지 않고 파이썬으로 바로 사용할 수 있기 때문에 "
+"편리하다. 하지만 동시에 데이터베이스에 쓰기 접근을 하려고 하면 각각의 쓰기를 "
+"순차적으로 해야 하기 때문에 느려진다. 소규모 애플리케이션에서는 큰 차이가 없다. "
+"하지만 대규모 애플리케이션을 만들 때는 다른 데이터베이스로 옮겨야 한다. "
 
 #: ../../tutorial/database.rst:17
 msgid ""
 "The tutorial doesn't go into detail about SQL. If you are not familiar "
 "with it, the SQLite docs describe the `language`_."
 msgstr ""
+"이 튜토리얼은 SQL에 대해 깊이 다루지 않을 것이다. 만약 익숙하지 않다면 "
+"SQLite 문서의 `language`_\ 를 참조한다. "
 
 #: ../../tutorial/database.rst:25
 msgid "Connect to the Database"
-msgstr ""
+msgstr "데이터베이스 연결"
 
 #: ../../tutorial/database.rst:27
 msgid ""
