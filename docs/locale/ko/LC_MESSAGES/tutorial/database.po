@@ -89,6 +89,10 @@ msgid ""
 "request. The connection is stored and reused instead of creating a new "
 "connection if ``get_db`` is called a second time in the same request."
 msgstr ""
+":data:`g`\ 는 각 request에 대해 유니크한 특별한 객체이다. "
+"이 객체는 request 처리 중에 여러개의 함수에서 동시에 접근하는 데이터를 저장하는데 "
+"쓰인다. 같은 request에서 ``get_db``\ 가 두번째로 호출되면 "
+"새로운 컨넥션을 만들지 않고 저장된 것을 재사용한다. "
 
 #: ../../tutorial/database.rst:69
 msgid ""
@@ -98,6 +102,10 @@ msgid ""
 "``get_db`` will be called when the application has been created and is "
 "handling a request, so :data:`current_app` can be used."
 msgstr ""
+":data:`current_app`\ 은 request 처리 중에 플라스크 애플리케이션을 가리키는 "
+"특별한 객체이다. 우리는 애플리케이션 팩토리를 사용하기 때문에 코드를 작성하는 동안 "
+"애플리케이션 객체는 존재하지 않는다. 나중에 애플리케이션이 실제로 생성되고 "
+"request를 처리할 때 ``get_db`` 함수가 호출되고 :data:`current_app`\ 를 쓰게 된다."
 
 #: ../../tutorial/database.rst:75
 msgid ""
@@ -105,12 +113,17 @@ msgid ""
 "by the ``DATABASE`` configuration key. This file doesn't have to exist "
 "yet, and won't until you initialize the database later."
 msgstr ""
+":func:`sqlite3.connect` 함수는 ``DATABASE`` 설정 키로 지정된 파일에 "
+"컨넥션을 만든다. 이 파일은 나중에 데이터베이스를 초기화하기 전까지는 "
+"아직 존재하지 않는다. "
 
 #: ../../tutorial/database.rst:79
 msgid ""
 ":class:`sqlite3.Row` tells the connection to return rows that behave like"
 " dicts. This allows accessing the columns by name."
 msgstr ""
+":class:`sqlite3.Row` 클래스는 딕셔너리처럼 동작하는 행을 반환하라고 "
+"컨넥션에 지시하는 것이다. 이렇게 되면 컬럼 이름으로 데이터를 접근할 수 있다. "
 
 #: ../../tutorial/database.rst:82
 msgid ""
@@ -119,6 +132,9 @@ msgid ""
 "tell your application about the ``close_db`` function in the application "
 "factory so that it is called after each request."
 msgstr ""
+"``close_db``\ 는 ``g.db``\ 가 제대로 설정되었는지 점검하고 만약 컨넥선이 있으면 "
+"닫는다. 나중에 애플리케이션에 각 request가 종료되면 애플리케이션 팩토리에서 "
+``close_db`` 함수가 request 종료시마다 호출되도록 지시하게 된다."
 
 #: ../../tutorial/database.rst:89
 msgid "Create the Tables"
