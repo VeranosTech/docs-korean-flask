@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../tutorial/factory.rst:4
 msgid "Application Setup"
-msgstr ""
+msgstr "애플리케이션 셋업"
 
 #: ../../tutorial/factory.rst:6
 msgid ""
@@ -27,6 +27,8 @@ msgid ""
 "Everything about the application, such as configuration and URLs, will be"
 " registered with this class."
 msgstr ""
+"플라스크 애플리케이션은 :class:`Flask` 클래스 인스턴스다. "
+"설정이나 URL 등 애플리케이션에 대한 모든 사항은 이 클래스에 등록된다. "
 
 #: ../../tutorial/factory.rst:10
 msgid ""
@@ -36,6 +38,10 @@ msgid ""
 " simple and useful in some cases, it can cause some tricky issues as the "
 "project grows."
 msgstr ""
+"플라스크 애플리케이션을 생성하는 가장 직접적인 방법은  "
+"앞 페이지의 \"Hello, World!\" 예제처럼 전역 :class:`Flask` 인스턴스를 "
+"코드로 직접 만드는 것이다. "
+"이 방법은 쉽고 어떤 경우에는 유용하지만 프로젝트가 커지면 몇가지 문제를 유발한다."
 
 #: ../../tutorial/factory.rst:16
 msgid ""
@@ -45,10 +51,13 @@ msgid ""
 "application needs will happen inside the function, then the application "
 "will be returned."
 msgstr ""
+":class:`Flask` 인스턴스를 전역으로 생성하는 대신 이 인스턴스를 함수 안에 만들 수 있다. "
+"이러한 함수를 *애플리케이션 팩토리*\ 라고 한다. 애플리케이션에 필요한 모든 설정, 등록, 셋업은 "
+"함수 안에서 실행되고 애플리케이션은 그 함수 인스턴스를 반환한다."
 
 #: ../../tutorial/factory.rst:24
 msgid "The Application Factory"
-msgstr ""
+msgstr "애플리케이션 팩토리"
 
 #: ../../tutorial/factory.rst:26
 msgid ""
@@ -57,6 +66,9 @@ msgid ""
 "contain the application factory, and it tells Python that the ``flaskr`` "
 "directory should be treated as a package."
 msgstr ""
+"이제 코딩을 시작할 시간이다! ``flaskr`` 디렉토리를 만들고 ``__init__.py`` 파일을 추가한다. "
+"``__init__.py`` 파일은 두 가지 역할을 한다. 애플리케이션 팩토리를 포함하는 역할과 "
+"파이썬에 ``flaskr`` 디렉토리를 패키지로 취급하도록 지시하는 역할이다."
 
 #: ../../tutorial/factory.rst:35
 msgid "``flaskr/__init__.py``"
@@ -67,12 +79,15 @@ msgid ""
 "``create_app`` is the application factory function. You'll add to it "
 "later in the tutorial, but it already does a lot."
 msgstr ""
+"``create_app``\ 은 애플리케이션 팩토리 함수다. 나중에 기능이 더 추가될 것이다. "
+"일단 지금 하는 일은 다음과 같다."
 
 #: ../../tutorial/factory.rst:74
 msgid ""
 "``app = Flask(__name__, instance_relative_config=True)`` creates the "
 ":class:`Flask` instance."
 msgstr ""
+"``app = Flask(__name__, instance_relative_config=True)`` 명령은 :class:`Flask` 인스턴스를 생성한다."
 
 #: ../../tutorial/factory.rst:77
 msgid ""
@@ -80,6 +95,8 @@ msgid ""
 "know where it's located to set up some paths, and ``__name__`` is a "
 "convenient way to tell it that."
 msgstr ""
+"``__name__``\ 은 현재 파이썬 모듈의 이름이다. 앱이 경로 정보를 셋업하려면 "
+"현재 자신의 위치를 알아야 하는데 ``__name__``\ 을 사용하면 쉽게 알 수 있다. "
 
 #: ../../tutorial/factory.rst:81
 msgid ""
@@ -89,12 +106,16 @@ msgid ""
 "local data that shouldn't be committed to version control, such as "
 "configuration secrets and the database file."
 msgstr ""
+"``instance_relative_config=True`` 명령은 앱에게 설정 파일 경로가 :ref:`인스턴스 폴더 <instance-folders>`\ 에 "
+"대해 상대적이라는 것을 알려준다. 인스턴스 폴더는 ``flaskr`` 패키지 바깥에 있고 "
+"설정용 시크릿이나 데이터베이스 파일과 같이 버전관리에 포함되지 않는 로컬 데이터를 가질 수 있다. "
 
 #: ../../tutorial/factory.rst:88
 msgid ""
 ":meth:`app.config.from_mapping() <Config.from_mapping>` sets some default"
 " configuration that the app will use:"
 msgstr ""
+":meth:`app.config.from_mapping() <Config.from_mapping>` 명령은 앱이 사용할 디폴트 설정을 지정한다.: "
 
 #: ../../tutorial/factory.rst:91
 msgid ""
@@ -102,6 +123,8 @@ msgid ""
 "It's set to ``'dev'`` to provide a convenient value during development, "
 "but it should be overridden with a random value when deploying."
 msgstr ""
+":data:`SECRET_KEY`\는 플라스크와 그 확장 프로그램이 데이터를 안전하게 관리하는데 필요하다. "
+"개발중에는 편의를 위해 ``'dev'`` 값으로 했지만 배포할 때는 난수를 넣어줘야 한다. "
 
 #: ../../tutorial/factory.rst:96
 msgid ""
@@ -110,6 +133,9 @@ msgid ""
 "path that Flask has chosen for the instance folder. You'll learn more "
 "about the database in the next section."
 msgstr ""
+"``DATABASE``\ 는 SQLite 데이터베이스 파일을 저장할 경로이다. "
+"이 파일은 플라스크 인스턴스 폴더인 :attr:`app.instance_path <Flask.instance_path>` 아래에 있다. "
+"다음 절에서 데이터베이스에 대해 공부할 것이다. "
 
 #: ../../tutorial/factory.rst:102
 msgid ""
@@ -118,6 +144,9 @@ msgid ""
 "the instance folder if it exists. For example, when deploying, this can "
 "be used to set a real ``SECRET_KEY``."
 msgstr ""
+":meth:`app.config.from_pyfile() <Config.from_pyfile>` 명령은 인스턴스 "
+"폴더 안의 ``config.py`` 파일에서 받은 디폴트 설정값을 덮어쓰는 명령이다. "
+"예를 들어 배포할 때는 진짜 ``SECRET_KEY`` 값을 넣을 수 있다. "
 
 #: ../../tutorial/factory.rst:107
 msgid ""
@@ -126,6 +155,9 @@ msgid ""
 "later in the tutorial can be configured independently of any development "
 "values you have configured."
 msgstr ""
+"``test_config``\ 를 팩토리에 넣으면 인스턴스 설정 대신 사용된다. "
+"이 기능은 튜토리얼 후반에서 테스트에 사용되어 미리 설정한 값과 상관없이 "
+"다시 값을 설정할 때 쓰인다. "
 
 #: ../../tutorial/factory.rst:112
 msgid ""
@@ -134,6 +166,10 @@ msgid ""
 "automatically, but it needs to be created because your project will "
 "create the SQLite database file there."
 msgstr ""
+":func:`os.makedirs` 명령은 :attr:`app.instance_path <Flask.instance_path>` 경로가 "
+"반드시 존재하도록 만들기 위한 것이다. 플라스크는 인스턴스 폴더를 자동으로 만들지 "
+"않는다. 하지만 이 폴더는 SQLite 데이터베이스 파일을 생성하는데 필요하기 때문에 "
+"미리 생성해야 한다."
 
 #: ../../tutorial/factory.rst:118
 msgid ""
@@ -142,10 +178,14 @@ msgid ""
 "creates a connection between the URL ``/hello`` and a function that "
 "returns a response, the string ``'Hello, World!'`` in this case."
 msgstr ""
+":meth:`@app.route() <Flask.route>` 명령은 라우트(route)를 만든다. "
+"이 튜토리얼에서 이 기능이 작동하는 것을 볼 수 있다. "
+"이 명령은 ``/hello`` URLRHK ``'Hello, World!'`` 문자열 response를 반환하는 "
+"함수를 연결한다. "
 
 #: ../../tutorial/factory.rst:126
 msgid "Run The Application"
-msgstr ""
+msgstr "애플리케이션 실행"
 
 #: ../../tutorial/factory.rst:128
 msgid ""
@@ -154,6 +194,10 @@ msgid ""
 "development mode. Remember, you should still be in the top-level ``flask-"
 "tutorial`` directory, not the ``flaskr`` package."
 msgstr ""
+"이제 ``flask`` 명령으로 애플리케이션을 가동할 수 있다. "
+"터미널에서 애플리케이션을 찾을 위치를 플라스크에게 알려주고 개발 모드로 가동한다. "
+"지금 현재 위치가 ``flaskr`` 패키지 안이 아니라 최상위 ``flask-tutorial`` 디렉토리인지 "
+"확인하라."
 
 #: ../../tutorial/factory.rst:133
 msgid ""
@@ -162,6 +206,8 @@ msgid ""
 " You can leave it running and just reload the browser page as you follow "
 "the tutorial."
 msgstr ""
+"개발 모드는 예외가 발생하면 대화형 디버거를 보여준다. "
+"
 
 #: ../../tutorial/factory.rst:138
 msgid "For Linux and Mac:"
