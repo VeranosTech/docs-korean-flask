@@ -173,6 +173,10 @@ msgid ""
 "returns a database connection, which is used to execute the commands read"
 " from the file."
 msgstr ""
+":meth:`open_resource() <Flask.open_resource>` 명령은 ``flaskr`` 패키지에 대한 "
+"상대경로를 이용하여 파일을 연다. 애플리케이션이 배포 설치된 위치를 알 필요가 "
+"없기 때문에 유용하다. ``get_db`` 명령은 데이터베이스 컨넥션을 반환한다. "
+"컨넥션은 파일에서 읽은 명령을 수행할 때 사용된다."
 
 
 #: ../../tutorial/database.rst:143
