@@ -117,5 +117,5 @@ msgstr ""
 
 #: ../../tutorial/layout.rst:110
 msgid "Continue to :doc:`factory`."
-msgstr ":doc:`factory`\ 으로 계속."
+msgstr ":doc:`factory`\ 으로 계속. "
 
