@@ -207,7 +207,6 @@ msgid ""
 "the tutorial."
 msgstr ""
 "개발 모드는 예외가 발생하면 대화형 디버거를 보여준다. "
-"
 
 #: ../../tutorial/factory.rst:138
 msgid "For Linux and Mac:"
