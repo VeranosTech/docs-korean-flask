@@ -132,7 +132,11 @@ msgid ""
 "was set. If the connection exists, it is closed. Further down you will "
 "tell your application about the ``close_db`` function in the application "
 "factory so that it is called after each request."
-msgstr "``close_db``\\ 는 ``g.db``\\ 가 제대로 설정되었는지 점검하고 만약 컨넥선이 있으면 닫는다. 나중에 애플리케이션에 각 request가 종료되면 애플리케이션 팩토리에서 ``close_db`` 함수가 request 종료시마다 호출되도록 지시하게 된다."
+msgstr ""
+"``close_db``\\ 는 ``g.db``\\ 가 제대로 설정되었는지 점검하고 "
+"만약 컨넥선이 있으면 닫는다. "
+"나중에 애플리케이션에 각 request가 종료되면 애플리케이션 팩토리에서 "
+"``close_db`` 함수가 request 종료시마다 호출되도록 지시하게 된다."
 
 #: ../../tutorial/database.rst:89
 msgid "Create the Tables"
@@ -169,6 +173,7 @@ msgid ""
 "returns a database connection, which is used to execute the commands read"
 " from the file."
 msgstr ""
+
 
 #: ../../tutorial/database.rst:143
 msgid ""
