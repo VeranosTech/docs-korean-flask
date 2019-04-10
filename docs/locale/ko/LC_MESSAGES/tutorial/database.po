@@ -201,24 +201,33 @@ msgid ""
 "instance isn't available when writing the functions. Instead, write a "
 "function that takes an application and does the registration."
 msgstr ""
+"``close_db``\\ 와 ``init_db_command`` 함수는 애플리케이션 인스턴스에 등록을 "
+"해야 한다. 그렇지 않으면 애플리케이션에서 쓸 수 없다. 하지만 지금은 팩토리 함수를 "
+"사용하고 있기 때문에 함수를 코딩하는 시점에서는 인스턴스가 없는 상태이다. "
+"대신에 애플리케이션을 받아서 등록을 해주는 함수를 만든다."
 
 #: ../../tutorial/database.rst:164
 msgid ""
 ":meth:`app.teardown_appcontext() <Flask.teardown_appcontext>` tells Flask"
 " to call that function when cleaning up after returning the response."
 msgstr ""
+":meth:`app.teardown_appcontext() <Flask.teardown_appcontext>` 명령은 "
+"response를 반환하고 정리를 할 때 호출할 함수를 등록한다."
 
 #: ../../tutorial/database.rst:168
 msgid ""
 ":meth:`app.cli.add_command() <click.Group.add_command>` adds a new "
 "command that can be called with the ``flask`` command."
 msgstr ""
+":meth:`app.cli.add_command() <click.Group.add_command>` 명령은 "
+"``flask`` 명령과 같이 사용할 서브커맨드를 등록한다."
 
 #: ../../tutorial/database.rst:171
 msgid ""
 "Import and call this function from the factory. Place the new code at the"
 " end of the factory function before returning the app."
 msgstr ""
+""
 
 #: ../../tutorial/database.rst:174
 msgid "``flaskr/__init__.py``"
