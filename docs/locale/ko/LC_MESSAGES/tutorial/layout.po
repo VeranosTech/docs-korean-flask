@@ -67,7 +67,7 @@ msgstr "프로젝트 디렉터리 내용은 다음과 같다:"
 
 #: ../../tutorial/layout.rst:41
 msgid "``flaskr/``, a Python package containing your application code and files."
-msgstr "``flaskr/``, 애플리케이션 코드와 파일을 포함하는 파이썬 패키지""
+msgstr "``flaskr/``, 애플리케이션 코드와 파일을 포함하는 파이썬 패키지"
 
 #: ../../tutorial/layout.rst:43
 msgid "``tests/``, a directory containing test modules."
