@@ -126,7 +126,6 @@ msgstr ""
 "컨넥션에 지시하는 것이다. 이렇게 되면 컬럼 이름으로 데이터를 접근할 수 있다. "
 
 #: ../../tutorial/database.rst:82
-#, fuzzy
 msgid ""
 "``close_db`` checks if a connection was created by checking if ``g.db`` "
 "was set. If the connection exists, it is closed. Further down you will "
