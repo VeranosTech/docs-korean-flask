@@ -227,7 +227,8 @@ msgid ""
 "Import and call this function from the factory. Place the new code at the"
 " end of the factory function before returning the app."
 msgstr ""
-""
+"이 함수를 팩토리에서 임포트하여 호출해야 한다. 팩토리 함수 마지막 부분에 "
+"앱을 반환하기 전에 새로운 코드를 추가한다."
 
 #: ../../tutorial/database.rst:174
 msgid "``flaskr/__init__.py``"
@@ -235,7 +236,7 @@ msgstr ""
 
 #: ../../tutorial/database.rst:188
 msgid "Initialize the Database File"
-msgstr ""
+msgstr "데이터베이스 파일 초기화"
 
 #: ../../tutorial/database.rst:190
 msgid ""
@@ -243,6 +244,8 @@ msgid ""
 "using the ``flask`` command, similar to the ``run`` command from the "
 "previous page."
 msgstr ""
+"이제 ``init-db`` 명령을 앱에 등록했으니 ``flask`` 명령과 붙여서 쓸 수 있다. "
+"앞 페이지의 ``run`` 명령처럼 쓰면 된다."
 
 #: ../../tutorial/database.rst:196
 msgid ""
@@ -252,20 +255,25 @@ msgid ""
 "env as described in :ref:`install-activate-env`. You'll also need to set "
 "``FLASK_APP`` and ``FLASK_ENV`` as shown on the previous page."
 msgstr ""
+"만약 앞 페이지의 서버가 아직 가동중이면 서버를 몀추거나 다른 터미널에서 "
+"이 명령을 실행하라. 다른 터미널을 쓰는 경우에는 프로젝트 디렉토리로 가서 "
+":ref:`install-activate-env` 명령으로 가상환경을 활성화하는 것을 잊지 말아라. "
+"또한 앞 페이지처럼 ``FLASK_APP``, ``FLASK_ENV`` 환경변수도 설정해야 한다."
 
 #: ../../tutorial/database.rst:203
 msgid "Run the ``init-db`` command:"
-msgstr ""
+msgstr "``init-db`` 명령 실행"
 
 #: ../../tutorial/database.rst:210
 msgid ""
 "There will now be a ``flaskr.sqlite`` file in the ``instance`` folder in "
 "your project."
 msgstr ""
+"이제 프로젝트 ``instance`` 폴더안에 ``flaskr.sqlite`` 파일이 생긴다."
 
 #: ../../tutorial/database.rst:213
 msgid "Continue to :doc:`views`."
-msgstr ""
+msgstr ":doc:`views`\ 로 계속."
 
 #~ msgid ""
 #~ "The ``close_db`` and ``init_db_command`` "
