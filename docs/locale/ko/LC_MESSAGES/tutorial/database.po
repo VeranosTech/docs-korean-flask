@@ -184,10 +184,14 @@ msgid ""
 "that calls the ``init_db`` function and shows a success message to the "
 "user. You can read :ref:`cli` to learn more about writing commands."
 msgstr ""
+":func:`click.command`\\ 는 ``init-db``\\ 라는 커맨드라인 명령을 정의한다. "
+"이 명령은  ``init_db`` 함수를 호출하고 성공하면 사용자에게 메세지를 표시한다. "
+"커맨드라인 명령 작성에 대해서는 :ref:`cli`\\ 를 참조한다."
+
 
 #: ../../tutorial/database.rst:149
 msgid "Register with the Application"
-msgstr ""
+msgstr "애플리케이션 등록"
 
 #: ../../tutorial/database.rst:151
 msgid ""
