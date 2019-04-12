@@ -14,6 +14,7 @@ echo '!_build/' >> .gitignore
 echo '!env/' >> .gitignore
 
 cd docs
+rm -rf _build/html
 make -e SPHINXOPTS="-D language='ko'" html
 cd ..
 
