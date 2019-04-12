@@ -102,7 +102,7 @@ msgstr ""
 
 #: ../../tutorial/views.rst:67
 msgid "The First View: Register"
-msgstr ""
+msgstr "첫번째 뷰: 사용자 등록"
 
 #: ../../tutorial/views.rst:69
 msgid ""
@@ -111,16 +111,20 @@ msgid ""
 "the form, it will validate their input and either show the form again "
 "with an error message or create the new user and go to the login page."
 msgstr ""
+"사용자가 ``/auth/register`` URL을 방문하면 ``register`` 뷰가 사용자가 채워야할 "
+"양식 `HTML`_ 화면을 반환한다. 양식을 제출하면 입력을 검증하고 에러 메세지와 같이 "
+"양식을 다시 보여주거나 아니면 신규 사용자를 생성해서 로그인 페이지로 이동한다. "
 
 #: ../../tutorial/views.rst:76
 msgid ""
 "For now you will just write the view code. On the next page, you'll write"
 " templates to generate the HTML form."
 msgstr ""
+"여기서는 뷰 코드만 작성한다. 다음 절에서는 HTML 양식을 생성하는 템플릿을 만들 것이다. "
 
 #: ../../tutorial/views.rst:111
 msgid "Here's what the ``register`` view function is doing:"
-msgstr ""
+msgstr "``register`` 뷰 함수가 하는 일이다.:"
 
 #: ../../tutorial/views.rst:113
 msgid ""
@@ -129,12 +133,17 @@ msgid ""
 "``/auth/register``, it will call the ``register`` view and use the return"
 " value as the response."
 msgstr ""
+":meth:`@bp.route <Blueprint.route>`  메서드는 ``/register`` URL을 "
+"``register`` 뷰 함수와 연결한다. 플라스크가 ``/auth/register``\ 에 대한 "
+"request를 받으면 ``register`` 뷰 함수를 호출하고 그 반환값을 response로 사용한다. "
 
 #: ../../tutorial/views.rst:118
 msgid ""
 "If the user submitted the form, :attr:`request.method <Request.method>` "
 "will be ``'POST'``. In this case, start validating the input."
 msgstr ""
+"만약 사용자가 양식을 제출하면 :attr:`request.method <Request.method>` 값은 "
+"``'POST'``\ 가 된다. 이 때는 입력을 검증한다. "
 
 #: ../../tutorial/views.rst:122
 msgid ""
@@ -142,10 +151,13 @@ msgid ""
 "mapping submitted form keys and values. The user will input their "
 "``username`` and ``password``."
 msgstr ""
+":attr:`request.form <Request.form>`\ 는 키와 밸류로 이루어진 특수한 형태의 "
+":class:`dict` 자료형이다.  사용자는 ``username``\ 과 ``password``\ 를 "
+"입력한다. "
 
 #: ../../tutorial/views.rst:126
 msgid "Validate that ``username`` and ``password`` are not empty."
-msgstr ""
+msgstr "``username``\ 과 ``password``\ 가 빈칸인지 확인한다. "
 
 #: ../../tutorial/views.rst:128
 msgid ""
@@ -156,6 +168,10 @@ msgid ""
 "with. The database library will take care of escaping the values so you "
 "are not vulnerable to a *SQL injection attack*."
 msgstr ""
+"데이터베이스 쿼리 결과를 보고 ``username``\ 이 이미 있는지 확인한다. "
+":meth:`db.execute <sqlite3.Connection.execute> 메서드는 ``?`` 플레이스홀더가 있는 "
+"SQL 쿼리문을 받는다. 플레이스홀더는 사용자 입력값으로 채워진다. "
+"데이터베이스 라이브러리는 *SQL 인젝션 공격*\ 을 피하기 위해 값을 이스케프하여 사용한다. "
 
 #: ../../tutorial/views.rst:136
 msgid ""
@@ -164,6 +180,9 @@ msgid ""
 ":meth:`~sqlite3.Cursor.fetchall` is used, which returns a list of all "
 "results."
 msgstr ""
+":meth:`~sqlite3.Cursor.fetchone` 메서드는 쿼리 응답으로 하나의 레코드를 반환한다. "
+"만약 결과거 없으면 ``None``\ 을 반환한다. 만약 :meth:`~sqlite3.Cursor.fetchall` 메서드를 "
+"스면 전체 결과를 리스트로 받는다. "
 
 #: ../../tutorial/views.rst:141
 msgid ""
@@ -174,6 +193,12 @@ msgid ""
 "modifies data, :meth:`db.commit() <sqlite3.Connection.commit>` needs to "
 "be called afterwards to save the changes."
 msgstr ""
+"검증에 성공하면 새로운 사용자 데이터를 데이터베이스에 넣는다. "
+"보안상 패스워드는 데이터베이스에 그대로 저장하지 않고 "
+":func:`~werkzeug.security.generate_password_hash` 명령으로 "
+"패스워드의 해시값을 저장한다. 이 쿼리는 데이터를 변경하는 쿼리이므로 "
+"상태를 저장하려면 :meth:`db.commit() <sqlite3.Connection.commit>` 메서드를 "
+"호출해야 한다."
 
 #: ../../tutorial/views.rst:149
 msgid ""
@@ -183,12 +208,19 @@ msgid ""
 " the URL later without changing all code that links to it. "
 ":func:`redirect` generates a redirect response to the generated URL."
 msgstr ""
+"사용자 정보를 저장한 다음에는 로그인 페이지로 리디렉트한다. "
+":func:`url_for` 명령은 로그인 뷰 이름을 보고 URL을 생성한다. "
+"URL을 직접 쓰는 것보다는 이게 더 좋다. 왜냐하면 나중에 URL이 바뀌어도 "
+"이 URL을 쓰는 모든 코드를 바꾸지 않아도 되기 때문이다. "
+":func:`redirect` 명령은 생성된 URL 페이지로 리디렉트하도록 response를 보낸다."
 
 #: ../../tutorial/views.rst:156
 msgid ""
 "If validation fails, the error is shown to the user. :func:`flash` stores"
 " messages that can be retrieved when rendering the template."
 msgstr ""
+"검증에 실패하면 에러를 사용자에게 출력한다. "
+":func:`flash` 명령은 템플릿을 렌더링할 때 사용될 메세지를 저장한다. "
 
 #: ../../tutorial/views.rst:159
 msgid ""
@@ -197,10 +229,14 @@ msgid ""
 "shown. :func:`render_template` will render a template containing the "
 "HTML, which you'll write in the next step of the tutorial."
 msgstr ""
+"사용자가 처음으로 ``auth/register``\ 로 가거나 검증 오류가 발생하면 "
+"등록 양식이 잇는 HTML 페이지가 보여야 한다. "
+":func:`render_template` 함수는 HTML을 포함한 템플릿을 렌더링한다. "
+"템플릿은 튜토리얼 다음 페이지에서 작성한다."
 
 #: ../../tutorial/views.rst:167
 msgid "Login"
-msgstr ""
+msgstr "로그인"
 
 #: ../../tutorial/views.rst:169
 msgid "This view follows the same pattern as the ``register`` view above."
