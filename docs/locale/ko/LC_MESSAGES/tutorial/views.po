@@ -57,7 +57,9 @@ msgid ""
 "separate module. Since the blog needs to know about authentication, "
 "you'll write the authentication one first."
 msgstr ""
-"Flaskr\ 는 "
+"Flaskr 애플리케이션에는 두개의 블루프린트가 있다. "
+"하나는 인증용 함수이고 하나는 블로그 포스팅용 함수이다. 각각의 블루프린트 코드는 "
+"별도의 모듈로 들어간다. 블로그는 인증정보가 필요하므로 인증부터 먼저 만들자."
 
 #: ../../tutorial/views.rst:27 ../../tutorial/views.rst:79
 #: ../../tutorial/views.rst:171 ../../tutorial/views.rst:218
@@ -72,6 +74,10 @@ msgid ""
 "is passed as the second argument. The ``url_prefix`` will be prepended to"
 " all the URLs associated with the blueprint."
 msgstr ""
+"이 코드는 ``'auth'``\ 라는 이름의 :class:`Blueprint`\ 를 만든다. "
+"애플리케이션 객체와 같이 블루프린트도 정의된 위치가 필요하기 때문에 두번째 인수로 "
+"``__name__``\ 을 넣었다. ``url_prefix`` 인수는 이 블루프린트의 모든 URL 앞에 "
+"붙이는 접두사이다."
 
 #: ../../tutorial/views.rst:46
 msgid ""
@@ -79,6 +85,9 @@ msgid ""
 ":meth:`app.register_blueprint() <Flask.register_blueprint>`. Place the "
 "new code at the end of the factory function before returning the app."
 msgstr ""
+"팩토리에서 :meth:`app.register_blueprint() <Flask.register_blueprint>` 함수로 "
+"블루프린트를 등록한다. "
+"등록하는 코드를 기존의 코드 마지막 부분, 그리고 앱을 반환하기 전 부분에 넣는다."
 
 #: ../../tutorial/views.rst:50
 msgid "``flaskr/__init__.py``"
@@ -89,6 +98,7 @@ msgid ""
 "The authentication blueprint will have views to register new users and to"
 " log in and log out."
 msgstr ""
+"인증용 블루프린트에는 신규 사용자를 등록하고 로그인, 로그아웃하는 뷰를 추가할 것이다."
 
 #: ../../tutorial/views.rst:67
 msgid "The First View: Register"
