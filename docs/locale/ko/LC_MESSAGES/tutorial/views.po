@@ -256,6 +256,8 @@ msgid ""
 "password in the same way as the stored hash and securely compares them. "
 "If they match, the password is valid."
 msgstr ""
+":func:`~werkzeug.security.check_password_hash` 함수는 제출된 패스워드를 같은 방법으로 "
+"해시화하여 저장된 패스워드와 안전하게 비교한다. 만약 일치하면 패스워드는 검증된 상태가 된다."
 
 #: ../../tutorial/views.rst:207
 msgid ""
@@ -265,6 +267,11 @@ msgid ""
 " then sends it back with subsequent requests. Flask securely *signs* the "
 "data so that it can't be tampered with."
 msgstr ""
+":data:`session`\ 은 복수의 request에 대해 사용할 수 있는 데이터를 저장하는 :class:`dict` "
+"자료형이다. 사용자 검증이 성공하면 사용자의 ``id``\ 가 새로운 세션에 저장된다. "
+"이 데이터는 우선 웹 브라우저로 보내져 쿠키에 저장되고 "
+"브라우저는 그 이후의 모든 request에 이 데이터를 첨부하여 서버로 보낸다."
+"플라스크는 이 데이터가 조작되지 않도록 보안 서명을 한다."
 
 #: ../../tutorial/views.rst:213
 msgid ""
