@@ -280,6 +280,8 @@ msgid ""
 "user is logged in their information should be loaded and made available "
 "to other views."
 msgstr ""
+"이제 사용자의 ``id`` 정보는 :data:`session`\ 에 저장되어 다음번 request부터 사용할 수 있다. "
+"request가 들어올 때마다 만약 사용자가 로그인되어 있다고 나오면 관련 정보가 로드되어 뷰에 나타나야 한다."
 
 #: ../../tutorial/views.rst:232
 msgid ""
