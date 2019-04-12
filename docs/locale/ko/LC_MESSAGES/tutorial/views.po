@@ -338,7 +338,7 @@ msgstr ""
 
 #: ../../tutorial/views.rst:283
 msgid "Endpoints and URLs"
-msgstr ""
+msgstr "엔드포인트와 URL"
 
 #: ../../tutorial/views.rst:285
 msgid ""
@@ -347,6 +347,8 @@ msgid ""
 "*endpoint*, and by default it's the same as the name of the view "
 "function."
 msgstr ""
+":func:`url_for` 함수는 이름과 인수에 기반하여 뷰함수에 대한 URL을 생성한다. "
+"뷰에 연결된 이름을 엔드포인트라고도 한다. 기본적으로 엔드포인트는 뷰함수 이름과 같다."
 
 #: ../../tutorial/views.rst:290
 msgid ""
@@ -355,6 +357,9 @@ msgid ""
 "with ``url_for('hello')``. If it took an argument, which you'll see "
 "later, it would be linked to using ``url_for('hello', who='World')``."
 msgstr ""
+"예를 들어 이 튜토리얼 초반에 앱 팩토리에 추가된 ``hello()`` 뷰는 ``'hello'``\ 라는 이름을 가지고 "
+"``url_for('hello')``\ 에 연결된다. 나중에 보겠지만 만약 인수가 있으면 "
+"``url_for('hello', who='World')`` 명령으로 연결할 수 있다."
 
 #: ../../tutorial/views.rst:296
 msgid ""
@@ -363,8 +368,10 @@ msgid ""
 "wrote above is ``'auth.login'`` because you added it to the ``'auth'`` "
 "blueprint."
 msgstr ""
+"블루프린트를 사용할 때는 블루프린트 이름이 함수 이름 앞에 붙는다. 그래서 ``login`` 함수에 대한 "
+"엔드포인트는  ``'auth'`` 접미사가 붙어서 `'auth.login'``\ 가 된다. "
 
 #: ../../tutorial/views.rst:301
 msgid "Continue to :doc:`templates`."
-msgstr ""
+msgstr ":doc:`templates`\ 으로 계속."
 
