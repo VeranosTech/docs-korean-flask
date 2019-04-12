@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../tutorial/views.rst:4
 msgid "Blueprints and Views"
-msgstr ""
+msgstr "블루프린트와 뷰"
 
 #: ../../tutorial/views.rst:6
 msgid ""
@@ -29,10 +29,14 @@ msgid ""
 "an outgoing response. Flask can also go the other direction and generate "
 "a URL to a view based on its name and arguments."
 msgstr ""
+"뷰함수는 애플리케이션에 오는 request에 대한 reponse를 작성하는 코드이다. "
+"플라스크는 request URL을 그에 대응하는 뷰 함수에 매칭시키는 패턴을 사용한다. "
+"뷰 함수는 데이터를 반환하고 플라스크는 이 데이터를 외부로 나가는 reponse로 변환한다. "
+"또한 다른 URL로 리디렉트를 하거나 뷰함수 이름과 인수에 대응하는 URL을 생성할 수도 있다."
 
 #: ../../tutorial/views.rst:14
 msgid "Create a Blueprint"
-msgstr ""
+msgstr "블루프린트 만들기"
 
 #: ../../tutorial/views.rst:16
 msgid ""
@@ -42,6 +46,9 @@ msgid ""
 " registered with the application when it is available in the factory "
 "function."
 msgstr ""
+":class:`Blueprint`\ 는 뷰와 코드를 그룹으로 관리하기 위한 방법의 하나이다. "
+"뷰와 코드를 직접 애플리케이션에 등록하지 않고 우선 블루프린트로 등록한다. "
+"그 다음 이 블루프린트를 팩토리 함수에 있는 애플리케이션에 등록한다."
 
 #: ../../tutorial/views.rst:22
 msgid ""
@@ -50,6 +57,7 @@ msgid ""
 "separate module. Since the blog needs to know about authentication, "
 "you'll write the authentication one first."
 msgstr ""
+"Flaskr\ 는 "
 
 #: ../../tutorial/views.rst:27 ../../tutorial/views.rst:79
 #: ../../tutorial/views.rst:171 ../../tutorial/views.rst:218

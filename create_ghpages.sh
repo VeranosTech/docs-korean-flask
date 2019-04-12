@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+find . -type f -name '*.mo' -delete
 git add . -A
 git commit -m "automatic commit"
 git push origin korean
