@@ -307,10 +307,12 @@ msgid ""
 "To log out, you need to remove the user id from the :data:`session`. Then"
 " ``load_logged_in_user`` won't load a user on subsequent requests."
 msgstr ""
+"로그아웃하려면 사용자 id를 :data:`session`\ 에서 삭제한다. "
+"그러면 ``load_logged_in_user`` 함수는 이후의 request에서 사용자를 로드하지 않는다."
 
 #: ../../tutorial/views.rst:257
 msgid "Require Authentication in Other Views"
-msgstr ""
+msgstr "다른 뷰에서 인증을 요구하는 경우"
 
 #: ../../tutorial/views.rst:259
 msgid ""
@@ -318,6 +320,8 @@ msgid ""
 "logged in. A *decorator* can be used to check this for each view it's "
 "applied to."
 msgstr ""
+"블로그 포스팅을 작성, 편집, 삭제하려면 사용자가 로그인되어있어야 한다. 데코레이터를 사용하여 "
+"각 뷰에서 로그인을 확인하도록 할 수 있다."
 
 #: ../../tutorial/views.rst:276
 msgid ""
@@ -327,6 +331,10 @@ msgid ""
 "view is called and continues normally. You'll use this decorator when "
 "writing the blog views."
 msgstr ""
+"이 데코레이터는 원래의 뷰함수를 래핑하여 새로운 뷰함수를 반환한다. "
+"새 함수는 사용자가 로드되어 있는지 확인하고 그렇지 않으면 로그인 페이지로 이동한다. "
+"만약 사용자가 로그되어 있으면 원래의 뷰함수를 정상적으로 호출한다. "
+"블로그 뷰를 작성할 때 이 데코레이터를 사용할 것이다."
 
 #: ../../tutorial/views.rst:283
 msgid "Endpoints and URLs"
