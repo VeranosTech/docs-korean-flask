@@ -369,7 +369,7 @@ msgid ""
 "blueprint."
 msgstr ""
 "블루프린트를 사용할 때는 블루프린트 이름이 함수 이름 앞에 붙는다. 그래서 ``login`` 함수에 대한 "
-"엔드포인트는  ``'auth'`` 접미사가 붙어서 `'auth.login'``\ 가 된다. "
+"엔드포인트는  ``'auth'`` 접미사가 붙어서 ``'auth.login'``\ 가 된다. "
 
 #: ../../tutorial/views.rst:301
 msgid "Continue to :doc:`templates`."
