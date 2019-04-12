@@ -240,15 +240,15 @@ msgstr "로그인"
 
 #: ../../tutorial/views.rst:169
 msgid "This view follows the same pattern as the ``register`` view above."
-msgstr ""
+msgstr "이 뷰도 위의 ``register`` 뷰와 같은 패턴을 따른다."
 
 #: ../../tutorial/views.rst:199
 msgid "There are a few differences from the ``register`` view:"
-msgstr ""
+msgstr "``register`` 뷰와의 차이점:"
 
 #: ../../tutorial/views.rst:201
 msgid "The user is queried first and stored in a variable for later use."
-msgstr ""
+msgstr "사용자 쿼리를 먼저하고 나중을 위해 결과를 변수에 저장한다."
 
 #: ../../tutorial/views.rst:203
 msgid ""
