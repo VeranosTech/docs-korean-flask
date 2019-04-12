@@ -293,10 +293,14 @@ msgid ""
 "there is no user id, or if the id doesn't exist, ``g.user`` will be "
 "``None``."
 msgstr ""
+":meth:`bp.before_app_request() <Blueprint.before_app_request>` 메서드는 뷰 함수를 실행하기 전에 "
+"호출할 함수를 등록한다. ``load_logged_in_user`` 함수는 사용자 id가 :data:`session`\ 에 있는지 확인하고 "
+"데이터베이스에서 해당 사용자의 데이터를 가져와 request를 처리하는 동안 유지되는 :data:`g.user <g>`\ 에 저장한다. "
+"만약 사용자 id가 없으면 ``g.user`` 값은 ``None``\ 이 된다. "
 
 #: ../../tutorial/views.rst:242
 msgid "Logout"
-msgstr ""
+msgstr "로그아웃"
 
 #: ../../tutorial/views.rst:244
 msgid ""
