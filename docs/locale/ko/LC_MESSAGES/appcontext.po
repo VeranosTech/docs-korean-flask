@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../appcontext.rst:6
 msgid "The Application Context"
-msgstr ""
+msgstr "애플리케이션 컨텍스트"
 
 #: ../../appcontext.rst:8
 msgid ""
@@ -28,6 +28,8 @@ msgid ""
 "application around to each function, the :data:`current_app` and "
 ":data:`g` proxies are accessed instead."
 msgstr ""
+"애플리케이션 컨텍스트는 request, 명령줄 커맨드 또는 다른 처리중에 애플리케이션 수준의 데이터를 "
+"추적한다. 애플리케이션 자체를 함수에서 공유할 때는 :data:`current_app` 또는 :data:`g`\ 를 대신 사용한다. "
 
 #: ../../appcontext.rst:13
 msgid ""
