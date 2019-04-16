@@ -135,8 +135,8 @@ msgid ""
 " :data:`current_app`. ::"
 msgstr ""
 "만약 확장 프로그램 초기화와 같은 애플리케이션 설정 중에 이러한 메세지를 본다면 ``app`` 객체에 "
-"직접 접근했다는 뜻이다. 이 때는 컨텍스트를 강제로 푸시할 수 있다. "
-"``with`` 블럭에서 :meth:`~Flask.app_context` 메서드로 "
+"직접 접근했다는 뜻이다.  "
+"이 때는 ``with`` 블럭에서 :meth:`~Flask.app_context` 메서드로 컨텍스트를 강제로 푸시할 수 있다."
 
 #: ../../appcontext.rst:83
 msgid ""
@@ -144,10 +144,12 @@ msgid ""
 "configuring the application, it most likely indicates that you should "
 "move that code into a view function or CLI command."
 msgstr ""
+"만약 애플리케이션 설정이 아닌 다른 코드에서 이 에러가 발생하면 해당 코드를 뷰 함수 내부나 "
+"CLI 명령 내부로 옮겨야 한다."
 
 #: ../../appcontext.rst:89
 msgid "Storing Data"
-msgstr ""
+msgstr "데이터 저장"
 
 #: ../../appcontext.rst:91
 msgid ""
@@ -156,6 +158,9 @@ msgid ""
 "purpose. It is a simple namespace object that has the same lifetime as an"
 " application context."
 msgstr ""
+"애플리케이션 컨텍스트는 리퀘스트나 CLI 명령을 처리하는 동안 여러 함수에서 공통을 사용할 데이터를 "
+"저장할 수 있는 좋은 곳이다. 플라스크는 이러한 목적으로 :data:`g object <g>`\ 라는 것을 제공한다. "
+"이 객체는 애플리케이션 컨텍스트와 같은 생애주기를 가지는 간단한 네임스페이스 객체다. "
 
 #: ../../appcontext.rst:97
 msgid ""
@@ -165,10 +170,14 @@ msgid ""
 "requests. Use the :data:`session` or a database to store data across "
 "requests."
 msgstr ""
+"``g``\ 라는 이름은 \"global\"\ 을 뜻한다. 하지만 컨텍스트 안에서만 전역일 뿐이다. "
+"컨텍스트가 끝나면 ``g`` 안의 데이터는 사라진다. 따라서 연속된 리쿼스트와 리쿼스트 사이에서 데이터를 "
+"보관할 수 있는 장소는 아니다. 리쿼스트가 끝나고 다음 리쿼스트에서도 쓸 수 있는 데이터를 저장하려면 "
+"데이터베이스나 :data:`session`\ 을 사용해야 한다. " 
 
 #: ../../appcontext.rst:103
 msgid "A common use for :data:`g` is to manage resources during a request."
-msgstr ""
+msgstr ":data:`g`\ 의 일반적인 사용은 리퀘스트 처리중에 리소스를 관리하는 것이다."
 
 #: ../../appcontext.rst:105
 msgid ""
