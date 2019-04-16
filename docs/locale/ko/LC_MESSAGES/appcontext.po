@@ -28,7 +28,7 @@ msgid ""
 "application around to each function, the :data:`current_app` and "
 ":data:`g` proxies are accessed instead."
 msgstr ""
-"애플리케이션 컨텍스트는 request, 명령줄 커맨드 또는 다른 처리중에 애플리케이션 수준의 데이터를 "
+"애플리케이션 컨텍스트는 리퀘스트, 명령줄 커맨드 또는 다른 처리중에 애플리케이션 수준의 데이터를 "
 "추적한다. 애플리케이션 자체를 함수에서 공유할 때는 :data:`current_app` 또는 :data:`g`\ 를 대신 사용한다. "
 
 #: ../../appcontext.rst:13
@@ -37,10 +37,12 @@ msgid ""
 "level data during a request. A corresponding application context is "
 "pushed when a request context is pushed."
 msgstr ""
+"애플리케이션 컨텍스트는 :doc:`/reqcontext`\ 와 비슷한데 이는 리퀘스트 처리중에 리퀘스트 레벨에서 "
+"데이터를 추적하기 위한 것이다. 리퀘스트 컨텍스트를 푸시하면 그에 대응하는 애플리케이션 컨텍스트도 같이 푸시된다. "
 
 #: ../../appcontext.rst:18
 msgid "Purpose of the Context"
-msgstr ""
+msgstr "컨텍스트의 목적"
 
 #: ../../appcontext.rst:20
 msgid ""
@@ -52,6 +54,12 @@ msgid ""
 "writing reusable :doc:`blueprints </blueprints>` or :doc:`extensions "
 "</extensions>` there won't be an ``app`` instance to import at all."
 msgstr ""
+":class:`Flask` 애플리케이션 객체는 :attr:`~Flask.config` 등의 속성을 가지고 있다. "
+"이 속성은 뷰 또는 :doc:`CLI commands </cli>`\ 에서 접근할 수 있어서 편리하다. "
+"하지만 프로젝트의 다른 모듈에서 `app`` 인스턴스를 임포트하면 순환 임포트 문제가 발생하기 쉽다. "
+"또 :doc:`앱 팩토리 패턴 </patterns/appfactories>` 또는 재사용 가능한 "
+":doc:`blueprints </blueprints>` 또는 :doc:`확장기능 </extensions>` 등을 작성할 때는 "
+"``app`` 인스턴스를 임포트하지 않는다. "
 
 #: ../../appcontext.rst:29
 msgid ""
@@ -59,6 +67,9 @@ msgid ""
 "referring to an ``app`` directly, you use the :data:`current_app` proxy, "
 "which points to the application handling the current activity."
 msgstr ""
+"이러한 경우를 대비하여 플라스크에서는 애플리케이션 컨텍스트라는 것을 사용한다. "
+"``app`` 객체를 직접 참조하는 게 아니라 현재 상태의 애플리케이션을 참조하는 :data:`current_app` "
+"프락시를 사용하는 것이다."
 
 #: ../../appcontext.rst:33
 msgid ""
@@ -66,12 +77,17 @@ msgid ""
 "request. View functions, error handlers, and other functions that run "
 "during a request will have access to :data:`current_app`."
 msgstr ""
+"플라스크는 리쿼스크가 올 때마다 자동으로 애플리케이션 컨텍스트를 푸시하여 저장한다. "
+"뷰 함수, 에러 핸들러, 그리고 리쿼스트 중에 불리는 다른 함수들은 :data:`current_app`\ 을 "
+"통해 이 애플리케이션 컨텍스트를 접근할 수 있다. "
 
 #: ../../appcontext.rst:37
 msgid ""
 "Flask will also automatically push an app context when running CLI "
 "commands registered with :attr:`Flask.cli` using ``@app.cli.command()``."
 msgstr ""
+"또한 ``@app.cli.command()`` 데코레이터로 등록된 :attr:`Flask.cli` CLI 명령을 "
+"사용할 때도 자동으로 애플리케니션 컨텍스트를 푸시하여 저장한다. "
 
 #: ../../appcontext.rst:42
 msgid "Lifetime of the Context"
