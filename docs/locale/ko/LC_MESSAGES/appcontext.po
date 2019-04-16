@@ -77,7 +77,7 @@ msgid ""
 "request. View functions, error handlers, and other functions that run "
 "during a request will have access to :data:`current_app`."
 msgstr ""
-"플라스크는 리쿼스크가 올 때마다 자동으로 애플리케이션 컨텍스트를 푸시하여 저장한다. "
+"플라스크는 리쿼스크가 올 때마다 자동으로 애플리케이션 컨텍스트를 푸시(push)하여 저장한다. "
 "뷰 함수, 에러 핸들러, 그리고 리쿼스트 중에 불리는 다른 함수들은 :data:`current_app`\ 을 "
 "통해 이 애플리케이션 컨텍스트를 접근할 수 있다. "
 
@@ -87,11 +87,11 @@ msgid ""
 "commands registered with :attr:`Flask.cli` using ``@app.cli.command()``."
 msgstr ""
 "또한 ``@app.cli.command()`` 데코레이터로 등록된 :attr:`Flask.cli` CLI 명령을 "
-"사용할 때도 자동으로 애플리케니션 컨텍스트를 푸시하여 저장한다. "
+"사용할 때도 자동으로 애플리케니션 컨텍스트를 푸시(push)하여 저장한다. "
 
 #: ../../appcontext.rst:42
 msgid "Lifetime of the Context"
-msgstr ""
+msgstr "컨텍스트의 생애주기"
 
 #: ../../appcontext.rst:44
 msgid ""
@@ -101,12 +101,18 @@ msgid ""
 " it pops the request context then the application context. Typically, an "
 "application context will have the same lifetime as a request."
 msgstr ""
+"애플리케이션 컨텍스트는 필요할 때마다 만들어졌다가 사라진다. "
+"플라스크 애플리케이션이 리쿼스트 처리를 시작하는 순간 애플리케이션 컨택스트와 "
+"doc:`request context </reqcontext>`\ 를 푸시(push)하여 저장한다. ""
+"리쿼스트 처리가 끝나면 저장된 리쿼스트 컨텍스트와 애플리케이션 컨텍스트가 팝(pop)되어 사라진다. "
 
 #: ../../appcontext.rst:51
 msgid ""
 "See :doc:`/reqcontext` for more information about how the contexts work "
 "and the full lifecycle of a request."
 msgstr ""
+"컨텍스트가 어떻게 동작하는지 그리고 리퀘스트의 전체 생애주기에 대해 자세히 보려면 "
+":doc:`/reqcontext`\ 를 참조한다."
 
 #: ../../appcontext.rst:56
 msgid "Manually Push a Context"
