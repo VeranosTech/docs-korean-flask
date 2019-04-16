@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>애플리케이션 셋업 &#8212; Flask Documentation (1.0.x)</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="shortcut icon" href="../_static/flask-icon.png"/>
+    <link rel="index" title="색인" href="../genindex.html" />
+    <link rel="search" title="검색" href="../search.html" />
+    <link rel="next" title="데이터베이스 정의하고 접근하기" href="database.html" />
+    <link rel="prev" title="프로젝트 레이아웃" href="layout.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>탐색</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="전체 색인"
+             accesskey="I">색인</a></li>
+        <li class="right" >
+          <a href="database.html" title="데이터베이스 정의하고 접근하기"
+             accesskey="N">다음</a> |</li>
+        <li class="right" >
+          <a href="layout.html" title="프로젝트 레이아웃"
+             accesskey="P">이전</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Flask Documentation (1.0.x)</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">튜토리얼</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="application-setup">
+<h1>애플리케이션 셋업<a class="headerlink" href="#application-setup" title="제목 주소">¶</a></h1>
+<p>플라스크 애플리케이션은 <a class="reference internal" href="../api.html#flask.Flask" title="flask.Flask"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flask</span></code></a> 클래스 인스턴스다. 설정이나 URL 등 애플리케이션에 대한 모든 사항은 이 클래스에 등록된다.</p>
+<p>플라스크 애플리케이션을 생성하는 가장 직접적인 방법은 앞 페이지의 &quot;Hello, World!&quot; 예제처럼 전역 <a class="reference internal" href="../api.html#flask.Flask" title="flask.Flask"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flask</span></code></a> 인스턴스를 코드로 직접 만드는 것이다. 이 방법은 쉽고 어떤 경우에는 유용하지만 프로젝트가 커지면 몇가지 문제를 유발한다.</p>
+<p><a class="reference internal" href="../api.html#flask.Flask" title="flask.Flask"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flask</span></code></a> 인스턴스를 전역으로 생성하는 대신 이 인스턴스를 함수 안에 만들 수 있다. 이러한 함수를 <em>애플리케이션 팩토리</em>라고 한다. 애플리케이션에 필요한 모든 설정, 등록, 셋업은 함수 안에서 실행되고 애플리케이션은 그 함수 인스턴스를 반환한다.</p>
+<div class="section" id="the-application-factory">
+<h2>애플리케이션 팩토리<a class="headerlink" href="#the-application-factory" title="제목 주소">¶</a></h2>
+<p>이제 코딩을 시작할 시간이다! <code class="docutils literal notranslate"><span class="pre">flaskr</span></code> 디렉토리를 만들고 <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 파일을 추가한다. <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 파일은 두 가지 역할을 한다. 애플리케이션 팩토리를 포함하는 역할과 파이썬에 <code class="docutils literal notranslate"><span class="pre">flaskr</span></code> 디렉토리를 패키지로 취급하도록 지시하는 역할이다.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ mkdir flaskr
+</pre></div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/__init__.py</span></code></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">test_config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="c1"># create and configure the app</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">instance_relative_config</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_mapping</span><span class="p">(</span>
+        <span class="n">SECRET_KEY</span><span class="o">=</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+        <span class="n">DATABASE</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">instance_path</span><span class="p">,</span> <span class="s1">&#39;flaskr.sqlite&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">test_config</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># load the instance config, if it exists, when not testing</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_pyfile</span><span class="p">(</span><span class="s1">&#39;config.py&#39;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># load the test config if passed in</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_mapping</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
+
+    <span class="c1"># ensure the instance folder exists</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">instance_path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># a simple page that says hello</span>
+    <span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/hello&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s1">&#39;Hello, World!&#39;</span>
+
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">create_app</span></code>은 애플리케이션 팩토리 함수다. 나중에 기능이 더 추가될 것이다. 일단 지금 하는 일은 다음과 같다.</p>
+<ol class="arabic simple">
+<li><code class="docutils literal notranslate"><span class="pre">app</span> <span class="pre">=</span> <span class="pre">Flask(__name__,</span> <span class="pre">instance_relative_config=True)</span></code> 명령은 <a class="reference internal" href="../api.html#flask.Flask" title="flask.Flask"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flask</span></code></a> 인스턴스를 생성한다.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">__name__</span></code>은 현재 파이썬 모듈의 이름이다. 앱이 경로 정보를 셋업하려면 현재 자신의 위치를 알아야 하는데 <code class="docutils literal notranslate"><span class="pre">__name__</span></code>을 사용하면 쉽게 알 수 있다.</li>
+<li><code class="docutils literal notranslate"><span class="pre">instance_relative_config=True</span></code> 명령은 앱에게 설정 파일 경로가 <a class="reference internal" href="../config.html#instance-folders"><span class="std std-ref">인스턴스 폴더</span></a>에 대해 상대적이라는 것을 알려준다. 인스턴스 폴더는 <code class="docutils literal notranslate"><span class="pre">flaskr</span></code> 패키지 바깥에 있고 설정용 시크릿이나 데이터베이스 파일과 같이 버전관리에 포함되지 않는 로컬 데이터를 가질 수 있다.</li>
+</ul>
+</li>
+<li><a class="reference internal" href="../api.html#flask.Config.from_mapping" title="flask.Config.from_mapping"><code class="xref py py-meth docutils literal notranslate"><span class="pre">app.config.from_mapping()</span></code></a> 명령은 앱이 사용할 디폴트 설정을 지정한다.:<ul>
+<li><a class="reference internal" href="../config.html#SECRET_KEY" title="SECRET_KEY"><code class="xref py py-data docutils literal notranslate"><span class="pre">SECRET_KEY</span></code></a>는 플라스크와 그 확장 프로그램이 데이터를 안전하게 관리하는데 필요하다. 개발중에는 편의를 위해 <code class="docutils literal notranslate"><span class="pre">'dev'</span></code> 값으로 했지만 배포할 때는 난수를 넣어줘야 한다.</li>
+<li><code class="docutils literal notranslate"><span class="pre">DATABASE</span></code>는 SQLite 데이터베이스 파일을 저장할 경로이다. 이 파일은 플라스크 인스턴스 폴더인 <a class="reference internal" href="../api.html#flask.Flask.instance_path" title="flask.Flask.instance_path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">app.instance_path</span></code></a> 아래에 있다. 다음 절에서 데이터베이스에 대해 공부할 것이다.</li>
+</ul>
+</li>
+<li><a class="reference internal" href="../api.html#flask.Config.from_pyfile" title="flask.Config.from_pyfile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">app.config.from_pyfile()</span></code></a> 명령은 인스턴스 폴더 안의 <code class="docutils literal notranslate"><span class="pre">config.py</span></code> 파일에서 받은 디폴트 설정값을 덮어쓰는 명령이다. 예를 들어 배포할 때는 진짜 <code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span></code> 값을 넣을 수 있다.<ul>
+<li><code class="docutils literal notranslate"><span class="pre">test_config</span></code>를 팩토리에 넣으면 인스턴스 설정 대신 사용된다. 이 기능은 튜토리얼 후반에서 테스트에 사용되어 미리 설정한 값과 상관없이 다시 값을 설정할 때 쓰인다.</li>
+</ul>
+</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/os.html#os.makedirs" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.makedirs()</span></code></a> 명령은 <a class="reference internal" href="../api.html#flask.Flask.instance_path" title="flask.Flask.instance_path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">app.instance_path</span></code></a> 경로가 반드시 존재하도록 만들기 위한 것이다. 플라스크는 인스턴스 폴더를 자동으로 만들지 않는다. 하지만 이 폴더는 SQLite 데이터베이스 파일을 생성하는데 필요하기 때문에 미리 생성해야 한다.</li>
+<li><a class="reference internal" href="../api.html#flask.Flask.route" title="flask.Flask.route"><code class="xref py py-meth docutils literal notranslate"><span class="pre">&#64;app.route()</span></code></a> 명령은 라우트(route)를 만든다. 이 튜토리얼에서 이 기능이 작동하는 것을 볼 수 있다. 이 명령은 <code class="docutils literal notranslate"><span class="pre">/hello</span></code> URLRHK <code class="docutils literal notranslate"><span class="pre">'Hello,</span> <span class="pre">World!'</span></code> 문자열 response를 반환하는 함수를 연결한다.</li>
+</ol>
+</div>
+<div class="section" id="run-the-application">
+<h2>애플리케이션 실행<a class="headerlink" href="#run-the-application" title="제목 주소">¶</a></h2>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">flask</span></code> 명령으로 애플리케이션을 가동할 수 있다. 터미널에서 애플리케이션을 찾을 위치를 플라스크에게 알려주고 개발 모드로 가동한다. 지금 현재 위치가 <code class="docutils literal notranslate"><span class="pre">flaskr</span></code> 패키지 안이 아니라 최상위 <code class="docutils literal notranslate"><span class="pre">flask-tutorial</span></code> 디렉토리인지 확인하라.</p>
+<p>개발 모드는 예외가 발생하면 대화형 디버거를 보여준다.</p>
+<p>리눅스와 맥:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ export FLASK_APP=flaskr
+$ export FLASK_ENV=development
+$ flask run
+</pre></div>
+</div>
+<p>윈도우에서는 <code class="docutils literal notranslate"><span class="pre">export</span></code> 대신 <code class="docutils literal notranslate"><span class="pre">set</span></code> 사용:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; set FLASK_APP=flaskr
+&gt; set FLASK_ENV=development
+&gt; flask run
+</pre></div>
+</div>
+<p>윈도우 파워셸에서는 <code class="docutils literal notranslate"><span class="pre">export</span></code> 대신 <code class="docutils literal notranslate"><span class="pre">$env:</span></code> 사용:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; $env:FLASK_APP = &quot;flaskr&quot;
+&gt; $env:FLASK_ENV = &quot;development&quot;
+&gt; flask run
+</pre></div>
+</div>
+<p>다음과 같은 화면을 볼 수 있다.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* Serving Flask app &quot;flaskr&quot;
+* Environment: development
+* Debug mode: on
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+* Restarting with stat
+* Debugger is active!
+* Debugger PIN: 855-212-761
+</pre></div>
+</div>
+<p>브라우저에서 <a class="reference external" href="http://127.0.0.1:5000/hello">http://127.0.0.1:5000/hello</a> 를 방문하면 &quot;Hello, World!&quot; 메세지가 보여야 한다. 축하한다. 이제 최초로 플라스크 웹 애플리케이션을 실행하였다!</p>
+<p><a class="reference internal" href="database.html"><span class="doc">데이터베이스 정의하고 접근하기</span></a>로 계속</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/flask-logo-sidebar.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">애플리케이션 셋업</a><ul>
+<li><a class="reference internal" href="#the-application-factory">애플리케이션 팩토리</a></li>
+<li><a class="reference internal" href="#run-the-application">애플리케이션 실행</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+      <li><a href="index.html">튜토리얼</a>
+        <ul>
+          <li>Previous: <a href="layout.html" title="이전 장">프로젝트 레이아웃</a>
+          <li>Next: <a href="database.html" title="다음 장">데이터베이스 정의하고 접근하기</a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>빠른 검색</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="바로 가기" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010 Pallets Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

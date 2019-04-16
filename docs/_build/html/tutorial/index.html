@@ -1,0 +1,120 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>튜토리얼 &#8212; Flask Documentation (1.0.x)</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="shortcut icon" href="../_static/flask-icon.png"/>
+    <link rel="index" title="색인" href="../genindex.html" />
+    <link rel="search" title="검색" href="../search.html" />
+    <link rel="next" title="프로젝트 레이아웃" href="layout.html" />
+    <link rel="prev" title="바로 시작하기" href="../quickstart.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>탐색</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="전체 색인"
+             accesskey="I">색인</a></li>
+        <li class="right" >
+          <a href="layout.html" title="프로젝트 레이아웃"
+             accesskey="N">다음</a> |</li>
+        <li class="right" >
+          <a href="../quickstart.html" title="바로 시작하기"
+             accesskey="P">이전</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Flask Documentation (1.0.x)</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial">
+<span id="id1"></span><h1>튜토리얼<a class="headerlink" href="#tutorial" title="제목 주소">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">목차:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="layout.html">프로젝트 레이아웃</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factory.html">애플리케이션 셋업</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">데이터베이스 정의하고 접근하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">블루프린트와 뷰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static.html">Static Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blog.html">Blog Blueprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Make the Project Installable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Test Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deploy to Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="next.html">Keep Developing!</a></li>
+</ul>
+</div>
+<p>이 튜토리얼에서는 Flaskr라는 간단한 블로그 애플리키이션을 만든다. 사용자는 사용자 등록, 로그인, 포스팅, 포스트 편집 및 삭제를 할 수 있다. 이 애플리케이션을 패키지화하여 다른 컴퓨터에 깔 수 있다.</p>
+<img alt="screenshot of index page" class="screenshot align-center" src="../_images/flaskr_index.png" />
+<p>파이썬은 이미 잘 알고 있다고 가정한다. 파이썬을 공부하거나 복습하려면 파이썬 문서의 <a class="reference external" href="https://docs.python.org/3/tutorial/">official tutorial</a>이 가장 좋은 방법이다.</p>
+<p>이 튜토리얼은 좋을 출발점이긴 하지만 플라스크의 모든 기능을 다루지는 않는다. 플라스크의 기능 전반에 대해서는 <a class="reference internal" href="../quickstart.html#quickstart"><span class="std std-ref">바로 시작하기</span></a>를 참고하고 더 자세한 기능은 문서를 찾아보라. 이 튜토리얼은 파이썬과 플라스크에서 제공되는 것만 사용한다. 다른 프로젝트에서는 작업을 간단하게 만들기 위해 <a class="reference internal" href="../extensions.html#extensions"><span class="std std-ref">Extensions</span></a> 또는 다른 라이브러리를 사용할 수 있다.</p>
+<img alt="screenshot of login page" class="screenshot align-center" src="../_images/flaskr_login.png" />
+<p>플라스크는 유연하다. 어떤 특정한 프로젝트나 코드 레이아웃을 요구하지는 않는다. 하지만 처음 시작할 때는 구조화된 방식을 따르는 것이 좋을 것이다. 원래 이 튜토리얼에 템플릿이 필요하지는 않지만 처음 개발하는 사람이 빠지기 쉬운 함정을 피하고 확장하기 쉬운 구조로 만들었다. 플라스크에 익숙해지고 나면 이 구조를 벗어나 플라스크의 유연성을 최대로 활용할 수 있을 것이다.</p>
+<img alt="screenshot of login page" class="screenshot align-center" src="../_images/flaskr_edit.png" />
+<p>만약 사용자의 프로젝트와 이 튜토리얼을 따랐을 때의 최종 프로덕트를 비교하고 싶다면 <a class="reference external" href="https://github.com/pallets/flask/tree/1.0.2/examples/tutorial">튜토리얼 프로젝트가 플라스크 레포지토리의 예제로 구현되어 있다.</a></p>
+<p><a class="reference internal" href="layout.html"><span class="doc">프로젝트 레이아웃</span></a>으로 계속.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/flask-logo-sidebar.png" alt="Logo"/>
+            </a></p>
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="../quickstart.html" title="이전 장">바로 시작하기</a>
+          <li>Next: <a href="layout.html" title="다음 장">프로젝트 레이아웃</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>빠른 검색</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="바로 가기" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010 Pallets Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

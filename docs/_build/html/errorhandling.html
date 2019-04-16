@@ -1,0 +1,293 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>애플리케이션 오류 &#8212; Flask Documentation (1.0.x)</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="shortcut icon" href="_static/flask-icon.png"/>
+    <link rel="index" title="색인" href="genindex.html" />
+    <link rel="search" title="검색" href="search.html" />
+    <link rel="next" title="Logging" href="logging.html" />
+    <link rel="prev" title="Flask 애플리케이션 테스트" href="testing.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>탐색</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="전체 색인"
+             accesskey="I">색인</a></li>
+        <li class="right" >
+          <a href="logging.html" title="Logging"
+             accesskey="N">다음</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Flask 애플리케이션 테스트"
+             accesskey="P">이전</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Documentation (1.0.x)</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="application-errors">
+<span id="id1"></span><h1>애플리케이션 오류<a class="headerlink" href="#application-errors" title="제목 주소">¶</a></h1>
+<div class="versionadded">
+<p><span class="versionmodified">버전 0.3에 추가.</span></p>
+</div>
+<details class="changelog">
+<summary>Changelog</summary></details><p>Applications fail, servers fail.  Sooner or later you will see an exception
+in production.  Even if your code is 100% correct, you will still see
+exceptions from time to time.  Why?  Because everything else involved will
+fail.  Here are some situations where perfectly fine code can lead to server
+errors:</p>
+<ul class="simple">
+<li>the client terminated the request early and the application was still
+reading from the incoming data</li>
+<li>the database server was overloaded and could not handle the query</li>
+<li>a filesystem is full</li>
+<li>a harddrive crashed</li>
+<li>a backend server overloaded</li>
+<li>a programming error in a library you are using</li>
+<li>network connection of the server to another system failed</li>
+</ul>
+<p>And that's just a small sample of issues you could be facing.  So how do we
+deal with that sort of problem?  By default if your application runs in
+production mode, Flask will display a very simple page for you and log the
+exception to the <a class="reference internal" href="api.html#flask.Flask.logger" title="flask.Flask.logger"><code class="xref py py-attr docutils literal notranslate"><span class="pre">logger</span></code></a>.</p>
+<p>But there is more you can do, and we will cover some better setups to deal
+with errors.</p>
+<div class="section" id="error-logging-tools">
+<h2>Error Logging Tools<a class="headerlink" href="#error-logging-tools" title="제목 주소">¶</a></h2>
+<p>Sending error mails, even if just for critical ones, can become
+overwhelming if enough users are hitting the error and log files are
+typically never looked at. This is why we recommend using <a class="reference external" href="https://sentry.io/">Sentry</a> for dealing with application errors.  It's
+available as an Open Source project <a class="reference external" href="https://github.com/getsentry/sentry">on GitHub</a> and is also available as a <a class="reference external" href="https://sentry.io/signup/">hosted version</a> which you can try for free. Sentry
+aggregates duplicate errors, captures the full stack trace and local
+variables for debugging, and sends you mails based on new errors or
+frequency thresholds.</p>
+<p>To use Sentry you need to install the <cite>sentry-sdk</cite> client with extra <cite>flask</cite> dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install sentry-sdk[flask]
+</pre></div>
+</div>
+<p>And then add this to your Flask app:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sentry_sdk</span>
+<span class="kn">from</span> <span class="nn">sentry_sdk.integrations.flask</span> <span class="k">import</span> <span class="n">FlaskIntegration</span>
+
+<span class="n">sentry_sdk</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s1">&#39;YOUR_DSN_HERE&#39;</span><span class="p">,</span><span class="n">integrations</span><span class="o">=</span><span class="p">[</span><span class="n">FlaskIntegration</span><span class="p">()])</span>
+</pre></div>
+</div>
+<p>The <cite>YOUR_DSN_HERE</cite> value needs to be replaced with the DSN value you get
+from your Sentry installation.</p>
+<p>After installation, failures leading to an Internal Server Error are automatically reported to
+Sentry and from there you can receive error notifications.</p>
+<p>Follow-up reads:</p>
+<ul class="simple">
+<li>Sentry also supports catching errors from your worker queue (RQ, Celery) in a
+similar fashion.  See the <a class="reference external" href="https://docs.sentry.io/platforms/python/">Python SDK docs</a> for more information.</li>
+<li><a class="reference external" href="https://docs.sentry.io/quickstart/?platform=python">Getting started with Sentry</a></li>
+<li><a class="reference external" href="https://docs.sentry.io/platforms/python/flask/">Flask-specific documentation</a>.</li>
+</ul>
+</div>
+<div class="section" id="error-handlers">
+<span id="id2"></span><h2>Error handlers<a class="headerlink" href="#error-handlers" title="제목 주소">¶</a></h2>
+<p>You might want to show custom error pages to the user when an error occurs.
+This can be done by registering error handlers.</p>
+<p>An error handler is a normal view function that returns a response, but instead
+of being registered for a route, it is registered for an exception or HTTP
+status code that would be raised while trying to handle a request.</p>
+<div class="section" id="registering">
+<h3>Registering<a class="headerlink" href="#registering" title="제목 주소">¶</a></h3>
+<p>Register handlers by decorating a function with
+<a class="reference internal" href="api.html#flask.Flask.errorhandler" title="flask.Flask.errorhandler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">errorhandler()</span></code></a>. Or use
+<a class="reference internal" href="api.html#flask.Flask.register_error_handler" title="flask.Flask.register_error_handler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_error_handler()</span></code></a> to register the function later.
+Remember to set the error code when returning the response.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">errorhandler</span><span class="p">(</span><span class="n">werkzeug</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">BadRequest</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">handle_bad_request</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;bad request!&#39;</span><span class="p">,</span> <span class="mi">400</span>
+
+<span class="c1"># or, without the decorator</span>
+<span class="n">app</span><span class="o">.</span><span class="n">register_error_handler</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">handle_bad_request</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://werkzeug.palletsprojects.com/en/0.15.x/exceptions/#werkzeug.exceptions.HTTPException" title="(in Werkzeug v0.15.x)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">werkzeug.exceptions.HTTPException</span></code></a> subclasses like
+<a class="reference external" href="https://werkzeug.palletsprojects.com/en/0.15.x/exceptions/#werkzeug.exceptions.BadRequest" title="(in Werkzeug v0.15.x)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadRequest</span></code></a> and their HTTP codes are interchangeable
+when registering handlers. (<code class="docutils literal notranslate"><span class="pre">BadRequest.code</span> <span class="pre">==</span> <span class="pre">400</span></code>)</p>
+<p>Non-standard HTTP codes cannot be registered by code because they are not known
+by Werkzeug. Instead, define a subclass of
+<a class="reference external" href="https://werkzeug.palletsprojects.com/en/0.15.x/exceptions/#werkzeug.exceptions.HTTPException" title="(in Werkzeug v0.15.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPException</span></code></a> with the appropriate code and
+register and raise that exception class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">InsufficientStorage</span><span class="p">(</span><span class="n">werkzeug</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPException</span><span class="p">):</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="mi">507</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Not enough storage space.&#39;</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">register_error_handler</span><span class="p">(</span><span class="n">InsufficientStorage</span><span class="p">,</span> <span class="n">handle_507</span><span class="p">)</span>
+
+<span class="k">raise</span> <span class="n">InsufficientStorage</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Handlers can be registered for any exception class, not just
+<a class="reference external" href="https://werkzeug.palletsprojects.com/en/0.15.x/exceptions/#werkzeug.exceptions.HTTPException" title="(in Werkzeug v0.15.x)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPException</span></code></a> subclasses or HTTP status
+codes. Handlers can be registered for a specific class, or for all subclasses
+of a parent class.</p>
+</div>
+<div class="section" id="handling">
+<h3>Handling<a class="headerlink" href="#handling" title="제목 주소">¶</a></h3>
+<p>When an exception is caught by Flask while handling a request, it is first
+looked up by code. If no handler is registered for the code, it is looked up
+by its class hierarchy; the most specific handler is chosen. If no handler is
+registered, <a class="reference external" href="https://werkzeug.palletsprojects.com/en/0.15.x/exceptions/#werkzeug.exceptions.HTTPException" title="(in Werkzeug v0.15.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPException</span></code></a> subclasses show a
+generic message about their code, while other exceptions are converted to a
+generic 500 Internal Server Error.</p>
+<p>For example, if an instance of <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ConnectionRefusedError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ConnectionRefusedError</span></code></a> is raised, and a handler
+is registered for <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ConnectionError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ConnectionError</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ConnectionRefusedError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ConnectionRefusedError</span></code></a>,
+the more specific <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ConnectionRefusedError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ConnectionRefusedError</span></code></a> handler is called with the
+exception instance to generate the response.</p>
+<p>Handlers registered on the blueprint take precedence over those registered
+globally on the application, assuming a blueprint is handling the request that
+raises the exception. However, the blueprint cannot handle 404 routing errors
+because the 404 occurs at the routing level before the blueprint can be
+determined.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">버전 0.11으로 변경: </span>Handlers are prioritized by specificity of the exception classes they are
+registered for instead of the order they are registered in.</p>
+</div>
+<details class="changelog">
+<summary>Changelog</summary></details></div>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="제목 주소">¶</a></h2>
+<p>See <a class="reference internal" href="logging.html#logging"><span class="std std-ref">Logging</span></a> for information on how to log exceptions, such as by
+emailing them to admins.</p>
+</div>
+</div>
+<div class="section" id="debugging-application-errors">
+<h1>Debugging Application Errors<a class="headerlink" href="#debugging-application-errors" title="제목 주소">¶</a></h1>
+<p>For production applications, configure your application with logging and
+notifications as described in <a class="reference internal" href="#application-errors"><span class="std std-ref">애플리케이션 오류</span></a>.  This section provides
+pointers when debugging deployment configuration and digging deeper with a
+full-featured Python debugger.</p>
+<div class="section" id="when-in-doubt-run-manually">
+<h2>When in Doubt, Run Manually<a class="headerlink" href="#when-in-doubt-run-manually" title="제목 주소">¶</a></h2>
+<p>Having problems getting your application configured for production?  If you
+have shell access to your host, verify that you can run your application
+manually from the shell in the deployment environment.  Be sure to run under
+the same user account as the configured deployment to troubleshoot permission
+issues.  You can use Flask's builtin development server with <cite>debug=True</cite> on
+your production host, which is helpful in catching configuration issues, but
+<strong>be sure to do this temporarily in a controlled environment.</strong> Do not run in
+production with <cite>debug=True</cite>.</p>
+</div>
+<div class="section" id="working-with-debuggers">
+<span id="id3"></span><h2>Working with Debuggers<a class="headerlink" href="#working-with-debuggers" title="제목 주소">¶</a></h2>
+<p>To dig deeper, possibly to trace code execution, Flask provides a debugger out
+of the box (see <a class="reference internal" href="quickstart.html#debug-mode"><span class="std std-ref">디버그 모드</span></a>).  If you would like to use another Python
+debugger, note that debuggers interfere with each other.  You have to set some
+options in order to use your favorite debugger:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">debug</span></code>        - whether to enable debug mode and catch exceptions</li>
+<li><code class="docutils literal notranslate"><span class="pre">use_debugger</span></code> - whether to use the internal Flask debugger</li>
+<li><code class="docutils literal notranslate"><span class="pre">use_reloader</span></code> - whether to reload and fork the process if modules were changed</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">debug</span></code> must be True (i.e., exceptions must be caught) in order for the other
+two options to have any value.</p>
+<p>If you're using Aptana/Eclipse for debugging you'll need to set both
+<code class="docutils literal notranslate"><span class="pre">use_debugger</span></code> and <code class="docutils literal notranslate"><span class="pre">use_reloader</span></code> to False.</p>
+<p>A possible useful pattern for configuration is to set the following in your
+config.yaml (change the block as appropriate for your application, of course):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FLASK</span><span class="p">:</span>
+    <span class="n">DEBUG</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="n">DEBUG_WITH_APTANA</span><span class="p">:</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Then in your application's entry-point (main.py), you could have something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># To allow aptana to receive errors, set use_debugger=False</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+
+    <span class="n">use_debugger</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">debug</span> <span class="ow">and</span> <span class="ow">not</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DEBUG_WITH_APTANA&#39;</span><span class="p">))</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">use_debugger</span><span class="o">=</span><span class="n">use_debugger</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">debug</span><span class="p">,</span>
+            <span class="n">use_reloader</span><span class="o">=</span><span class="n">use_debugger</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/flask-logo-sidebar.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">애플리케이션 오류</a><ul>
+<li><a class="reference internal" href="#error-logging-tools">Error Logging Tools</a></li>
+<li><a class="reference internal" href="#error-handlers">Error handlers</a><ul>
+<li><a class="reference internal" href="#registering">Registering</a></li>
+<li><a class="reference internal" href="#handling">Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logging">Logging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#debugging-application-errors">Debugging Application Errors</a><ul>
+<li><a class="reference internal" href="#when-in-doubt-run-manually">When in Doubt, Run Manually</a></li>
+<li><a class="reference internal" href="#working-with-debuggers">Working with Debuggers</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="testing.html" title="이전 장">Flask 애플리케이션 테스트</a>
+          <li>Next: <a href="logging.html" title="다음 장">Logging</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>빠른 검색</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="바로 가기" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010 Pallets Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,241 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>데이터베이스 정의하고 접근하기 &#8212; Flask Documentation (1.0.x)</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="shortcut icon" href="../_static/flask-icon.png"/>
+    <link rel="index" title="색인" href="../genindex.html" />
+    <link rel="search" title="검색" href="../search.html" />
+    <link rel="next" title="블루프린트와 뷰" href="views.html" />
+    <link rel="prev" title="애플리케이션 셋업" href="factory.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>탐색</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="전체 색인"
+             accesskey="I">색인</a></li>
+        <li class="right" >
+          <a href="views.html" title="블루프린트와 뷰"
+             accesskey="N">다음</a> |</li>
+        <li class="right" >
+          <a href="factory.html" title="애플리케이션 셋업"
+             accesskey="P">이전</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Flask Documentation (1.0.x)</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">튜토리얼</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="define-and-access-the-database">
+<h1>데이터베이스 정의하고 접근하기<a class="headerlink" href="#define-and-access-the-database" title="제목 주소">¶</a></h1>
+<p>이 애플리케이션은 <a class="reference external" href="https://sqlite.org/about.html">SQLite</a> 데이터베이스로 사용자와 포스트를 저장할 것이다. 파이썬은 <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html#module-sqlite3" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> 모듈로 SQLite를 지원한다.</p>
+<p>SQLite는 별도의 데이터베이스 서버를 만들지 않고 파이썬으로 바로 사용할 수 있기 때문에 편리하다. 하지만 동시에 데이터베이스에 쓰기 접근을 하려고 하면 각각의 쓰기를 순차적으로 해야 하기 때문에 느려진다. 소규모 애플리케이션에서는 큰 차이가 없다. 하지만 대규모 애플리케이션을 만들 때는 다른 데이터베이스로 옮겨야 한다.</p>
+<p>이 튜토리얼은 SQL에 대해 깊이 다루지 않을 것이다. 만약 익숙하지 않다면 SQLite 문서의 <a class="reference external" href="https://sqlite.org/lang.html">language</a>를 참조한다.</p>
+<div class="section" id="connect-to-the-database">
+<h2>데이터베이스 연결<a class="headerlink" href="#connect-to-the-database" title="제목 주소">¶</a></h2>
+<p>SQLite 데이터베이스를 사용할 때(다른 파이썬 데이터베이스를 라이브러리를 사용할 때도 대부분 마찬가지로) 가장 먼저 할 일은 데이터베이스에 연결하는 컨넥션을 만드는 것이다. 모든 쿼리와 연산은 컨넥션을 써서 이루어지고 모든 작업이 끝나면 컨넥션이 닫힌다.</p>
+<p>웹 애플리케이션에서 컨넥션은 보통 request와 연결되어 있다. request를 다룰 때 특정 시점에서 컨넥션이 만들어지고 reponse를 보내기 전에 닫는다.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/db.py</span></code></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">current_app</span><span class="p">,</span> <span class="n">g</span>
+<span class="kn">from</span> <span class="nn">flask.cli</span> <span class="kn">import</span> <span class="n">with_appcontext</span>
+
+
+<span class="k">def</span> <span class="nf">get_db</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">&#39;db&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;DATABASE&#39;</span><span class="p">],</span>
+            <span class="n">detect_types</span><span class="o">=</span><span class="n">sqlite3</span><span class="o">.</span><span class="n">PARSE_DECLTYPES</span>
+        <span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Row</span>
+
+    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="n">db</span>
+
+
+<span class="k">def</span> <span class="nf">close_db</span><span class="p">(</span><span class="n">e</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">db</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="../api.html#flask.g" title="flask.g"><code class="xref py py-data docutils literal notranslate"><span class="pre">g</span></code></a>는 각 request에 대해 유니크한 특별한 객체이다. 이 객체는 request 처리 중에 여러개의 함수에서 동시에 접근하는 데이터를 저장하는데 쓰인다. 같은 request에서 <code class="docutils literal notranslate"><span class="pre">get_db</span></code>가 두번째로 호출되면 새로운 컨넥션을 만들지 않고 저장된 것을 재사용한다.</p>
+<p><a class="reference internal" href="../api.html#flask.current_app" title="flask.current_app"><code class="xref py py-data docutils literal notranslate"><span class="pre">current_app</span></code></a>은 request 처리 중에 플라스크 애플리케이션을 가리키는 특별한 객체이다. 우리는 애플리케이션 팩토리를 사용하기 때문에 코드를 작성하는 동안 애플리케이션 객체는 존재하지 않는다. 나중에 애플리케이션이 실제로 생성되고 request를 처리할 때 <code class="docutils literal notranslate"><span class="pre">get_db</span></code> 함수가 호출되고 <a class="reference internal" href="../api.html#flask.current_app" title="flask.current_app"><code class="xref py py-data docutils literal notranslate"><span class="pre">current_app</span></code></a>를 쓰게 된다.</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/sqlite3.html#sqlite3.connect" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">sqlite3.connect()</span></code></a> 함수는 <code class="docutils literal notranslate"><span class="pre">DATABASE</span></code> 설정 키로 지정된 파일에 컨넥션을 만든다. 이 파일은 나중에 데이터베이스를 초기화하기 전까지는 아직 존재하지 않는다.</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/sqlite3.html#sqlite3.Row" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">sqlite3.Row</span></code></a> 클래스는 딕셔너리처럼 동작하는 행을 반환하라고 컨넥션에 지시하는 것이다. 이렇게 되면 컬럼 이름으로 데이터를 접근할 수 있다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">close_db</span></code>는 <code class="docutils literal notranslate"><span class="pre">g.db</span></code>가 제대로 설정되었는지 점검하고 만약 컨넥선이 있으면 닫는다. 나중에 애플리케이션에 각 request가 종료되면 애플리케이션 팩토리에서 <code class="docutils literal notranslate"><span class="pre">close_db</span></code> 함수가 request 종료시마다 호출되도록 지시하게 된다.</p>
+</div>
+<div class="section" id="create-the-tables">
+<h2>테이블 생성<a class="headerlink" href="#create-the-tables" title="제목 주소">¶</a></h2>
+<p>SQLite에서는 데이터는 테이블과 컬럼에 저장된다. 테이블과 컬럼은 데이터를 저장하거나 가져오기 전에 미리 만들어져 있어야 한다. Flaskr는 사용자 정보를 <code class="docutils literal notranslate"><span class="pre">user</span></code> 테이블에, 포스팅 정보를 <code class="docutils literal notranslate"><span class="pre">post</span></code> 테이블에 저장한다. SQL 명령으로 파일 내에 빈 테이블을 생성한다.:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/schema.sql</span></code></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="k">user</span><span class="p">;</span>
+<span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">post</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">user</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">AUTOINCREMENT</span><span class="p">,</span>
+  <span class="n">username</span> <span class="nb">TEXT</span> <span class="k">UNIQUE</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">password</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">post</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">AUTOINCREMENT</span><span class="p">,</span>
+  <span class="n">author_id</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">created</span> <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+  <span class="n">title</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">body</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">author_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="k">user</span> <span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>이 SQL 명령을 실행하는 파이썬 함수를 <code class="docutils literal notranslate"><span class="pre">db.py</span></code> 파일에 추가한다.:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/db.py</span></code></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">init_db</span><span class="p">():</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">current_app</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="s1">&#39;schema.sql&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
+
+
+<span class="nd">@click.command</span><span class="p">(</span><span class="s1">&#39;init-db&#39;</span><span class="p">)</span>
+<span class="nd">@with_appcontext</span>
+<span class="k">def</span> <span class="nf">init_db_command</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Clear the existing data and create new tables.&quot;&quot;&quot;</span>
+    <span class="n">init_db</span><span class="p">()</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s1">&#39;Initialized the database.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="../api.html#flask.Flask.open_resource" title="flask.Flask.open_resource"><code class="xref py py-meth docutils literal notranslate"><span class="pre">open_resource()</span></code></a> 명령은 <code class="docutils literal notranslate"><span class="pre">flaskr</span></code> 패키지에 대한 상대경로를 이용하여 파일을 연다. 애플리케이션이 배포 설치된 위치를 알 필요가 없기 때문에 유용하다. <code class="docutils literal notranslate"><span class="pre">get_db</span></code> 명령은 데이터베이스 컨넥션을 반환한다. 컨넥션은 파일에서 읽은 명령을 수행할 때 사용된다.</p>
+<p><a class="reference external" href="https://click.palletsprojects.com/en/7.x/api/#click.command" title="(in Click v7.x)"><code class="xref py py-func docutils literal notranslate"><span class="pre">click.command()</span></code></a>는 <code class="docutils literal notranslate"><span class="pre">init-db</span></code>라는 커맨드라인 명령을 정의한다. 이 명령은  <code class="docutils literal notranslate"><span class="pre">init_db</span></code> 함수를 호출하고 성공하면 사용자에게 메세지를 표시한다. 커맨드라인 명령 작성에 대해서는 <a class="reference internal" href="../cli.html#cli"><span class="std std-ref">Command Line Interface</span></a>를 참조한다.</p>
+</div>
+<div class="section" id="register-with-the-application">
+<h2>애플리케이션 등록<a class="headerlink" href="#register-with-the-application" title="제목 주소">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">close_db</span></code>와 <code class="docutils literal notranslate"><span class="pre">init_db_command</span></code> 함수는 애플리케이션 인스턴스에 등록을 해야 한다. 그렇지 않으면 애플리케이션에서 쓸 수 없다. 하지만 지금은 팩토리 함수를 사용하고 있기 때문에 함수를 코딩하는 시점에서는 인스턴스가 없는 상태이다. 대신에 애플리케이션을 받아서 등록을 해주는 함수를 만든다.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/db.py</span></code></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">teardown_appcontext</span><span class="p">(</span><span class="n">close_db</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">init_db_command</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="../api.html#flask.Flask.teardown_appcontext" title="flask.Flask.teardown_appcontext"><code class="xref py py-meth docutils literal notranslate"><span class="pre">app.teardown_appcontext()</span></code></a> 명령은 response를 반환하고 정리를 할 때 호출할 함수를 등록한다.</p>
+<p><a class="reference external" href="https://click.palletsprojects.com/en/7.x/api/#click.Group.add_command" title="(in Click v7.x)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">app.cli.add_command()</span></code></a> 명령은 <code class="docutils literal notranslate"><span class="pre">flask</span></code> 명령과 같이 사용할 서브커맨드를 등록한다.</p>
+<p>이 함수를 팩토리에서 임포트하여 호출해야 한다. 팩토리 함수 마지막 부분에 앱을 반환하기 전에 새로운 코드를 추가한다.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/__init__.py</span></code></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_app</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="c1"># existing code omitted</span>
+
+    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">db</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="initialize-the-database-file">
+<h2>데이터베이스 파일 초기화<a class="headerlink" href="#initialize-the-database-file" title="제목 주소">¶</a></h2>
+<p>이제 <code class="docutils literal notranslate"><span class="pre">init-db</span></code> 명령을 앱에 등록했으니 <code class="docutils literal notranslate"><span class="pre">flask</span></code> 명령과 붙여서 쓸 수 있다. 앞 페이지의 <code class="docutils literal notranslate"><span class="pre">run</span></code> 명령처럼 쓰면 된다.</p>
+<div class="admonition note">
+<p class="first admonition-title">주석</p>
+<p class="last">만약 앞 페이지의 서버가 아직 가동중이면 서버를 몀추거나 다른 터미널에서 이 명령을 실행하라. 다른 터미널을 쓰는 경우에는 프로젝트 디렉토리로 가서 <a class="reference internal" href="../installation.html#install-activate-env"><span class="std std-ref">Activate the environment</span></a> 명령으로 가상환경을 활성화하는 것을 잊지 말아라. 또한 앞 페이지처럼 <code class="docutils literal notranslate"><span class="pre">FLASK_APP</span></code>, <code class="docutils literal notranslate"><span class="pre">FLASK_ENV</span></code> 환경변수도 설정해야 한다.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">init-db</span></code> 명령 실행</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ flask init-db
+Initialized the database.
+</pre></div>
+</div>
+<p>이제 프로젝트 <code class="docutils literal notranslate"><span class="pre">instance</span></code> 폴더안에 <code class="docutils literal notranslate"><span class="pre">flaskr.sqlite</span></code> 파일이 생긴다.</p>
+<p><a class="reference internal" href="views.html"><span class="doc">블루프린트와 뷰</span></a>로 계속.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/flask-logo-sidebar.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">데이터베이스 정의하고 접근하기</a><ul>
+<li><a class="reference internal" href="#connect-to-the-database">데이터베이스 연결</a></li>
+<li><a class="reference internal" href="#create-the-tables">테이블 생성</a></li>
+<li><a class="reference internal" href="#register-with-the-application">애플리케이션 등록</a></li>
+<li><a class="reference internal" href="#initialize-the-database-file">데이터베이스 파일 초기화</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+      <li><a href="index.html">튜토리얼</a>
+        <ul>
+          <li>Previous: <a href="factory.html" title="이전 장">애플리케이션 셋업</a>
+          <li>Next: <a href="views.html" title="다음 장">블루프린트와 뷰</a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>빠른 검색</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="바로 가기" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010 Pallets Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

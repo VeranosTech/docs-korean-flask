@@ -1,0 +1,304 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>블루프린트와 뷰 &#8212; Flask Documentation (1.0.x)</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="shortcut icon" href="../_static/flask-icon.png"/>
+    <link rel="index" title="색인" href="../genindex.html" />
+    <link rel="search" title="검색" href="../search.html" />
+    <link rel="next" title="Templates" href="templates.html" />
+    <link rel="prev" title="데이터베이스 정의하고 접근하기" href="database.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>탐색</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="전체 색인"
+             accesskey="I">색인</a></li>
+        <li class="right" >
+          <a href="templates.html" title="Templates"
+             accesskey="N">다음</a> |</li>
+        <li class="right" >
+          <a href="database.html" title="데이터베이스 정의하고 접근하기"
+             accesskey="P">이전</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Flask Documentation (1.0.x)</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">튜토리얼</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="blueprints-and-views">
+<h1>블루프린트와 뷰<a class="headerlink" href="#blueprints-and-views" title="제목 주소">¶</a></h1>
+<p>뷰함수는 애플리케이션에 오는 request에 대한 reponse를 작성하는 코드이다. 플라스크는 request URL을 그에 대응하는 뷰 함수에 매칭시키는 패턴을 사용한다. 뷰 함수는 데이터를 반환하고 플라스크는 이 데이터를 외부로 나가는 reponse로 변환한다. 또한 다른 URL로 리디렉트를 하거나 뷰함수 이름과 인수에 대응하는 URL을 생성할 수도 있다.</p>
+<div class="section" id="create-a-blueprint">
+<h2>블루프린트 만들기<a class="headerlink" href="#create-a-blueprint" title="제목 주소">¶</a></h2>
+<p><a class="reference internal" href="../api.html#flask.Blueprint" title="flask.Blueprint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Blueprint</span></code></a>는 뷰와 코드를 그룹으로 관리하기 위한 방법의 하나이다. 뷰와 코드를 직접 애플리케이션에 등록하지 않고 우선 블루프린트로 등록한다. 그 다음 이 블루프린트를 팩토리 함수에 있는 애플리케이션에 등록한다.</p>
+<p>Flaskr 애플리케이션에는 두개의 블루프린트가 있다. 하나는 인증용 함수이고 하나는 블로그 포스팅용 함수이다. 각각의 블루프린트 코드는 별도의 모듈로 들어간다. 블로그는 인증정보가 필요하므로 인증부터 먼저 만들자.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/auth.py</span></code></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Blueprint</span><span class="p">,</span> <span class="n">flash</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_for</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">werkzeug.security</span> <span class="kn">import</span> <span class="n">check_password_hash</span><span class="p">,</span> <span class="n">generate_password_hash</span>
+
+<span class="kn">from</span> <span class="nn">flaskr.db</span> <span class="kn">import</span> <span class="n">get_db</span>
+
+<span class="n">bp</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/auth&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>이 코드는 <code class="docutils literal notranslate"><span class="pre">'auth'</span></code>라는 이름의 <a class="reference internal" href="../api.html#flask.Blueprint" title="flask.Blueprint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Blueprint</span></code></a>를 만든다. 애플리케이션 객체와 같이 블루프린트도 정의된 위치가 필요하기 때문에 두번째 인수로 <code class="docutils literal notranslate"><span class="pre">__name__</span></code>을 넣었다. <code class="docutils literal notranslate"><span class="pre">url_prefix</span></code> 인수는 이 블루프린트의 모든 URL 앞에 붙이는 접두사이다.</p>
+<p>팩토리에서 <a class="reference internal" href="../api.html#flask.Flask.register_blueprint" title="flask.Flask.register_blueprint"><code class="xref py py-meth docutils literal notranslate"><span class="pre">app.register_blueprint()</span></code></a> 함수로 블루프린트를 등록한다. 등록하는 코드를 기존의 코드 마지막 부분, 그리고 앱을 반환하기 전 부분에 넣는다.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/__init__.py</span></code></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_app</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="c1"># existing code omitted</span>
+
+    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">auth</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">bp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+</div>
+</div>
+<p>인증용 블루프린트에는 신규 사용자를 등록하고 로그인, 로그아웃하는 뷰를 추가할 것이다.</p>
+</div>
+<div class="section" id="the-first-view-register">
+<h2>첫번째 뷰: 사용자 등록<a class="headerlink" href="#the-first-view-register" title="제목 주소">¶</a></h2>
+<p>사용자가 <code class="docutils literal notranslate"><span class="pre">/auth/register</span></code> URL을 방문하면 <code class="docutils literal notranslate"><span class="pre">register</span></code> 뷰가 사용자가 채워야할 양식 <a class="reference external" href="https://developer.mozilla.org/docs/Web/HTML">HTML</a> 화면을 반환한다. 양식을 제출하면 입력을 검증하고 에러 메세지와 같이 양식을 다시 보여주거나 아니면 신규 사용자를 생성해서 로그인 페이지로 이동한다.</p>
+<p>여기서는 뷰 코드만 작성한다. 다음 절에서는 HTML 양식을 생성하는 템플릿을 만들 것이다.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/auth.py</span></code></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@bp.route</span><span class="p">(</span><span class="s1">&#39;/register&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">()</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="s1">&#39;Username is required.&#39;</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="s1">&#39;Password is required.&#39;</span>
+        <span class="k">elif</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s1">&#39;SELECT id FROM user WHERE username = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="s1">&#39;User {} is already registered.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s1">&#39;INSERT INTO user (username, password) VALUES (?, ?)&#39;</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">))</span>
+            <span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;auth.login&#39;</span><span class="p">))</span>
+
+        <span class="n">flash</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;auth/register.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">register</span></code> 뷰 함수가 하는 일이다.:</p>
+<ol class="arabic">
+<li><p class="first"><a class="reference internal" href="../api.html#flask.Blueprint.route" title="flask.Blueprint.route"><code class="xref py py-meth docutils literal notranslate"><span class="pre">&#64;bp.route</span></code></a>  메서드는 <code class="docutils literal notranslate"><span class="pre">/register</span></code> URL을 <code class="docutils literal notranslate"><span class="pre">register</span></code> 뷰 함수와 연결한다. 플라스크가 <code class="docutils literal notranslate"><span class="pre">/auth/register</span></code>에 대한 request를 받으면 <code class="docutils literal notranslate"><span class="pre">register</span></code> 뷰 함수를 호출하고 그 반환값을 response로 사용한다.</p>
+</li>
+<li><p class="first">만약 사용자가 양식을 제출하면 <a class="reference internal" href="../api.html#flask.Request.method" title="flask.Request.method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">request.method</span></code></a> 값은 <code class="docutils literal notranslate"><span class="pre">'POST'</span></code>가 된다. 이 때는 입력을 검증한다.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../api.html#flask.Request.form" title="flask.Request.form"><code class="xref py py-attr docutils literal notranslate"><span class="pre">request.form</span></code></a>는 키와 밸류로 이루어진 특수한 형태의 <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 자료형이다.  사용자는 <code class="docutils literal notranslate"><span class="pre">username</span></code>과 <code class="docutils literal notranslate"><span class="pre">password</span></code>를 입력한다.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">username</span></code>과 <code class="docutils literal notranslate"><span class="pre">password</span></code>가 빈칸인지 확인한다.</p>
+</li>
+<li><p class="first">데이터베이스 쿼리 결과를 보고 <code class="docutils literal notranslate"><span class="pre">username</span></code>이 이미 있는지 확인한다. <code class="xref py py-meth docutils literal notranslate"><span class="pre">db.execute</span> <span class="pre">&lt;sqlite3.Connection.execute&gt;</span> <span class="pre">메서드는</span> <span class="pre">`()</span></code>?`` 플레이스홀더가 있는 SQL 쿼리문을 받는다. 플레이스홀더는 사용자 입력값으로 채워진다. 데이터베이스 라이브러리는 <em>SQL 인젝션 공격</em>을 피하기 위해 값을 이스케프하여 사용한다.</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/sqlite3.html#sqlite3.Cursor.fetchone" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fetchone()</span></code></a> 메서드는 쿼리 응답으로 하나의 레코드를 반환한다. 만약 결과거 없으면 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 반환한다. 만약 <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html#sqlite3.Cursor.fetchall" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fetchall()</span></code></a> 메서드를 스면 전체 결과를 리스트로 받는다.</p>
+</li>
+<li><p class="first">검증에 성공하면 새로운 사용자 데이터를 데이터베이스에 넣는다. 보안상 패스워드는 데이터베이스에 그대로 저장하지 않고 <a class="reference external" href="https://werkzeug.palletsprojects.com/en/0.15.x/utils/#werkzeug.security.generate_password_hash" title="(in Werkzeug v0.15.x)"><code class="xref py py-func docutils literal notranslate"><span class="pre">generate_password_hash()</span></code></a> 명령으로 패스워드의 해시값을 저장한다. 이 쿼리는 데이터를 변경하는 쿼리이므로 상태를 저장하려면 <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.commit" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">db.commit()</span></code></a> 메서드를 호출해야 한다.</p>
+</li>
+<li><p class="first">사용자 정보를 저장한 다음에는 로그인 페이지로 리디렉트한다. <a class="reference internal" href="../api.html#flask.url_for" title="flask.url_for"><code class="xref py py-func docutils literal notranslate"><span class="pre">url_for()</span></code></a> 명령은 로그인 뷰 이름을 보고 URL을 생성한다. URL을 직접 쓰는 것보다는 이게 더 좋다. 왜냐하면 나중에 URL이 바뀌어도 이 URL을 쓰는 모든 코드를 바꾸지 않아도 되기 때문이다. <a class="reference internal" href="../api.html#flask.redirect" title="flask.redirect"><code class="xref py py-func docutils literal notranslate"><span class="pre">redirect()</span></code></a> 명령은 생성된 URL 페이지로 리디렉트하도록 response를 보낸다.</p>
+</li>
+<li><p class="first">검증에 실패하면 에러를 사용자에게 출력한다. <a class="reference internal" href="../api.html#flask.flash" title="flask.flash"><code class="xref py py-func docutils literal notranslate"><span class="pre">flash()</span></code></a> 명령은 템플릿을 렌더링할 때 사용될 메세지를 저장한다.</p>
+</li>
+<li><p class="first">사용자가 처음으로 <code class="docutils literal notranslate"><span class="pre">auth/register</span></code>로 가거나 검증 오류가 발생하면 등록 양식이 잇는 HTML 페이지가 보여야 한다. <a class="reference internal" href="../api.html#flask.render_template" title="flask.render_template"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_template()</span></code></a> 함수는 HTML을 포함한 템플릿을 렌더링한다. 템플릿은 튜토리얼 다음 페이지에서 작성한다.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="login">
+<h2>로그인<a class="headerlink" href="#login" title="제목 주소">¶</a></h2>
+<p>이 뷰도 위의 <code class="docutils literal notranslate"><span class="pre">register</span></code> 뷰와 같은 패턴을 따른다.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/auth.py</span></code></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@bp.route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">()</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s1">&#39;SELECT * FROM user WHERE username = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="s1">&#39;Incorrect username.&#39;</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span> <span class="n">password</span><span class="p">):</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="s1">&#39;Incorrect password.&#39;</span>
+
+        <span class="k">if</span> <span class="n">error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="n">session</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
+
+        <span class="n">flash</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;auth/login.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">register</span></code> 뷰와의 차이점:</p>
+<ol class="arabic simple">
+<li>사용자 쿼리를 먼저하고 나중을 위해 결과를 변수에 저장한다.</li>
+<li><a class="reference external" href="https://werkzeug.palletsprojects.com/en/0.15.x/utils/#werkzeug.security.check_password_hash" title="(in Werkzeug v0.15.x)"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_password_hash()</span></code></a> 함수는 제출된 패스워드를 같은 방법으로 해시화하여 저장된 패스워드와 안전하게 비교한다. 만약 일치하면 패스워드는 검증된 상태가 된다.</li>
+<li><a class="reference internal" href="../api.html#flask.session" title="flask.session"><code class="xref py py-data docutils literal notranslate"><span class="pre">session</span></code></a>은 복수의 request에 대해 사용할 수 있는 데이터를 저장하는 <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 자료형이다. 사용자 검증이 성공하면 사용자의 <code class="docutils literal notranslate"><span class="pre">id</span></code>가 새로운 세션에 저장된다. 이 데이터는 우선 웹 브라우저로 보내져 쿠키에 저장되고 브라우저는 그 이후의 모든 request에 이 데이터를 첨부하여 서버로 보낸다.플라스크는 이 데이터가 조작되지 않도록 보안 서명을 한다.</li>
+</ol>
+<p>이제 사용자의 <code class="docutils literal notranslate"><span class="pre">id</span></code> 정보는 <a class="reference internal" href="../api.html#flask.session" title="flask.session"><code class="xref py py-data docutils literal notranslate"><span class="pre">session</span></code></a>에 저장되어 다음번 request부터 사용할 수 있다. request가 들어올 때마다 만약 사용자가 로그인되어 있다고 나오면 관련 정보가 로드되어 뷰에 나타나야 한다.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/auth.py</span></code></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@bp.before_app_request</span>
+<span class="k">def</span> <span class="nf">load_logged_in_user</span><span class="p">():</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">user_id</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s1">&#39;SELECT * FROM user WHERE id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="../api.html#flask.Blueprint.before_app_request" title="flask.Blueprint.before_app_request"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bp.before_app_request()</span></code></a> 메서드는 뷰 함수를 실행하기 전에 호출할 함수를 등록한다. <code class="docutils literal notranslate"><span class="pre">load_logged_in_user</span></code> 함수는 사용자 id가 <a class="reference internal" href="../api.html#flask.session" title="flask.session"><code class="xref py py-data docutils literal notranslate"><span class="pre">session</span></code></a>에 있는지 확인하고 데이터베이스에서 해당 사용자의 데이터를 가져와 request를 처리하는 동안 유지되는 <a class="reference internal" href="../api.html#flask.g" title="flask.g"><code class="xref py py-data docutils literal notranslate"><span class="pre">g.user</span></code></a>에 저장한다. 만약 사용자 id가 없으면 <code class="docutils literal notranslate"><span class="pre">g.user</span></code> 값은 <code class="docutils literal notranslate"><span class="pre">None</span></code>이 된다.</p>
+</div>
+<div class="section" id="logout">
+<h2>로그아웃<a class="headerlink" href="#logout" title="제목 주소">¶</a></h2>
+<p>로그아웃하려면 사용자 id를 <a class="reference internal" href="../api.html#flask.session" title="flask.session"><code class="xref py py-data docutils literal notranslate"><span class="pre">session</span></code></a>에서 삭제한다. 그러면 <code class="docutils literal notranslate"><span class="pre">load_logged_in_user</span></code> 함수는 이후의 request에서 사용자를 로드하지 않는다.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/auth.py</span></code></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@bp.route</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="require-authentication-in-other-views">
+<h2>다른 뷰에서 인증을 요구하는 경우<a class="headerlink" href="#require-authentication-in-other-views" title="제목 주소">¶</a></h2>
+<p>블로그 포스팅을 작성, 편집, 삭제하려면 사용자가 로그인되어있어야 한다. 데코레이터를 사용하여 각 뷰에서 로그인을 확인하도록 할 수 있다.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">flaskr/auth.py</span></code></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">login_required</span><span class="p">(</span><span class="n">view</span><span class="p">):</span>
+    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapped_view</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;auth.login&#39;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">view</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wrapped_view</span>
+</pre></div>
+</div>
+</div>
+<p>이 데코레이터는 원래의 뷰함수를 래핑하여 새로운 뷰함수를 반환한다. 새 함수는 사용자가 로드되어 있는지 확인하고 그렇지 않으면 로그인 페이지로 이동한다. 만약 사용자가 로그되어 있으면 원래의 뷰함수를 정상적으로 호출한다. 블로그 뷰를 작성할 때 이 데코레이터를 사용할 것이다.</p>
+</div>
+<div class="section" id="endpoints-and-urls">
+<h2>엔드포인트와 URL<a class="headerlink" href="#endpoints-and-urls" title="제목 주소">¶</a></h2>
+<p><a class="reference internal" href="../api.html#flask.url_for" title="flask.url_for"><code class="xref py py-func docutils literal notranslate"><span class="pre">url_for()</span></code></a> 함수는 이름과 인수에 기반하여 뷰함수에 대한 URL을 생성한다. 뷰에 연결된 이름을 엔드포인트라고도 한다. 기본적으로 엔드포인트는 뷰함수 이름과 같다.</p>
+<p>예를 들어 이 튜토리얼 초반에 앱 팩토리에 추가된 <code class="docutils literal notranslate"><span class="pre">hello()</span></code> 뷰는 <code class="docutils literal notranslate"><span class="pre">'hello'</span></code>라는 이름을 가지고 <code class="docutils literal notranslate"><span class="pre">url_for('hello')</span></code>에 연결된다. 나중에 보겠지만 만약 인수가 있으면 <code class="docutils literal notranslate"><span class="pre">url_for('hello',</span> <span class="pre">who='World')</span></code> 명령으로 연결할 수 있다.</p>
+<p>블루프린트를 사용할 때는 블루프린트 이름이 함수 이름 앞에 붙는다. 그래서 <code class="docutils literal notranslate"><span class="pre">login</span></code> 함수에 대한 엔드포인트는  <code class="docutils literal notranslate"><span class="pre">'auth'</span></code> 접미사가 붙어서 <code class="docutils literal notranslate"><span class="pre">'auth.login'</span></code>가 된다.</p>
+<p><a class="reference internal" href="templates.html"><span class="doc">Templates</span></a>으로 계속.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/flask-logo-sidebar.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">블루프린트와 뷰</a><ul>
+<li><a class="reference internal" href="#create-a-blueprint">블루프린트 만들기</a></li>
+<li><a class="reference internal" href="#the-first-view-register">첫번째 뷰: 사용자 등록</a></li>
+<li><a class="reference internal" href="#login">로그인</a></li>
+<li><a class="reference internal" href="#logout">로그아웃</a></li>
+<li><a class="reference internal" href="#require-authentication-in-other-views">다른 뷰에서 인증을 요구하는 경우</a></li>
+<li><a class="reference internal" href="#endpoints-and-urls">엔드포인트와 URL</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+      <li><a href="index.html">튜토리얼</a>
+        <ul>
+          <li>Previous: <a href="database.html" title="이전 장">데이터베이스 정의하고 접근하기</a>
+          <li>Next: <a href="templates.html" title="다음 장">Templates</a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>빠른 검색</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="바로 가기" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010 Pallets Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
